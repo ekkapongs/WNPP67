@@ -1,0 +1,341 @@
+﻿@model IEnumerable<BranchRegister.Models.TBranch>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActiveStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LanguageId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecordStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedByName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedByName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BranchTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonasteryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonasteryType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonasteryTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonasteryPhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepositaryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepositaryPhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonasteryAreaRai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonasteryAreaNgan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MonasteryAreaWa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandRightsDocuments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfFounding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EcclesiasticalTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EcclesiasticalType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotTemple)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preceptor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreceptorTemple)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfAcceptPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotPhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotLineId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CertifierName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CertifierTemple)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfOrdination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbbotSignDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AddressTextMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseNoMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MooMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VillageMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoadMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubDistrictMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistrictMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProvinceMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryMonatery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostCodeMonatery)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActiveStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LanguageId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecordStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedByName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedByName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonasteryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonasteryType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonasteryTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonasteryPhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepositaryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepositaryPhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonasteryAreaRai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonasteryAreaNgan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonasteryAreaWa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandRightsDocuments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfFounding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EcclesiasticalTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EcclesiasticalType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotTemple)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preceptor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreceptorTemple)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfAcceptPosition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotPhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotLineId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotImageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CertifierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CertifierTemple)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfOrdination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbbotSignDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressTextMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseNoMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MooMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VillageMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoadMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubDistrictMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistrictMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProvinceMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryMonatery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostCodeMonatery)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
