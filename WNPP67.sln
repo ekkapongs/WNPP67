@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WNPP-API", "WNPP-API\WNPP-API.csproj", "{2582559B-5264-4ECF-912F-27A9D530D4EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WNPP-API", "WNPP-API\WNPP-API.csproj", "{2582559B-5264-4ECF-912F-27A9D530D4EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WNPP-UI", "WNPP-UI\WNPP-UI.csproj", "{479A2BC7-960A-42B8-9C51-1C0842B9C704}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2582559B-5264-4ECF-912F-27A9D530D4EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2582559B-5264-4ECF-912F-27A9D530D4EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2582559B-5264-4ECF-912F-27A9D530D4EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{479A2BC7-960A-42B8-9C51-1C0842B9C704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479A2BC7-960A-42B8-9C51-1C0842B9C704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479A2BC7-960A-42B8-9C51-1C0842B9C704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479A2BC7-960A-42B8-9C51-1C0842B9C704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
