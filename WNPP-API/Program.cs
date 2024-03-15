@@ -1,16 +1,16 @@
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+const string CorsPolicy = "CorsPolicy";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://example.com",
-                                              "http://192.168.1.99")
-                          .AllowAnyHeader();
-                      });
+    options.AddPolicy(name: CorsPolicy, builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
 // Add services to the container.
@@ -32,9 +32,14 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseCors(MyAllowSpecificOrigins);
-
 app.UseAuthorization();
+
+app.UseCors(CorsPolicy);
+//app.UseCors(builder =>
+//        builder
+//        .WithOrigins("http://domain.com")
+//        .AllowAnyMethod()
+//        .AllowAnyHeader());
 
 app.MapControllers();
 
