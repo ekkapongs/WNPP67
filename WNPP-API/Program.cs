@@ -3,6 +3,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 const string CorsPolicy = "CorsPolicy";
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: CorsPolicy, builder =>

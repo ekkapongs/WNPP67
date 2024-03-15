@@ -23,6 +23,8 @@ public partial class Wnpp66Context : DbContext
 
     public virtual DbSet<TBranchRegister> TBranchRegisters { get; set; }
 
+    public virtual DbSet<TFileOnDb> TFileOnDbs { get; set; }
+
     public virtual DbSet<TMonk> TMonks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -331,6 +333,21 @@ public partial class Wnpp66Context : DbContext
             entity.Property(e => e.VillagePreceptor)
                 .HasMaxLength(50)
                 .HasColumnName("Village_Preceptor");
+        });
+
+        modelBuilder.Entity<TFileOnDb>(entity =>
+        {
+            entity.ToTable("T_FileOnDB");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CreatedByName).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.FileName).HasMaxLength(500);
+            entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+            entity.Property(e => e.ModifiedByName).HasMaxLength(100);
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.Notation).HasMaxLength(500);
+            entity.Property(e => e.RecordStatus).HasMaxLength(10);
         });
 
         modelBuilder.Entity<TMonk>(entity =>
