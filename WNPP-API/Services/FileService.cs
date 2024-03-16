@@ -1,15 +1,21 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using System;
 using WNPP_API.Models;
 
 namespace WNPP_API.Services
 {
+    public enum FileType
+    {
+        PDF = 1,
+        DOCX = 2
+    }
     public interface IFileService
     {
         public Task PostFileAsync(IFormFile fileData);
 
         public Task DownloadFileById(int fileName);
+        public Byte[] getImage(int Id);
+
     }
     public class FileService : CommonService, IFileService
     {
@@ -20,6 +26,9 @@ namespace WNPP_API.Services
             {
                 var tFileOnDb = new TFileOnDb()
                 {
+                    ActiveStatus = _Record_Active,
+                    LanguageId = _Lang_TH,
+
                     CreatedBy = _Admin_ID,
                     CreatedByName = _Admin_Name,
                     CreatedDate = DateTime.Now,
@@ -67,5 +76,18 @@ namespace WNPP_API.Services
             }
         }
 
+        public Byte[] getImage(int Id)
+        {
+            try
+            {
+                var file = ctx.TFileOnDbs.Where(x => x.Id == Id).FirstOrDefaultAsync();
+                return file.Result.FileBinary.ToArray();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

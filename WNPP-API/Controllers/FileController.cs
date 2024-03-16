@@ -18,16 +18,16 @@ namespace WNPP_API.Controllers
         }
         [HttpPost]
         [ActionName("PostSingleFile")]
-        public async Task<ActionResult> PostSingleFile([FromForm] IFormFile fileDetails)
+        public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel file)
         {
-            if (fileDetails == null)
+            if (file == null)
             {
                 return BadRequest();
             }
 
             try
             {
-                await _service.PostFileAsync(fileDetails);
+                await _service.PostFileAsync(file.FileDetails);
                 return Ok();
             }
             catch (Exception)
@@ -35,6 +35,40 @@ namespace WNPP_API.Controllers
                 throw;
             }
         }
+        [HttpGet("DownloadFile")]
+        public async Task<ActionResult> DownloadFile(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest();
+            }
 
+            try
+            {
+                await _service.DownloadFileById(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpGet("LoadImage")]
+        public IActionResult LoadImage(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                return File( _service.getImage(id), "image/jpeg");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

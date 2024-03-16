@@ -1,5 +1,7 @@
 
 
+using WNPP_API.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 const string CorsPolicy = "CorsPolicy";
@@ -20,6 +22,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//
+//builder.Services.AddScoped<IFileService, FileService>();
 
 var app = builder.Build();
 

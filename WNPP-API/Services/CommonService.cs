@@ -7,8 +7,8 @@
         public const string _Admin_Name = "Administrator";
 
         /// === LANG
-        public const int _Lang_TH = 0;
-        public const int _Lang_EN = 1;
+        public const int _Lang_TH = 1;
+        public const int _Lang_EN = 2;
 
         /// === RECORD STATUS
         public const bool _Record_Active = true;
