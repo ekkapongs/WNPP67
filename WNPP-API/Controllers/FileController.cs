@@ -70,5 +70,22 @@ namespace WNPP_API.Controllers
                 throw;
             }
         }
+        [HttpGet("LoadPDF")]
+        public IActionResult LoadPDF(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                return File(_service.getImage(id), "application/pdf");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

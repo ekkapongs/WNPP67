@@ -29,5 +29,9 @@ public partial class TFileOnDb
 
     public string? FileName { get; set; }
 
+    public string? FileType { get; set; }
+
+    public long? FileSize { get; set; }
+
     public byte[]? FileBinary { get; set; }
 }

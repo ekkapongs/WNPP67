@@ -6,8 +6,9 @@ namespace WNPP_API.Services
 {
     public enum FileType
     {
-        PDF = 1,
-        DOCX = 2
+        image = 1,
+        PDF = 2,
+        DOCX = 3
     }
     public interface IFileService
     {
@@ -39,6 +40,7 @@ namespace WNPP_API.Services
                 using (var stream = new MemoryStream())
                 {
                     fileData.CopyTo(stream);
+                
                     tFileOnDb.FileBinary = stream.ToArray();
                 }
                 ctx.TFileOnDbs.Add(tFileOnDb);
