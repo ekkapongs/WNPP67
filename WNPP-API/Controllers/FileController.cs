@@ -20,6 +20,7 @@ namespace WNPP_API.Controllers
         [ActionName("PostSingleFile")]
         public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel file)
         {
+            int result = 0;
             if (file == null)
             {
                 return BadRequest();
@@ -27,8 +28,8 @@ namespace WNPP_API.Controllers
 
             try
             {
-                await _service.PostFileAsync(file.FileDetails);
-                return Ok();
+                result = await _service.PostFileAsync(file.FileDetails, file.FileType);
+                return Ok(result);
             }
             catch (Exception)
             {

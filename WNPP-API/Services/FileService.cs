@@ -12,7 +12,7 @@ namespace WNPP_API.Services
     }
     public interface IFileService
     {
-        public Task PostFileAsync(IFormFile fileData);
+        public Task<int> PostFileAsync(IFormFile fileData, FileType fileType);
 
         public Task DownloadFileById(int fileName);
         public Byte[] getImage(int Id);
@@ -21,8 +21,9 @@ namespace WNPP_API.Services
     public class FileService : CommonService, IFileService
     {
         private readonly Wnpp66Context ctx = new Wnpp66Context();
-        public async Task PostFileAsync(IFormFile fileData)
+        public async Task<int> PostFileAsync(IFormFile fileData, FileType fileType)
         {
+            int result = 0;
             try
             {
                 var tFileOnDb = new TFileOnDb()
@@ -40,16 +41,19 @@ namespace WNPP_API.Services
                 using (var stream = new MemoryStream())
                 {
                     fileData.CopyTo(stream);
-                
+                    tFileOnDb.FileType = fileType.ToString();
+                    tFileOnDb.FileSize = stream.Length;
                     tFileOnDb.FileBinary = stream.ToArray();
                 }
                 ctx.TFileOnDbs.Add(tFileOnDb);
                 await ctx.SaveChangesAsync();
+                result = tFileOnDb.Id;
             }
             catch (Exception)
             {
                 throw;
             }
+            return result;
         }
        
         public async Task DownloadFileById(int Id)
