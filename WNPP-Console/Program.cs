@@ -345,6 +345,7 @@ void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
         data = data.Replace("-", "");
+        data = data.Replace(" ", "");
         branch.MonasteryPhoneNo = data;
 
         rowRecCount++; i++;
@@ -482,6 +483,7 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
         data = data.Replace("-", "");
+        data = data.Replace(" ", "");
         branch.MonasteryPhoneNo = data;
 
         rowRecCount++; i++;
@@ -637,6 +639,7 @@ void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
         data = data.Replace("-", "");
+        data = data.Replace(" ", "");
         branch.MonasteryPhoneNo = data;
 
         rowRecCount++; i++;
