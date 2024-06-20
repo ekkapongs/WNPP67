@@ -85,6 +85,10 @@ public partial class TBranch
 
     public string? CertifierTemple { get; set; }
 
+    public int? OrdainedAtAge { get; set; }
+
+    public DateTime? DateOfRegister { get; set; }
+
     public DateTime? DateOfBirth { get; set; }
 
     public DateTime? DateOfOrdination { get; set; }

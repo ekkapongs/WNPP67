@@ -6,7 +6,8 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using WNPP_API.Models;
 
 ///=== RUN =======
-string fileName = @"D:\DEV\NewContract2567v.2.04.09.xlsx";
+//string fileName = @"D:\DEV\NewContract2567v.2.04.16.xlsx"; // Data Type 4
+string fileName = @"D:\DEV\NewContract2567v.2.05.04.xlsx"; // Data Type 5
 ///
 
 //getImageFromExcel();
@@ -85,6 +86,27 @@ string getArabicnumber(string source)
     result = result.Replace("๘", "8");
     result = result.Replace("๙", "9");
     result = result.Replace("๐", "0");
+
+    return result;
+}
+int getOrdinationOfAge(String data)
+{
+    int result = 0;
+    int ageYear = 0;
+    string age = "";
+    string[] convData;
+
+    if (data.IndexOf("อุปสมบท เมื่ออายุ") >= 0)
+    {
+        age = data.Substring(data.IndexOf("อุปสมบท เมื่ออายุ")).Trim();
+        convData = age.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (convData.Length >= 3 )
+        {
+            bool canConvert = int.TryParse(convData[2], out ageYear);
+            result = canConvert ? ageYear : 0;
+        }
+    }
+   
 
     return result;
 }
@@ -231,7 +253,7 @@ void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     List<TBranch> lstTBranch = new List<TBranch>();
     TBranch branch;
     int rowCount = 1, rowRecCount = 1;
-    int maxRowCount = 2790;
+    int maxRowCount = 3330;
     for (int i = 1; i <= maxRowCount; i++)
     {
 
@@ -334,6 +356,7 @@ void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
         branch.Notation = data;
+        branch.OrdainedAtAge = getOrdinationOfAge(data);
         branch.DateOfBirth = getDateOfBirth(data);
         branch.DateOfOrdination = getOrdination(data);
 
@@ -361,6 +384,7 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     WorksheetPart worksheetPart = GetWorksheetPartByName(doc, sheetName);
     Worksheet sheet = worksheetPart.Worksheet;
 
+    string tmp = "";
     string? data = null;
     string[] add = null;
 
@@ -370,7 +394,7 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     List<TBranch> lstTBranch = new List<TBranch>();
     TBranch branch;
     int rowCount = 1, rowRecCount = 1;
-    int maxRowCount = 580;
+    int maxRowCount = 40;
     for (int i = 1; i <= maxRowCount; i++)
     {
 
@@ -464,7 +488,6 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         branch.AbbotName = data;
 
         rowRecCount++; i++;
-        rowRecCount++; i++;
 
         ///8 === Ordinate ====
         ///===================
@@ -472,8 +495,31 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
         branch.Notation = data;
+        branch.OrdainedAtAge = getOrdinationOfAge(data);
         branch.DateOfBirth = getDateOfBirth(data);
         branch.DateOfOrdination = getOrdination(data);
+
+        rowRecCount++; i++;
+
+        ///8 === Certifier ===
+        ///===================
+        cellColumn = "C" + i;
+        data = getCellData(cellColumn, sheet, sst);
+        data = data != null ? data.Trim() : "";
+        data = data.Replace("รับรอง", "");
+        add = data.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        tmp = "";
+        if (add.Length >=1)
+        {
+            for (int j = 0; j < add.Length - 1; j++)
+            {
+                tmp = tmp + add[j] + " ";
+            }
+            tmp = tmp.Trim();
+            branch.CertifierName = tmp;
+            branch.CertifierTemple = add[add.Length - 1];
+        }
+
 
         rowRecCount++; i++;
 
@@ -509,7 +555,7 @@ void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     List<TBranch> lstTBranch = new List<TBranch>();
     TBranch branch;
     int rowCount = 1, rowRecCount = 1;
-    int maxRowCount = 700;
+    int maxRowCount = 730;
     for (int i = 1; i <= maxRowCount; i++)
     {
 
@@ -610,6 +656,7 @@ void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
         branch.Notation = data;
+        branch.OrdainedAtAge = getOrdinationOfAge(data);
         branch.DateOfBirth = getDateOfBirth(data);
         branch.DateOfOrdination = getOrdination(data);
 
