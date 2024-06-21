@@ -10,10 +10,50 @@ namespace WNPP_API.Services
         public List<TBranch>? findByAbbotName(String abbotName);
         public List<TBranch>? findByMonasteryName(String monasteryName);
         public List<TBranch>? searchByName(String name);
+        public List<TBranch>? searchByName2(String name);
     }
     public class WNPPServive: CommonService, IWNPPServive
     {
         private readonly Wnpp66Context ctx = new Wnpp66Context();
+        public List<TBranch>? searchByName2(String name)
+        {
+            List<TBranch> result = new List<TBranch>();
+            int yearNow = DateTime.Now.Year;
+            int yearOfOrdinate = 0;
+            DateTime dateOfOrdination;
+
+            string countYearOfOrdinate = "พรรษา";
+            string countYearOfAge = "ปี";
+            try
+            {
+                foreach (TBranch data in searchByName(name))
+                {
+                    if (data.OrdainedAtAge > 0)
+                    {
+                        countYearOfAge = "ปี";
+                        countYearOfOrdinate = "พรรษา";
+
+                        countYearOfOrdinate = (DateTime.Now.Year - ((DateTime)data.DateOfOrdination).Year) + " " + countYearOfOrdinate;
+                        countYearOfAge = (DateTime.Now.Year - ((DateTime)data.DateOfBirth).Year) + " " + countYearOfAge;
+
+                        data.Notation = data.Notation + " ปัจจุบันอายุ " + countYearOfAge + " " + countYearOfOrdinate;
+                    }
+                    else
+                    {
+                        data.Notation = "--ไม่มีข้อมูล--";
+                    }
+
+
+
+                    result.Add(data);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return result;
+        }
         public List<TBranch>? searchByName(String name)
         {
             List<TBranch> result = null;

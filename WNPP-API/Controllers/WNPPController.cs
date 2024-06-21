@@ -17,6 +17,13 @@ namespace WNPP_API.Controllers
             _service = new WNPPServive();
         }
         [HttpPost]
+        [ActionName("searchByName2")]
+        public List<TBranch> searchByName2(String name)
+        {
+            _logger.LogTrace("searchByName2 : " + name);
+            return _service.searchByName2(name);
+        }
+        [HttpPost]
         [ActionName("searchByName")]
         public List<TBranch> searchByName(String name)
         {
