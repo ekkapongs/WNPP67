@@ -1,0 +1,14 @@
+﻿@{
+    switch (ViewData["page"])
+    {
+        case "Admin":
+            Layout = "_AdminLayout";
+            break;
+        case "Users":
+            Layout = "_UserLayout";
+            break;
+        default:
+            Layout = "_Layout";
+            break;
+    }
+}

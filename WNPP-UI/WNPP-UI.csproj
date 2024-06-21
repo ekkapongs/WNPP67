@@ -7,4 +7,19 @@
     <RootNamespace>WNPP_UI</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\site.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\_Layout - Copy.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\" />
+  </ItemGroup>
+
 </Project>
