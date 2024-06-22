@@ -7,4 +7,8 @@
     <RootNamespace>WNPP_WEB</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WNPP-API\WNPP-API.csproj" />
+  </ItemGroup>
+
 </Project>

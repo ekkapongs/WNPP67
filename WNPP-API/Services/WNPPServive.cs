@@ -11,30 +11,26 @@ namespace WNPP_API.Services
         public List<TBranch>? findByMonasteryName(String monasteryName);
         public List<TBranch>? searchByName(String name);
         public List<TBranch>? searchByName2(String name);
+        public List<TBranch>? calPhranSa(List<TBranch> datas);
     }
     public class WNPPServive: CommonService, IWNPPServive
     {
+
         private readonly Wnpp66Context ctx = new Wnpp66Context();
-        public List<TBranch>? searchByName2(String name)
+
+        public List<TBranch>? calPhranSa(List<TBranch> datas)
         {
             List<TBranch> result = new List<TBranch>();
-            int yearNow = DateTime.Now.Year;
-            int yearOfOrdinate = 0;
-            DateTime dateOfOrdination;
-
-            string countYearOfOrdinate = "พรรษา";
-            string countYearOfAge = "ปี";
+            string countYearOfOrdinate;
+            string countYearOfAge;
             try
             {
-                foreach (TBranch data in searchByName(name))
+                foreach (TBranch data in datas)
                 {
                     if (data.OrdainedAtAge > 0)
                     {
-                        countYearOfAge = "ปี";
-                        countYearOfOrdinate = "พรรษา";
-
-                        countYearOfOrdinate = (DateTime.Now.Year - ((DateTime)data.DateOfOrdination).Year) + " " + countYearOfOrdinate;
-                        countYearOfAge = (DateTime.Now.Year - ((DateTime)data.DateOfBirth).Year) + " " + countYearOfAge;
+                        countYearOfOrdinate = (DateTime.Now.Year - ((DateTime)data.DateOfOrdination).Year) + " พรรษา";
+                        countYearOfAge = (DateTime.Now.Year - ((DateTime)data.DateOfBirth).Year) + " ปี";
 
                         data.Notation = data.Notation + " ปัจจุบันอายุ " + countYearOfAge + " " + countYearOfOrdinate;
                     }
@@ -43,10 +39,24 @@ namespace WNPP_API.Services
                         data.Notation = "--ไม่มีข้อมูล--";
                     }
 
-
-
                     result.Add(data);
                 }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return result;
+        }
+
+        public List<TBranch>? searchByName2(String name)
+        {
+            List<TBranch> result = new List<TBranch>();
+            try
+            {
+                result = calPhranSa(searchByName(name));
+                
             }
             catch (Exception)
             {

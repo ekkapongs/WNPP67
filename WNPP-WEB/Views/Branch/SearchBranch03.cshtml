@@ -1,5 +1,66 @@
-﻿@*
+﻿@using WNPP_WEB.Models
+@model List<BranchViewModel>
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["MenuName"] = "B3";
+    ViewData["MenuListB"] = "show";
+    ViewData["MenuB3"] = "active";
+
+    //var data = ViewBag.Message;
 }
+
+<div class="card-header card-header-rose card-header-text">
+    <div class="card-text">
+        <h4 class="card-title">B2 คัดค้นสาขาสำรวจ</h4>
+    </div>
+</div>
+<div class="card-body">
+    <div class="toolbar">
+        <!--        Here you can write extra buttons/actions for the toolbar              -->
+    </div>
+    <div class="material-datatables">
+        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Date</th>
+                    <th class="disabled-sorting text-right">Actions</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start date</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.BranchName</td>
+                        <td>@item.MonasteryName</td>
+                        <td>@item.ProvinceMonatery</td>
+                        <td>@item.AbbotName</td>
+                        <td>@item.Notation</td>
+                        <td class="text-right">
+                            <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">favorite</i></a>
+                            <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
+                            <a href="#" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
