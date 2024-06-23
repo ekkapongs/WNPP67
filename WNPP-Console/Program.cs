@@ -7,7 +7,7 @@ using WNPP_API.Models;
 
 ///=== RUN =======
 //string fileName = @"D:\DEV\NewContract2567v.2.04.16.xlsx"; // Data Type 4
-string fileName = @"D:\DEV\NewContract2567v.2.05.04.xlsx"; // Data Type 5
+string fileName = @"D:\DEV\NewContract2567v.2.05.05.xlsx"; // Data Type 5
 ///
 
 //getImageFromExcel();
@@ -71,6 +71,16 @@ String? getCellData(String cellAddress, Worksheet sheet, SharedStringTable sst)
         if ((theCell.DataType != null) && (theCell.DataType == CellValues.SharedString))
             result = sst.ChildElements[int.Parse(theCell.CellValue.Text)].InnerText;
 
+    return result;
+}
+string convBranch3Digit(string source)
+{
+    string result = source;
+    string[] data = source.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    if (data.Length == 2)
+    {
+        result = data[0] + " " + string.Format("{0:000}", int.Parse(data[1]));
+    }
     return result;
 }
 string getArabicnumber(string source)
@@ -265,7 +275,7 @@ void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         cellColumn = "B" + i;
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
-        branch.BranchName = data;
+        branch.BranchName = convBranch3Digit(data);
         branch.BranchType = branchType;
         branch.BranchTypeName = sheetName;
 
@@ -406,7 +416,7 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         cellColumn = "B" + i;
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
-        branch.BranchName = data;
+        branch.BranchName = convBranch3Digit(data);
         branch.BranchType = branchType;
         branch.BranchTypeName = sheetName;
 
@@ -567,7 +577,7 @@ void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         cellColumn = "B" + i;
         data = getCellData(cellColumn, sheet, sst);
         data = data != null ? getArabicnumber(data.Trim()) : "";
-        branch.BranchName = data;
+        branch.BranchName = convBranch3Digit(data);
         branch.BranchType = branchType;
         branch.BranchTypeName = sheetName;
 

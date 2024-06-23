@@ -4,6 +4,7 @@
     {
         public string? BranchName { get; set; }
         public string? MonasteryName { get; set; }
+        public string? MonasteryPhoneNO { get; set; }
         public string? AbbotName { get; set; }
         public string? Notation { get; set; }
         public string? CertifierName { get; set; }

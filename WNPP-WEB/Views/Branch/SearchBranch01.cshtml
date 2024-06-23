@@ -24,21 +24,33 @@
         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Date</th>
+                    <th>สาขา</th>
+                    <th>วัด/ที่พักสงฆ์</th>
+                    <th>ชื่อ/ฉายา</th>
+                    <th>เบอร์โทร</th>
+                    <th>ที่อยู่</th>
+                    <th>ตำบล</th>
+                    <th>อำเภอ</th>
+                    <th>จังหวัด</th>
+                    <th>ประเทศ</th>
+                    <th>รหัส</th>
+                    <th>ข้อมูลอุปสมบท</th>
                     <th class="disabled-sorting text-right">Actions</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
+                    <th>สาขา</th>
+                    <th>วัด/ที่พักสงฆ์</th>
+                    <th>ชื่อ/ฉายา</th>
+                    <th>เบอร์โทร</th>
+                    <th>ที่อยู่</th>
+                    <th>ตำบล</th>
+                    <th>อำเภอ</th>
+                    <th>จังหวัด</th>
+                    <th>ประเทศ</th>
+                    <th>รหัส</th>
+                    <th>ข้อมูลอุปสมบท</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </tfoot>
@@ -48,8 +60,14 @@
                     <tr>
                         <td>@item.BranchName</td>
                         <td>@item.MonasteryName</td>
-                        <td>@item.ProvinceMonatery</td>
                         <td>@item.AbbotName</td>
+                        <td>@item.MonasteryPhoneNO</td>
+                        <td>@item.AddressTextMonatery</td>
+                        <td>@item.SubDistrictMonatery</td>
+                        <td>@item.DistrictMonatery</td>
+                        <td>@item.ProvinceMonatery</td>
+                        <td>@item.CountryMonatery</td>
+                        <td>@item.PostCodeMonatery</td>
                         <td>@item.Notation</td>
                         <td class="text-right">
                             <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">favorite</i></a>

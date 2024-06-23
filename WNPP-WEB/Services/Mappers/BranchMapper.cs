@@ -38,6 +38,7 @@ namespace WNPP_WEB.Services.Mappers
                 {
                     BranchName = branch.BranchName,
                     MonasteryName = branch.MonasteryName,
+                    MonasteryPhoneNO = branch.MonasteryPhoneNo,
                     AbbotName = branch.AbbotName,
                     Notation = branch.Notation,
                     CertifierName = branch.CertifierName,
