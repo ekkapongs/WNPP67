@@ -10,5 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WNPP-API\WNPP-API.csproj" />
   </ItemGroup>
-
+	<PropertyGroup>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
 </Project>
