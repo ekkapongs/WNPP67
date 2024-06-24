@@ -6,6 +6,8 @@ namespace WNPP_WEB.Services
 {
     public interface IBranchServices
     {
+        public List<BranchViewModel> searchBranch(string message);
+
         public List<BranchViewModel> getAllBranch();
         public List<BranchViewModel> getAllReserve();
         public List<BranchViewModel> getAllSurvey();
@@ -15,6 +17,13 @@ namespace WNPP_WEB.Services
         private IBranchMapper _mapper;
         public BranchServices() {
             _mapper = new BranchMapper();
+        }
+        public List<BranchViewModel> searchBranch(string message)
+        {
+            List<BranchViewModel> result = new List<BranchViewModel>();
+            result = _mapper.ToViews(calPhranSa(searchByName(message)));
+            return result;
+            
         }
 
         public List<BranchViewModel> getAllBranch()

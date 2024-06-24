@@ -19,21 +19,34 @@ namespace WNPP_WEB.Controllers
             
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Index(string txtSearch)
+        {
+            List<BranchViewModel> lst = new List<BranchViewModel>();
+            try
+            {
+                lst = _service.searchBranch(txtSearch);
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(lst);
+        }
         public IActionResult Register()
         {
-            ViewData["page"] = "Users";
             return View();
         }
         public IActionResult SearchBranch01()
         {
-            ViewData["page"] = "Users";
             List<BranchViewModel> lst = _service.getAllBranch();
 
             return View(lst);
         }
         public IActionResult SearchBranch02()
         {
-            ViewData["page"] = "Users";
             List<BranchViewModel> lst = _service.getAllReserve();
  
 
@@ -43,7 +56,6 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult SearchBranch03()
         {
-            ViewData["page"] = "Users";
             List<BranchViewModel> lst = _service.getAllSurvey();
 
 
@@ -52,7 +64,6 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult SearchBranch04()
         {
-            ViewData["page"] = "Users";
             List<BranchViewModel> lst = _service.getAllSurvey();
 
 
