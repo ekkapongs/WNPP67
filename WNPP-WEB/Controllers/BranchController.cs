@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Diagnostics;
 using WNPP_WEB.Models;
 using WNPP_WEB.Services;
@@ -19,25 +20,34 @@ namespace WNPP_WEB.Controllers
             
             return View();
         }
-
         [HttpPost]
         public IActionResult Index(string txtSearch)
+        {
+
+            return View();
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        public IActionResult SearchBranch00()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SearchBranch00(string txtSearch)
         {
             List<BranchViewModel> lst = new List<BranchViewModel>();
             try
             {
                 lst = _service.searchBranch(txtSearch);
-                
+
             }
             catch (Exception ex)
             {
 
             }
             return View(lst);
-        }
-        public IActionResult Register()
-        {
-            return View();
         }
         public IActionResult SearchBranch01()
         {
@@ -70,7 +80,39 @@ namespace WNPP_WEB.Controllers
 
             return View(lst);
         }
+        public IActionResult EditBranch(int Id)
+        {
+            TBranch branch = new TBranch();
+            try                       
+            {
+               
 
+                branch = _service.findByID(Id);
+
+            }
+            catch (Exception ex)
+            {
+                return View("SearchBranch00");
+            }
+
+            return View(branch);
+        }
+        [HttpPost]
+        public IActionResult EditBranch(TBranch data)
+        {
+            TBranch branch = new TBranch();
+            try
+            {
+                _service.editBranch(data);
+                return View("SearchBranch00");
+            }
+            catch (Exception ex)
+            {
+                return View("SearchBranch00");
+            }
+
+            
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

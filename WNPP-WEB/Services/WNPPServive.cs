@@ -7,8 +7,11 @@ namespace WNPP_WEB.Services
     {
         public List<TBranch> getAllBranch();
         public List<TBranch>? getBranchByTypeID(int typeID);
+
+        public TBranch? findByID(int ID);
         public List<TBranch>? findByAbbotName(String abbotName);
         public List<TBranch>? findByMonasteryName(String monasteryName);
+
         public List<TBranch>? searchByName(String name);
         public List<TBranch>? searchByName2(String name);
         public List<TBranch>? calPhranSa(List<TBranch> datas);
@@ -89,6 +92,28 @@ namespace WNPP_WEB.Services
 
                 }
                 result = rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return result;
+        }
+        public TBranch? findByID(int ID)
+        {
+            TBranch result = null;
+            try
+            {
+                var rows = ctx.TBranches.Where(x =>
+                            x.ActiveStatus == true &&
+                            x.Id == ID).AsNoTracking().ToList();
+
+                if (!rows.Any())
+                {
+                    throw new Exception($"No data by ID :[ {ID} ] is not found.");
+
+                }
+                result = rows.FirstOrDefault();
             }
             catch (Exception)
             {

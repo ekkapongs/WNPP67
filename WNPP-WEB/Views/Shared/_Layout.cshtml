@@ -93,7 +93,7 @@
                         <div class="collapse @ViewData["MenuListB"]" id="branchRegister">
                             <ul class="nav">
                                 <li class="nav-item @ViewData["MenuB0"]">
-                                    <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="Index">
+                                    <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="SearchBranch00">
                                         <span class="sidebar-mini"> B0 </span>
                                         <span class="sidebar-normal"> คัดค้นสาขา </span>
                                     </a>
@@ -122,7 +122,12 @@
                                         <span class="sidebar-normal"> นานาชาติ </span>
                                     </a>
                                 </li>
-
+                                <li class="nav-item @ViewData["MenuB5"]">
+                                    <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="Register">
+                                        <span class="sidebar-mini"> B5 </span>
+                                        <span class="sidebar-normal">ลงทะเบียนสาขา</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -610,6 +615,8 @@
     <script>
         $(document).ready(function () {
 
+            md.initFormExtendedDatetimepickers();
+
             $("#btSearch").click(function () {
                 alert("กูแกไปแล้วจริงๆ. @ViewData["MenuName"]");
             });
@@ -639,7 +646,7 @@
                 }
 
                 var data = table.row($tr).data();
-                alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+                alert('แก้ไขข้อมูล: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
             });
 
             // Delete a record

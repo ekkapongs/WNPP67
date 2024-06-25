@@ -35,6 +35,7 @@ namespace WNPP_WEB.Services.Mappers
             {
                 result = new BranchViewModel()
                 {
+                    Id = branch.Id,
                     BranchName = branch.BranchName,
                     MonasteryName = branch.MonasteryName,
                     MonasteryPhoneNO = branch.MonasteryPhoneNo,
