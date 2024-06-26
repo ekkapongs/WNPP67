@@ -16,5 +16,7 @@
         public string? ProvinceMonatery { get; set; }
         public string? CountryMonatery { get; set; }
         public string? PostCodeMonatery { get; set; }
+
+        public IFormFile? FileUploadFormFile { get; set; }
     }
 }

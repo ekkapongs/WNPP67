@@ -132,5 +132,30 @@
                 </div>
             </div>
         </form>
+        <form enctype="multipart/form-data"  asp-controller="Branch" asp-action="PostSingleFile" method="post">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <h4 class="title">Regular Image</h4>
+                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail">
+                            <img src="/assets/imgs/monk-icon.jpg" alt="...">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                        <div>
+                            <span class="btn btn-rose btn-round btn-file">
+                                <span class="fileinput-new">Select image</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input id="FileUploadFormFile" type="file" name="FileUploadFormFile" />
+                            </span>
+                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-rose">Upload รูป</button>
+                    </div>
+                </div>
+                
+            </div>
+        </form>
     </div>
 </div>

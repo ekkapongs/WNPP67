@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
 using DocumentFormat.OpenXml.Packaging;
@@ -10,8 +11,13 @@ using WNPP_API.Models;
 string fileName = @"D:\DEV\NewContract2567v.2.05.05.xlsx"; // Data Type 5
 ///
 
-//getImageFromExcel();
-getDataFromNewExcelFormat();
+///=== GET IMAGE ===///
+getImageFromExcel(@"D:\DEV\Branch\", "สาขา");
+getImageFromExcel(@"D:\DEV\Branch\", "สำรอง");
+getImageFromExcel(@"D:\DEV\Branch\", "สำรวจ");
+
+///=== Load Data To Database ===///
+///getDataFromNewExcelFormat();
 
 void getDataFromNewExcelFormat()
 {
@@ -707,13 +713,10 @@ void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     ctx.SaveChanges();
 }
 
-void getImageFromExcel()
+void getImageFromExcel(string filePath, string sheetName)
 {
     {
-        
-        string sheetName = "สำรวจ";
-
-        string filesOut = @"D:\DEV\Branch\" + sheetName + "\\";
+        string filesOut = filePath + sheetName + "\\";
 
         using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         {
@@ -732,7 +735,8 @@ void getImageFromExcel()
                     stream.Read(byteStream, 0, (int)length);
 
                     Console.WriteLine("The rId of this Image is '{0}' data {1}", rId, i);
-                    Image img = Image.FromStream(i.GetStream());
+                    //Image img = Image.FromStream(i.GetStream());
+                    Image img = ResizeImage(Image.FromStream(i.GetStream()),100,146);
                     img.Save(filesOut + rId + ".jpg", ImageFormat.Jpeg);
                 }
 
@@ -754,4 +758,29 @@ void getImageFromExcel()
 
         return worksheetPart;
     }
+}
+
+Bitmap ResizeImage(Image image, int width, int height)
+{
+    var destRect = new Rectangle(0, 0, width, height);
+    var destImage = new Bitmap(width, height);
+
+    destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+    using (var graphics = Graphics.FromImage(destImage))
+    {
+        graphics.CompositingMode = CompositingMode.SourceCopy;
+        graphics.CompositingQuality = CompositingQuality.HighQuality;
+        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+        graphics.SmoothingMode = SmoothingMode.HighQuality;
+        graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+        using (var wrapMode = new ImageAttributes())
+        {
+            wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+            graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+        }
+    }
+
+    return destImage;
 }

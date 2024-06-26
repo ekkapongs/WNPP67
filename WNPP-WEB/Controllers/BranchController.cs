@@ -10,10 +10,12 @@ namespace WNPP_WEB.Controllers
     {
         private readonly ILogger<BranchController> _logger;
         private readonly IBranchServices _service;
+        private readonly IFileServices _serviceFiles;
         public BranchController(ILogger<BranchController> logger)
         {
             _logger = logger;
             _service = new BranchServices();
+            _serviceFiles = new FileServices();
         }
         public IActionResult Index()
         {
@@ -112,6 +114,52 @@ namespace WNPP_WEB.Controllers
             }
 
             
+        }
+
+        [HttpPost]
+        [ActionName("PostSingleFile")]
+        public async Task<IActionResult> PostSingleFile([FromForm] BranchViewModel view)
+        {
+            long size = view.FileUploadFormFile.Length;
+            await _serviceFiles.PostFileAsync(view.FileUploadFormFile);
+            return Ok();
+        }
+
+        [HttpGet]
+        [ActionName("LoadImage")]
+        public IActionResult LoadImage(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                return File(_serviceFiles.getImage(id), "image/jpeg");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpGet]
+        [ActionName("LoadPDF")]
+        public IActionResult LoadPDF(int id)
+        {
+            if (id < 1)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                return File(_serviceFiles.getImage(id), "application/pdf");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
