@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WNPP-API\WNPP-API.csproj" />
+    <ProjectReference Include="..\WNPP-WEB\WNPP-WEB.csproj" />
   </ItemGroup>
 
 </Project>

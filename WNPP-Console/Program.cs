@@ -4,7 +4,9 @@ using System.Drawing.Imaging;
 
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
-using WNPP_API.Models;
+using DocumentFormat.OpenXml.Wordprocessing;
+using WNPP_WEB.Models;
+using WNPP_WEB.Services;
 
 ///=== RUN =======
 //string fileName = @"D:\DEV\NewContract2567v.2.04.16.xlsx"; // Data Type 4
@@ -12,16 +14,21 @@ string fileName = @"D:\DEV\NewContract2567v.2.05.05.xlsx"; // Data Type 5
 ///
 
 ///=== GET IMAGE ===///
-getImageFromExcel(@"D:\DEV\Branch\", "สาขา");
-getImageFromExcel(@"D:\DEV\Branch\", "สำรอง");
-getImageFromExcel(@"D:\DEV\Branch\", "สำรวจ");
+Imdb67Context ctx = new Imdb67Context();
+getImageFromExcelToDB(ctx, "สาขา", true);
+getImageFromExcelToDB(ctx, "สำรอง", true);
+getImageFromExcelToDB(ctx, "สำรวจ", true);
+
+//getImageFromExcel(@"D:\DEV\Branch\", "สาขา", true);
+//getImageFromExcel(@"D:\DEV\Branch\", "สำรอง", true);
+//getImageFromExcel(@"D:\DEV\Branch\", "สำรวจ", true);
 
 ///=== Load Data To Database ===///
 ///getDataFromNewExcelFormat();
 
 void getDataFromNewExcelFormat()
 {
-    
+
 
     int set_1_Subject = 1;
     int set_2_Add1 = 3;
@@ -37,7 +44,7 @@ void getDataFromNewExcelFormat()
 
 
     Console.WriteLine(" === Open Connection === ");
-    Wnpp66Context ctx = new Wnpp66Context();
+    Wnpp67Context ctx = new Wnpp67Context();
 
     using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
     {
@@ -116,13 +123,13 @@ int getOrdinationOfAge(String data)
     {
         age = data.Substring(data.IndexOf("อุปสมบท เมื่ออายุ")).Trim();
         convData = age.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        if (convData.Length >= 3 )
+        if (convData.Length >= 3)
         {
             bool canConvert = int.TryParse(convData[2], out ageYear);
             result = canConvert ? ageYear : 0;
         }
     }
-   
+
 
     return result;
 }
@@ -255,7 +262,7 @@ WorksheetPart GetWorksheetPartByName(SpreadsheetDocument document, string sheetN
     return worksheetPart;
 }
 
-void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp66Context ctx)
+void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp67Context ctx)
 {
     WorksheetPart worksheetPart = GetWorksheetPartByName(doc, sheetName);
     Worksheet sheet = worksheetPart.Worksheet;
@@ -395,7 +402,7 @@ void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     ctx.SaveChanges();
 }
 /// ===> สำรอง
-void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp66Context ctx)
+void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp67Context ctx)
 {
     WorksheetPart worksheetPart = GetWorksheetPartByName(doc, sheetName);
     Worksheet sheet = worksheetPart.Worksheet;
@@ -525,7 +532,7 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = data.Replace("รับรอง", "");
         add = data.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         tmp = "";
-        if (add.Length >=1)
+        if (add.Length >= 1)
         {
             for (int j = 0; j < add.Length - 1; j++)
             {
@@ -556,7 +563,7 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     ctx.SaveChanges();
 }
 /// ===> สำรวจ
-void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp66Context ctx)
+void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp67Context ctx)
 {
     WorksheetPart worksheetPart = GetWorksheetPartByName(doc, sheetName);
     Worksheet sheet = worksheetPart.Worksheet;
@@ -712,51 +719,101 @@ void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     ctx.TBranches.AddRange(lstTBranch);
     ctx.SaveChanges();
 }
-
-void getImageFromExcel(string filePath, string sheetName)
+void getImageFromExcelToDB(Imdb67Context ctx, string sheetName, bool needReSize)
 {
+    Stream stream;
+    long length;
+    byte[] byteStream;
+    Image img;
+    TAbbotImg result;
+
+    using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
     {
-        string filesOut = filePath + sheetName + "\\";
-
-        using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        using (SpreadsheetDocument doc = SpreadsheetDocument.Open(fs, false))
         {
-            using (SpreadsheetDocument doc = SpreadsheetDocument.Open(fs, false))
+            WorkbookPart workbookPart = doc.WorkbookPart;
+            WorksheetPart workSheet = GetWorksheetPartByName(doc, sheetName);
+
+
+            foreach (ImagePart i in workSheet.DrawingsPart.ImageParts)
             {
-                WorkbookPart workbookPart = doc.WorkbookPart;
-                WorksheetPart workSheet = GetWorksheetPartByName(doc, sheetName);
+                var rId = workSheet.DrawingsPart.GetIdOfPart(i);
 
-                foreach (ImagePart i in workSheet.DrawingsPart.ImageParts)
+                stream = i.GetStream();
+                length = stream.Length;
+                byteStream = new byte[length];
+                stream.Read(byteStream, 0, (int)length);
+
+                Console.WriteLine("The rId of this Image is '{0}' data {1}", rId, i);
+
+                if (needReSize)
+                    img = ResizeImage(Image.FromStream(i.GetStream()), 100, 150);
+
+                else
+                    img = Image.FromStream(i.GetStream());
+
+                result = new TAbbotImg()
                 {
-                    var rId = workSheet.DrawingsPart.GetIdOfPart(i);
+                    ActiveStatus = CommonService._Record_Active,
+                    LanguageId = CommonService._Lang_TH,
 
-                    Stream stream = i.GetStream();
-                    long length = stream.Length;
-                    byte[] byteStream = new byte[length];
-                    stream.Read(byteStream, 0, (int)length);
+                    CreatedBy = CommonService._Admin_ID,
+                    CreatedByName = CommonService._Admin_Name,
+                    CreatedDate = DateTime.Now,
 
-                    Console.WriteLine("The rId of this Image is '{0}' data {1}", rId, i);
-                    //Image img = Image.FromStream(i.GetStream());
-                    Image img = ResizeImage(Image.FromStream(i.GetStream()),100,146);
-                    img.Save(filesOut + rId + ".jpg", ImageFormat.Jpeg);
+                    //AbbotName = rId +".jpg",
+                    ImgNotation = rId + "," + sheetName,
+                };
+
+                using (var stm = new MemoryStream())
+                {
+                    img.Save(stm, ImageFormat.Jpeg);
+                    result.ImgType = "image/jpeg";
+                    result.ImgSize = stm.Length;
+                    result.ImgBinary = stm.ToArray();
                 }
 
+                ctx.TAbbotImgs.Add(result);
+                
             }
+            ctx.SaveChanges();
         }
     }
-    static WorksheetPart GetWorksheetPartByName(SpreadsheetDocument document, string sheetName)
+}
+void getImageFromExcel(string filePath, string sheetName, bool needReSize)
+
+
+{
+    string filesOut = filePath + sheetName + "\\";
+
+    using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
     {
-        IEnumerable<Sheet> sheets = document.WorkbookPart.Workbook.GetFirstChild<Sheets>().Elements<Sheet>().Where(s => s.Name == sheetName);
-
-        if (sheets.Count() == 0)
+        using (SpreadsheetDocument doc = SpreadsheetDocument.Open(fs, false))
         {
-            // The specified worksheet does not exist.
-            return null;
+            WorkbookPart workbookPart = doc.WorkbookPart;
+            WorksheetPart workSheet = GetWorksheetPartByName(doc, sheetName);
+
+            foreach (ImagePart i in workSheet.DrawingsPart.ImageParts)
+            {
+                var rId = workSheet.DrawingsPart.GetIdOfPart(i);
+
+                Stream stream = i.GetStream();
+                long length = stream.Length;
+                byte[] byteStream = new byte[length];
+                stream.Read(byteStream, 0, (int)length);
+
+                Console.WriteLine("The rId of this Image is '{0}' data {1}", rId, i);
+                Image img;
+                if (needReSize)
+                    img = ResizeImage(Image.FromStream(i.GetStream()), 100, 150);
+
+                else
+                    img = Image.FromStream(i.GetStream());
+
+                img.Save(filesOut + rId + ".jpg", ImageFormat.Jpeg);
+            }
+
         }
-
-        string relationshipId = sheets.First().Id.Value;
-        WorksheetPart worksheetPart = (WorksheetPart)document.WorkbookPart.GetPartById(relationshipId);
-
-        return worksheetPart;
     }
 }
 

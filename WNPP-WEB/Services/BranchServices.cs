@@ -41,6 +41,7 @@ namespace WNPP_WEB.Services
                     row.PostCodeMonatery = data.PostCodeMonatery;
                     row.MonasteryPhoneNo = data.MonasteryPhoneNo;
                     row.AbbotName = data.AbbotName;
+                    row.AbbotImageUrl = data.AbbotImageUrl;
 
                     row.CertifierName = data.CertifierName;
                     row.CertifierTemple = data.CertifierTemple;

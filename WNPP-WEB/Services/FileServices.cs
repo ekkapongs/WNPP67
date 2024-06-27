@@ -5,30 +5,46 @@ namespace WNPP_WEB.Services
 {
     public interface IFileServices
     {
-        public Task<TFileDb> PostFileAsync(IFormFile fileData);
+        public Task<TAbbotImg> PostAbbotImage(AbbotImageViewModel view);
         public Byte[] getImage(int Id);
+        public Byte[] getAbbotImage(int Id);
     }
     public class FileServices : WNPPServive, IFileServices
     {
         private readonly Imdb67Context ctx = new Imdb67Context();
-        public Byte[] getImage(int Id)
+        private readonly Wnpp67Context ctxDB = new Wnpp67Context();
+        public Byte[] getAbbotImage(int Id)
         {
             try
             {
-                var file = ctx.TFileDbs.Where(x => x.Id == Id).FirstOrDefaultAsync();
-                return file.Result.FileBinary.ToArray();
+                var file = ctx.TAbbotImgs.Where(x => x.Id == Id && x.ActiveStatus == true).FirstOrDefaultAsync();
+                return file.Result.ImgBinary.ToArray();
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public async Task<TFileDb> PostFileAsync(IFormFile fileData)
+        public Byte[] getImage(int Id)
         {
-            TFileDb result = null;
             try
             {
-                result = new TFileDb()
+                var file = ctx.TAbbotImgs.Where(x => x.Id == Id).FirstOrDefaultAsync();
+                return file.Result.ImgBinary.ToArray();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<TAbbotImg> PostAbbotImage(AbbotImageViewModel view)
+        {
+            TAbbotImg result = null;
+            try
+            {
+                IFormFile fileData = view.FileUploadFormFile;
+
+                result = new TAbbotImg()
                 {
                     ActiveStatus = _Record_Active,
                     LanguageId = _Lang_TH,
@@ -37,20 +53,27 @@ namespace WNPP_WEB.Services
                     CreatedByName = _Admin_Name,
                     CreatedDate = DateTime.Now,
 
-                    FileName = fileData.FileName,
+                    AbbotName = view.AbbotName,
                 };
 
                 using (var stream = new MemoryStream())
                 {
                     fileData.CopyTo(stream);
-                    result.FileType = result.ToString();
-                    result.FileSize = stream.Length;
-                    result.FileBinary = stream.ToArray();
+                    result.ImgType = result.ToString();
+                    result.ImgSize = stream.Length;
+                    result.ImgBinary = stream.ToArray();
                 }
 
-                ctx.TFileDbs.Add(result);
+                ctx.TAbbotImgs.Add(result);
                 await ctx.SaveChangesAsync();
 
+                var row = ctxDB.TBranches.Where(x =>
+                            x.ActiveStatus == true &&
+                            x.Id == view.DataId).FirstOrDefault();
+
+                row.AbbotImageUrl = "/File/GetAbbotImage?id=" + result.Id;
+                ctxDB.TBranches.Update(row);
+                ctxDB.SaveChanges();
             }
             catch (Exception ex)
             {

@@ -10,16 +10,15 @@ namespace WNPP_WEB.Controllers
     {
         private readonly ILogger<BranchController> _logger;
         private readonly IBranchServices _service;
-        private readonly IFileServices _serviceFiles;
+
         public BranchController(ILogger<BranchController> logger)
         {
             _logger = logger;
             _service = new BranchServices();
-            _serviceFiles = new FileServices();
         }
         public IActionResult Index()
         {
-            
+
             return View();
         }
         [HttpPost]
@@ -47,7 +46,7 @@ namespace WNPP_WEB.Controllers
             }
             catch (Exception ex)
             {
-
+                return View("Error");
             }
             return View(lst);
         }
@@ -60,7 +59,7 @@ namespace WNPP_WEB.Controllers
         public IActionResult SearchBranch02()
         {
             List<BranchViewModel> lst = _service.getAllReserve();
- 
+
 
 
             return View(lst);
@@ -85,16 +84,16 @@ namespace WNPP_WEB.Controllers
         public IActionResult EditBranch(int Id)
         {
             TBranch branch = new TBranch();
-            try                       
+            try
             {
-               
+
 
                 branch = _service.findByID(Id);
 
             }
             catch (Exception ex)
             {
-                return View("SearchBranch00");
+                return View("Error");
             }
 
             return View(branch);
@@ -110,57 +109,12 @@ namespace WNPP_WEB.Controllers
             }
             catch (Exception ex)
             {
-                return View("SearchBranch00");
+                return View("Error");
             }
 
-            
+
         }
 
-        [HttpPost]
-        [ActionName("PostSingleFile")]
-        public async Task<IActionResult> PostSingleFile([FromForm] BranchViewModel view)
-        {
-            long size = view.FileUploadFormFile.Length;
-            await _serviceFiles.PostFileAsync(view.FileUploadFormFile);
-            return Ok();
-        }
-
-        [HttpGet]
-        [ActionName("LoadImage")]
-        public IActionResult LoadImage(int id)
-        {
-            if (id < 1)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                return File(_serviceFiles.getImage(id), "image/jpeg");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        [HttpGet]
-        [ActionName("LoadPDF")]
-        public IActionResult LoadPDF(int id)
-        {
-            if (id < 1)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                return File(_serviceFiles.getImage(id), "application/pdf");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
