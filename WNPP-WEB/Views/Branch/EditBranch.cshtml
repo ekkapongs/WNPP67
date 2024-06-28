@@ -21,7 +21,7 @@
                 <div class="col-sm-10">
                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                         <div class="fileinput-new thumbnail">
-                            <img src="/assets/imgs/monk-icon.jpg" alt="...">
+                            <img src="@Model.AbbotImageUrl" alt="...">
                         </div>
                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                         <div>
@@ -30,16 +30,11 @@
                                 <span class="fileinput-exists">เปลี่ยนรูป</span>
                                 <input id="FileUploadFormFile" type="file" name="FileUploadFormFile" />
                             </span>
+                            <a href="#pablo" class="btn btn-success btn-sm fileinput-exists" data-dismiss="fileinput"><i class="material-icons">save_as</i> บันทึกรูป</a>
                             <a href="#pablo" class="btn btn-danger btn-sm fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> ยกเลิก</a>
                         </div>
-                        <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="บันทึกข้อมูล">
-                            <i class="material-icons">save_as</i>
-                            บันทึกข้อมูล
-                        </button>
-                        <input type="hidden" id="AbbotImageId" name="AbbotImageId" class="form-control" value="">
                         <input type="hidden" id="DataId" name="DataId" class="form-control" value="@Model.Id">
                         <input type="hidden" id="AbbotName" name="AbbotName" class="form-control" value="@Model.AbbotName">
-                        <input type="hidden" id="CallBackPath" name="CallBackPath" class="form-control" value="">
                     </div>
                 </div>
             </div>
