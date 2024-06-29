@@ -15,30 +15,6 @@
         </div>
     </div>
     <div class="card-body ">
-        <form enctype="multipart/form-data" asp-controller="File" asp-action="PostAbbotImage" method="post">
-            <div class="row">
-                <label class="col-sm-2 col-form-label">ภาพถ่าย</label>
-                <div class="col-sm-10">
-                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                        <div class="fileinput-new thumbnail">
-                            <img src="@Model.AbbotImageUrl" alt="...">
-                        </div>
-                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                        <div>
-                            <span class="btn btn-default btn-sm btn-file">
-                                <span class="fileinput-new">เลือกรูปจากเครื่อง</span>
-                                <span class="fileinput-exists">เปลี่ยนรูป</span>
-                                <input id="FileUploadFormFile" type="file" name="FileUploadFormFile" />
-                            </span>
-                            <a href="#pablo" class="btn btn-success btn-sm fileinput-exists" data-dismiss="fileinput"><i class="material-icons">save_as</i> บันทึกรูป</a>
-                            <a href="#pablo" class="btn btn-danger btn-sm fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> ยกเลิก</a>
-                        </div>
-                        <input type="hidden" id="DataId" name="DataId" class="form-control" value="@Model.Id">
-                        <input type="hidden" id="AbbotName" name="AbbotName" class="form-control" value="@Model.AbbotName">
-                    </div>
-                </div>
-            </div>
-        </form>
         <form asp-controller="Branch" asp-action="EditBranch" method="post" class="form-horizontal">
             <div class="row">
                 <label class="col-sm-2 col-form-label">ลำดับที่</label>

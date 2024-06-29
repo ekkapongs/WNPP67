@@ -1,0 +1,340 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["MenuName"] = "B5";
+    ViewData["MenuListB"] = "show";
+    ViewData["MenuB5"] = "active";
+}
+<div class="card">
+    <div class="card-header card-header-rose card-header-text">
+        <div class="card-text">
+            <h4 class="card-title">ลงทะเบียนสาขา</h4>
+        </div>
+    </div>
+    <div class="card-body ">
+        <form method="get" action="/" class="form-horizontal">
+            <div class="row">
+                <label class="col-sm-2 col-form-label label-checkbox">ประเภทสาขา</label>
+                <div class="col-sm-10 checkbox-radios">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" value="1"> สาขา
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" value="2"> สำรอง
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" value="3" checked> สำรวจ
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline disabled">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="exampleRadios" value="4"> นานาชาติ
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">ลำดับที่</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="สำรวจที่ xxx">
+                                <span class="bmd-help">ระบบต้องคำนวนให้จากฐาน</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">ชื่อวัด</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="">
+                                <span class="bmd-help">ชื่อวัด/ที่พักสงฆ์</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">ที่อยู่ของวัด</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="บ้านเลขที่ ...">
+                                <span class="bmd-help">บ้านเลขที่ ...</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="หมู่ที่ ... ">
+                                <span class="bmd-help">หมู่ที่ ... </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="หมู่บ้าน (บ้าน) ...">
+                                <span class="bmd-help">หมู่บ้าน (บ้าน) ...</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="ถนน ...">
+                                <span class="bmd-help">ถนน ...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="ตำบล ...">
+                                <span class="bmd-help">ตำบล ...</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="อำเภอ ... ">
+                                <span class="bmd-help">อำเภอ ... </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="จังหวัด ...">
+                                <span class="bmd-help">จังหวัด ...</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="รหัสไปรษณีย์ ...">
+                                <span class="bmd-help">รหัสไปรษณีย์ ...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">ข้อมูลโยมวัด</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="ชื่อ โยมวัด">
+                                <span class="bmd-help">โยมวัดเพื่อใช้ติดต่อ มัคนายก หรือ ไวยาวัจกร </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="เบอร์โทร โยมวัด">
+                                <span class="bmd-help">โยมวัดเพื่อใช้ติดต่อ มัคนายก หรือ ไวยาวัจกร </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">ที่ดินวัด</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="ชนิดเอกสารสิทธิ์">
+                                <span class="bmd-help">ชนิดเอกสารสิทธิ์ เช่น โฉนด, น.ส.3 ก, อื่นๆ </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="จำรวน ไร่">
+                                <span class="bmd-help">จำนวน ไร่ ใส่แต่ตัวเลข </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="จำรวน งาน">
+                                <span class="bmd-help">จำนวน งาน ใส่แต่ตัวเลข </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="จำรวน ตารางวา">
+                                <span class="bmd-help">จำนวน ตารางวา ใส่แต่ตัวเลข </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">รับตำแหน่งวันที่</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control datepicker" name="DateOfBirth" value="">
+                                <span class="bmd-help">รับตำแหน่งเจ้าอาวาส / ประธานสงฆ์ วันที่ ?</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">ชื่อเจ้าอาวาส</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="">
+                                <span class="bmd-help">ชื่อเจ้าอาวาส / ประธานสงฆ์ </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="สังกัดวัด">
+                                <span class="bmd-help">สังกัดวัด</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="วิทยะฐานะ">
+                                <span class="bmd-help">ประถม / มัธทยม /ปริญญา </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="ปริยัติ">
+                                <span class="bmd-help">นักธรรม ตรี/โท/เอก , เปรียญ </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="เบอร์ติดต่อ">
+                                <span class="bmd-help">เบอร์โทรศัพท์ </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">เกิดวันที่</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control datepicker" name="DateOfBirth" value="">
+                                <span class="bmd-help">ข้อมูล เจ้าอาวาส / ประธานสงฆ์</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">อุปสมบทวันที่</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control datepicker" name="DateOfBirth" value="">
+                                <span class="bmd-help">ข้อมูล เจ้าอาวาส / ประธานสงฆ์</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">พระอุปัชฌาย์</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="ชื่อ พระอุปัชฌาย์">
+                                <span class="bmd-help">ชื่อ พระอุปัชฌาย์ </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="วัด พระอุปัชฌาย์">
+                                <span class="bmd-help">วัด พระอุปัชฌาย์ </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">ผู้รับรอง</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="ชื่อ ผู้รับรอง">
+                                <span class="bmd-help">พระเถระในสาขาวัดหนองป่าพง</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="วัด ผู้รับรอง">
+                                <span class="bmd-help">วัด พระเถระในสาขาวัดหนองป่าพง</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">รับรองวันที่</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control datepicker" name="DateOfBirth" value="">
+                                <span class="bmd-help">ผู้รับรอง รับรองวันที่</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="บันทึกข้อมูล">
+                            <i class="material-icons">save_as</i>
+                            บันทึกข้อมูล
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

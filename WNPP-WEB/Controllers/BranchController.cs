@@ -31,6 +31,10 @@ namespace WNPP_WEB.Controllers
         {
             return View();
         }
+        public IActionResult AddBranch()
+        {
+            return View();
+        }
         public IActionResult SearchBranch00()
         {
             return View();
