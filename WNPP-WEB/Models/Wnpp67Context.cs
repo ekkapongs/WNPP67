@@ -15,7 +15,11 @@ public partial class Wnpp67Context : DbContext
     {
     }
 
+    public virtual DbSet<MMonastery> MMonasteries { get; set; }
+
     public virtual DbSet<TBranch> TBranches { get; set; }
+
+    public virtual DbSet<TempleDb> TempleDbs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -24,6 +28,42 @@ public partial class Wnpp67Context : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("Thai_CS_AI");
+
+        modelBuilder.Entity<MMonastery>(entity =>
+        {
+            entity.ToTable("M_Monastery");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CountryMonatery)
+                .HasMaxLength(100)
+                .HasColumnName("Country_Monatery");
+            entity.Property(e => e.CreatedByName).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.DateOfFoundingTxt).HasMaxLength(12);
+            entity.Property(e => e.DateOfWisungkhamTxt).HasMaxLength(12);
+            entity.Property(e => e.Denomination).HasMaxLength(100);
+            entity.Property(e => e.DistrictMonatery)
+                .HasMaxLength(100)
+                .HasColumnName("District_Monatery");
+            entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+            entity.Property(e => e.ModifiedByName).HasMaxLength(100);
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.MonasteryName).HasMaxLength(250);
+            entity.Property(e => e.MonasteryType).HasMaxLength(50);
+            entity.Property(e => e.Notation).HasMaxLength(500);
+            entity.Property(e => e.PostCodeMonatery)
+                .HasMaxLength(5)
+                .HasColumnName("PostCode_Monatery");
+            entity.Property(e => e.ProvinceMonatery)
+                .HasMaxLength(100)
+                .HasColumnName("Province_Monatery");
+            entity.Property(e => e.RecordStatus).HasMaxLength(10);
+            entity.Property(e => e.RegisterType).HasMaxLength(50);
+            entity.Property(e => e.SubDistrictMonatery)
+                .HasMaxLength(100)
+                .HasColumnName("SubDistrict_Monatery");
+            entity.Property(e => e.WisungkhamType).HasMaxLength(50);
+        });
 
         modelBuilder.Entity<TBranch>(entity =>
         {
@@ -106,6 +146,50 @@ public partial class Wnpp67Context : DbContext
             entity.Property(e => e.VillageMonatery)
                 .HasMaxLength(50)
                 .HasColumnName("Village_Monatery");
+        });
+
+        modelBuilder.Entity<TempleDb>(entity =>
+        {
+            entity.HasKey(e => e.Column1);
+
+            entity.ToTable("TempleDB");
+
+            entity.Property(e => e.Column1)
+                .ValueGeneratedNever()
+                .HasColumnName("column1");
+            entity.Property(e => e.Column10)
+                .HasMaxLength(100)
+                .HasColumnName("column10");
+            entity.Property(e => e.Column11)
+                .HasMaxLength(100)
+                .HasColumnName("column11");
+            entity.Property(e => e.Column12)
+                .HasMaxLength(10)
+                .HasColumnName("column12");
+            entity.Property(e => e.Column2)
+                .HasMaxLength(200)
+                .HasColumnName("column2");
+            entity.Property(e => e.Column3)
+                .HasMaxLength(50)
+                .HasColumnName("column3");
+            entity.Property(e => e.Column4)
+                .HasMaxLength(50)
+                .HasColumnName("column4");
+            entity.Property(e => e.Column5)
+                .HasMaxLength(50)
+                .HasColumnName("column5");
+            entity.Property(e => e.Column6)
+                .HasMaxLength(50)
+                .HasColumnName("column6");
+            entity.Property(e => e.Column7)
+                .HasMaxLength(50)
+                .HasColumnName("column7");
+            entity.Property(e => e.Column8)
+                .HasMaxLength(50)
+                .HasColumnName("column8");
+            entity.Property(e => e.Column9)
+                .HasMaxLength(100)
+                .HasColumnName("column9");
         });
 
         OnModelCreatingPartial(modelBuilder);

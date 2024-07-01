@@ -21,6 +21,10 @@
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	  <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Monk\" />
+  </ItemGroup>
 	<PropertyGroup>
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	</PropertyGroup>

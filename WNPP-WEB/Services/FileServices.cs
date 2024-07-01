@@ -8,11 +8,24 @@ namespace WNPP_WEB.Services
         public Task<TAbbotImg> PostAbbotImage(AbbotImageViewModel view);
         public Byte[] getImage(int Id);
         public Byte[] getAbbotImage(int Id);
+        public List<TAbbotImg> getAllAbbotImage();
+
     }
     public class FileServices : WNPPServive, IFileServices
     {
         private readonly Imdb67Context ctx = new Imdb67Context();
         private readonly Wnpp67Context ctxDB = new Wnpp67Context();
+        public List<TAbbotImg> getAllAbbotImage()
+        {
+            try
+            {
+                return ctx.TAbbotImgs.AsNoTracking().ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public Byte[] getAbbotImage(int Id)
         {
             try

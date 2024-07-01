@@ -27,6 +27,11 @@ namespace WNPP_WEB.Controllers
 
             return View();
         }
+        public IActionResult Tmp()
+        {
+            IFileServices services = new FileServices();
+            return View(services.getAllAbbotImage());
+        }
         public IActionResult Register()
         {
             return View();
