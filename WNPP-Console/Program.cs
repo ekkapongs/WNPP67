@@ -15,14 +15,14 @@ string fileName = @"D:\DEV\NewContract2567v.2.05.05.xlsx"; // Data Type 5
 
 ///=== GET IMAGE ===///
 Imdb67Context ctx = new Imdb67Context();
-getImageFromExcel("D:\\DEV\\Branch\\", "สาขา", true);
-getImageFromExcelToDB(ctx, "สาขา", true);
+getImageFromExcel("D:\\DEV\\Branch\\", "สาขา", false);
+//getImageFromExcelToDB(ctx, "สาขา", true);
 
-getImageFromExcel("D:\\DEV\\Branch\\", "สำรอง", true);
-getImageFromExcelToDB(ctx, "สำรอง", true);
+getImageFromExcel("D:\\DEV\\Branch\\", "สำรอง", false);
+//getImageFromExcelToDB(ctx, "สำรอง", true);
 
-getImageFromExcel("D:\\DEV\\Branch\\", "สำรวจ", true);
-getImageFromExcelToDB(ctx, "สำรวจ", true);
+getImageFromExcel("D:\\DEV\\Branch\\", "สำรวจ", false);
+//getImageFromExcelToDB(ctx, "สำรวจ", true);
 
 ///=== Load Data To Database ===///
 ///getDataFromNewExcelFormat();

@@ -61,7 +61,15 @@
                     {
                         <tr>
                             <td>
-                                <img class="img" src="@item.AbbotImageUrl" />
+                                @if (string.IsNullOrEmpty( item.AbbotImageUrl))
+                                {
+                                    <img class="img" src="~/assets/imgs/NoDataMonk.jpg" />
+                                }
+                                else
+                                {
+                                    <img class="img" src="@item.AbbotImageUrl" />
+                                }
+                                
                             </td>
                             <td>@item.BranchName</td>
                             <td>@item.MonasteryName</td>
