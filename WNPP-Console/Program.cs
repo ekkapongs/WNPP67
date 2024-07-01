@@ -14,17 +14,22 @@ string fileName = @"D:\DEV\NewContract2567v.2.05.05.xlsx"; // Data Type 5
 ///
 
 ///=== GET IMAGE ===///
-//Imdb67Context ctx = new Imdb67Context();
-//getImageFromExcelToDB(ctx, "สาขา", true);
-//getImageFromExcelToDB(ctx, "สำรอง", true);
-//getImageFromExcelToDB(ctx, "สำรวจ", true);
+Imdb67Context ctx = new Imdb67Context();
+getImageFromExcel("D:\\DEV\\Branch\\", "สาขา", true);
+getImageFromExcelToDB(ctx, "สาขา", true);
+
+getImageFromExcel("D:\\DEV\\Branch\\", "สำรอง", true);
+getImageFromExcelToDB(ctx, "สำรอง", true);
+
+getImageFromExcel("D:\\DEV\\Branch\\", "สำรวจ", true);
+getImageFromExcelToDB(ctx, "สำรวจ", true);
 
 ///=== Load Data To Database ===///
 ///getDataFromNewExcelFormat();
 
 ///=== Migration Temple to database. ===//
 ///
-migrateTempleToDB();
+//migrateTempleToDB();
 
 void migrateTempleToDB()
 {
@@ -798,7 +803,7 @@ void getImageFromExcelToDB(Imdb67Context ctx, string sheetName, bool needReSize)
                     CreatedDate = DateTime.Now,
 
                     //AbbotName = rId +".jpg",
-                    ImgNotation = rId + "," + sheetName,
+                    ImgNotation = rId + ".jpg",
                 };
 
                 using (var stm = new MemoryStream())
@@ -810,9 +815,9 @@ void getImageFromExcelToDB(Imdb67Context ctx, string sheetName, bool needReSize)
                 }
 
                 ctx.TAbbotImgs.Add(result);
-                
+                ctx.SaveChanges();
             }
-            ctx.SaveChanges();
+            
         }
     }
 }
