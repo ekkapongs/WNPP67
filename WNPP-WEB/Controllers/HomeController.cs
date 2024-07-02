@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WNPP_WEB.Models;
 
@@ -15,11 +15,21 @@ namespace WNPP_WEB.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ศูนย์ข้อมูล สำนักเลขา วัดหนองป่าพง",
+
+            };
             return View();
         }
 
         public IActionResult Privacy()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ศูนย์ข้อมูล สำนักเลขา วัดหนองป่าพง",
+
+            };
             ViewData["page"] = "Users";
             return View();
         }

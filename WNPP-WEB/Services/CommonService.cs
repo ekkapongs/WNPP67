@@ -5,6 +5,10 @@ using System.Drawing.Imaging;
 
 namespace WNPP_WEB.Services
 {
+    public interface ICommonService
+    {
+        public Bitmap ResizeImage(System.Drawing.Image image, int width, int height);
+    }
     public class CommonService
     {
         /// === Administrator

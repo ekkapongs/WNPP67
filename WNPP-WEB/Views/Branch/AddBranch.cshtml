@@ -13,7 +13,22 @@
         </div>
     </div>
     <div class="card-body ">
-        <form method="get" action="/" class="form-horizontal">
+        <div class="text-right">
+
+            <a class="btn btn-primary" asp-area="" asp-controller="Branch" asp-action="SearchBranch00">
+                <i class="material-icons">search</i>
+                <span class="sidebar-normal"> คัดค้นสาขา </span>
+            </a>
+            <button id="btSave" name="btSave" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="บันทึกข้อมูล">
+                <i class="material-icons">save_as</i>
+                บันทึกข้อมูล
+            </button>
+        </div>
+        <form asp-controller="Branch" asp-action="/" method="post">
+            <button class="btn">
+            </button>
+
+   
             <div class="row">
                 <label class="col-sm-2 col-form-label label-checkbox">ประเภทสาขา</label>
                 <div class="col-sm-10 checkbox-radios">
@@ -327,14 +342,31 @@
             <div class="row">
                 <label class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="บันทึกข้อมูล">
-                            <i class="material-icons">save_as</i>
-                            บันทึกข้อมูล
-                        </button>
-                    </div>
+                    <div class="toolbar">
+                        <div class="text-right">
+                            <button class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="ค้นหาข้อมูล">
+                                <i class="material-icons">search</i>
+                                ค้นหา
+                            </button>
+                            <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="บันทึกข้อมูล">
+                                <i class="material-icons">save_as</i>
+                                บันทึกข้อมูล
+                            </button>
+                        </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+
+        function doSubmit(form) {
+            alert("มึงจะรีบ Submit ไปไหน.");
+        };
+
+        $("#").click(function () {
+            alert("กูแกไปแล้วจริงๆ. @ViewData["MenuName"]");
+        });
+    }
+</script>

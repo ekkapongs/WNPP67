@@ -90,7 +90,7 @@
                                 <b class="caret"></b>
                             </p>
                         </a>
-                        <div class="collapse @ViewData["MenuListB"]" id="branchRegister">
+                        <div class="collapse @ViewBag.MenuViewModel.MenuListB" id="branchRegister">
                             <ul class="nav">
                                 <li class="nav-item @ViewData["MenuB0"]">
                                     <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="SearchBranch00">
@@ -123,7 +123,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item @ViewData["MenuB5"]">
-                                    <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="Tmp">
+                                    <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="AddBranch">
                                         <span class="sidebar-mini"> B5 </span>
                                         <span class="sidebar-normal">ลงทะเบียนสาขา</span>
                                     </a>
@@ -170,11 +170,11 @@
                                 <b class="caret"></b>
                             </p>
                         </a>
-                        <div class="collapse" id="monkRegister">
+                        <div class="collapse @ViewData["MenuListM"]" id="monkRegister">
                             <ul class="nav">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="../../examples/forms/regular.html">
-                                        <span class="sidebar-mini"> 01 </span>
+                                <li class="nav-item @ViewData["MenuM0"]">
+                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="Tmp">
+                                        <span class="sidebar-mini"> M0 </span>
                                         <span class="sidebar-normal"> คัดค้นข้อมูลภิกษุ </span>
                                     </a>
                                 </li>
@@ -271,7 +271,7 @@
                                 <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
                             </button>
                         </div>
-                        <a class="navbar-brand" href="javascript:;">สำนักเลขา วัดหนองป่าพง</a>
+                        <a class="navbar-brand" href="javascript:;">@ViewBag.MenuViewModel.MenuName</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="sr-only">Toggle navigation</span>

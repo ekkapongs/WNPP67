@@ -3,7 +3,7 @@ using WNPP_WEB.Models;
 
 namespace WNPP_WEB.Services
 {
-    public interface IFileServices
+    public interface IFileServices : ICommonService
     {
         public Task<TAbbotImg> PostAbbotImage(AbbotImageViewModel view);
         public Byte[] getImage(int Id);
@@ -11,7 +11,7 @@ namespace WNPP_WEB.Services
         public List<TAbbotImg> getAllAbbotImage();
 
     }
-    public class FileServices : WNPPServive, IFileServices
+    public class FileServices : CommonService, IFileServices
     {
         private readonly Imdb67Context ctx = new Imdb67Context();
         private readonly Wnpp67Context ctxDB = new Wnpp67Context();

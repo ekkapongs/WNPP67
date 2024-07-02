@@ -3,7 +3,7 @@ using WNPP_WEB.Models;
 
 namespace WNPP_WEB.Services
 {
-    public interface IWNPPServive
+    public interface IWNPPServive : IFileServices
     {
         public List<TBranch> getAllBranch();
         public List<TBranch>? getBranchByTypeID(int typeID);
@@ -16,7 +16,7 @@ namespace WNPP_WEB.Services
         public List<TBranch>? searchByName2(String name);
         public List<TBranch>? calPhranSa(List<TBranch> datas);
     }
-    public class WNPPServive: CommonService, IWNPPServive
+    public class WNPPServive: FileServices, IWNPPServive
     {
 
         private readonly Wnpp67Context ctx = new Wnpp67Context();

@@ -18,19 +18,24 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult Index()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "งานทะเบียนสาขา",
+                MenuListB = "show"
+            };
 
             return View();
         }
         [HttpPost]
         public IActionResult Index(string txtSearch)
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "งานทะเบียนสาขา",
+                MenuListB = "show"
+            };
 
             return View();
-        }
-        public IActionResult Tmp()
-        {
-            IFileServices services = new FileServices();
-            return View(services.getAllAbbotImage());
         }
         public IActionResult Register()
         {
@@ -38,15 +43,33 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult AddBranch()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "งานทะเบียนสาขา",
+                MenuListB = "show",
+                MenuB5 = "active",
+            };
             return View();
         }
         public IActionResult SearchBranch00()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "B0 คัดค้นทะเบียนสาขา",
+                MenuListB = "show",
+                MenuB1 = "active",
+            };
             return View();
         }
         [HttpPost]
         public IActionResult SearchBranch00(string txtSearch)
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "คัดค้นข้อมูล สาขา สำรอง สำรวจ",
+                MenuListB = "show",
+                MenuB0 = "active",
+            };
             List<BranchViewModel> lst = new List<BranchViewModel>();
             try
             {
@@ -61,12 +84,24 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult SearchBranch01()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ทะเบียนสาขา",
+                MenuListB = "show",
+                MenuB1 = "active",
+            };
             List<BranchViewModel> lst = _service.getAllBranch();
 
             return View(lst);
         }
         public IActionResult SearchBranch02()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ทะเบียนสาขาสำรอง",
+                MenuListB = "show",
+                MenuB2 = "active",
+            };
             List<BranchViewModel> lst = _service.getAllReserve();
 
 
@@ -76,6 +111,12 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult SearchBranch03()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ทะเบียนสาขาสำรวจ",
+                MenuListB = "show",
+                MenuB3 = "active",
+            };
             List<BranchViewModel> lst = _service.getAllSurvey();
 
 
@@ -84,6 +125,12 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult SearchBranch04()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ทะเบียนสาขานานาชาติ",
+                MenuListB = "show",
+                MenuB4 = "active",
+            };
             List<BranchViewModel> lst = _service.getAllSurvey();
 
 
@@ -92,6 +139,12 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult EditBranch(int Id)
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ทะเบียนสาขานานาชาติ",
+                MenuListB = "show",
+                MenuB4 = "active",
+            };
             TBranch branch = new TBranch();
             try
             {
@@ -110,6 +163,12 @@ namespace WNPP_WEB.Controllers
         [HttpPost]
         public IActionResult EditBranch(TBranch data)
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ทะเบียนสาขานานาชาติ",
+                MenuListB = "show",
+                MenuB4 = "active",
+            };
             TBranch branch = new TBranch();
             try
             {
