@@ -1,6 +1,4 @@
-﻿
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <head>
     <title>วัดหนองป่าพง</title>
     <!-- Required meta tags -->
@@ -92,40 +90,40 @@
                         </a>
                         <div class="collapse @ViewBag.MenuViewModel.MenuListB" id="branchRegister">
                             <ul class="nav">
-                                <li class="nav-item @ViewData["MenuB0"]">
+                                <li class="nav-item @ViewBag.MenuViewModel.MenuB0">
                                     <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="SearchBranch00">
                                         <span class="sidebar-mini"> B0 </span>
                                         <span class="sidebar-normal"> คัดค้นสาขา </span>
                                     </a>
                                 </li>
-                                <li class="nav-item @ViewData["MenuB1"]">
+                                <li class="nav-item @ViewBag.MenuViewModel.MenuB1">
                                     <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="SearchBranch01">
                                         <span class="sidebar-mini"> B1 </span>
                                         <span class="sidebar-normal"> สาขา </span>
                                     </a>
                                 </li>
-                                <li class="nav-item @ViewData["MenuB2"]">
+                                <li class="nav-item @ViewBag.MenuViewModel.MenuB2">
                                     <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="SearchBranch02">
                                         <span class="sidebar-mini"> B2 </span>
                                         <span class="sidebar-normal"> สำรอง </span>
                                     </a>
                                 </li>
-                                <li class="nav-item @ViewData["MenuB3"]">
+                                <li class="nav-item @ViewBag.MenuViewModel.MenuB3">
                                     <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="SearchBranch03">
                                         <span class="sidebar-mini"> B3 </span>
                                         <span class="sidebar-normal"> สำรวจ </span>
                                     </a>
                                 </li>
-                                <li class="nav-item @ViewData["MenuB4"]">
+                                <li class="nav-item @ViewBag.MenuViewModel.MenuB4">
                                     <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="SearchBranch04">
                                         <span class="sidebar-mini"> B4 </span>
                                         <span class="sidebar-normal"> นานาชาติ </span>
                                     </a>
                                 </li>
-                                <li class="nav-item @ViewData["MenuB5"]">
-                                    <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="AddBranch">
+                                <li class="nav-item @ViewBag.MenuViewModel.MenuB5">
+                                    <a class="nav-link" asp-area="" asp-controller="Branch" asp-action="Edit2Branch">
                                         <span class="sidebar-mini"> B5 </span>
-                                        <span class="sidebar-normal">ลงทะเบียนสาขา</span>
+                                        <span class="sidebar-normal">Develop Page </span>
                                     </a>
                                 </li>
                             </ul>
@@ -326,7 +324,7 @@
 
                             @RenderBody()
                             <!-- end content-->
-                    
+
                         </div>
                         <!-- end col-md-12 -->
                     </div>
@@ -414,261 +412,7 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/assets/js/material-dashboard.js?v=2.2.2" type="text/javascript"></script>
 
-    <script>
-        $(document).ready(function () {
-            $().ready(function () {
-                $sidebar = $('.sidebar');
-
-                $sidebar_img_container = $sidebar.find('.sidebar-background');
-
-                $full_page = $('.full-page');
-
-                $sidebar_responsive = $('body > .navbar-collapse');
-
-                window_width = $(window).width();
-
-                fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-                if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
-                    if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
-                        $('.fixed-plugin .dropdown').addClass('open');
-                    }
-
-                }
-
-                $('.fixed-plugin a').click(function (event) {
-                    // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-                    if ($(this).hasClass('switch-trigger')) {
-                        if (event.stopPropagation) {
-                            event.stopPropagation();
-                        } else if (window.event) {
-                            window.event.cancelBubble = true;
-                        }
-                    }
-                });
-
-                $('.fixed-plugin .active-color span').click(function () {
-                    $full_page_background = $('.full-page-background');
-
-                    $(this).siblings().removeClass('active');
-                    $(this).addClass('active');
-
-                    var new_color = $(this).data('color');
-
-                    if ($sidebar.length != 0) {
-                        $sidebar.attr('data-color', new_color);
-                    }
-
-                    if ($full_page.length != 0) {
-                        $full_page.attr('filter-color', new_color);
-                    }
-
-                    if ($sidebar_responsive.length != 0) {
-                        $sidebar_responsive.attr('data-color', new_color);
-                    }
-                });
-
-                $('.fixed-plugin .background-color .badge').click(function () {
-                    $(this).siblings().removeClass('active');
-                    $(this).addClass('active');
-
-                    var new_color = $(this).data('background-color');
-
-                    if ($sidebar.length != 0) {
-                        $sidebar.attr('data-background-color', new_color);
-                    }
-                });
-
-                $('.fixed-plugin .img-holder').click(function () {
-                    $full_page_background = $('.full-page-background');
-
-                    $(this).parent('li').siblings().removeClass('active');
-                    $(this).parent('li').addClass('active');
-
-
-                    var new_image = $(this).find("img").attr('src');
-
-                    if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-                        $sidebar_img_container.fadeOut('fast', function () {
-                            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-                            $sidebar_img_container.fadeIn('fast');
-                        });
-                    }
-
-                    if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-
-                        $full_page_background.fadeOut('fast', function () {
-                            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-                            $full_page_background.fadeIn('fast');
-                        });
-                    }
-
-                    if ($('.switch-sidebar-image input:checked').length == 0) {
-                        var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
-                        var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-
-                        $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-                        $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-                    }
-
-                    if ($sidebar_responsive.length != 0) {
-                        $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
-                    }
-                });
-
-                $('.switch-sidebar-image input').change(function () {
-                    $full_page_background = $('.full-page-background');
-
-                    $input = $(this);
-
-                    if ($input.is(':checked')) {
-                        if ($sidebar_img_container.length != 0) {
-                            $sidebar_img_container.fadeIn('fast');
-                            $sidebar.attr('data-image', '#');
-                        }
-
-                        if ($full_page_background.length != 0) {
-                            $full_page_background.fadeIn('fast');
-                            $full_page.attr('data-image', '#');
-                        }
-
-                        background_image = true;
-                    } else {
-                        if ($sidebar_img_container.length != 0) {
-                            $sidebar.removeAttr('data-image');
-                            $sidebar_img_container.fadeOut('fast');
-                        }
-
-                        if ($full_page_background.length != 0) {
-                            $full_page.removeAttr('data-image', '#');
-                            $full_page_background.fadeOut('fast');
-                        }
-
-                        background_image = false;
-                    }
-                });
-
-                $('.switch-sidebar-mini input').change(function () {
-                    $body = $('body');
-
-                    $input = $(this);
-
-                    if (md.misc.sidebar_mini_active == true) {
-                        $('body').removeClass('sidebar-mini');
-                        md.misc.sidebar_mini_active = false;
-
-                        if ($(".sidebar").length != 0) {
-                            var ps = new PerfectScrollbar('.sidebar');
-                        }
-                        if ($(".sidebar-wrapper").length != 0) {
-                            var ps1 = new PerfectScrollbar('.sidebar-wrapper');
-                        }
-                        if ($(".main-panel").length != 0) {
-                            var ps2 = new PerfectScrollbar('.main-panel');
-                        }
-                        if ($(".main").length != 0) {
-                            var ps3 = new PerfectScrollbar('main');
-                        }
-
-                    } else {
-
-                        if ($(".sidebar").length != 0) {
-                            var ps = new PerfectScrollbar('.sidebar');
-                            ps.destroy();
-                        }
-                        if ($(".sidebar-wrapper").length != 0) {
-                            var ps1 = new PerfectScrollbar('.sidebar-wrapper');
-                            ps1.destroy();
-                        }
-                        if ($(".main-panel").length != 0) {
-                            var ps2 = new PerfectScrollbar('.main-panel');
-                            ps2.destroy();
-                        }
-                        if ($(".main").length != 0) {
-                            var ps3 = new PerfectScrollbar('main');
-                            ps3.destroy();
-                        }
-
-
-                        setTimeout(function () {
-                            $('body').addClass('sidebar-mini');
-
-                            md.misc.sidebar_mini_active = true;
-                        }, 300);
-                    }
-
-                    // we simulate the window Resize so the charts will get updated in realtime.
-                    var simulateWindowResize = setInterval(function () {
-                        window.dispatchEvent(new Event('resize'));
-                    }, 180);
-
-                    // we stop the simulation of Window Resize after the animations are completed
-                    setTimeout(function () {
-                        clearInterval(simulateWindowResize);
-                    }, 1000);
-
-                });
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-
-            md.initFormExtendedDatetimepickers();
-
-            $("#btSearch").click(function () {
-                alert("กูแกไปแล้วจริงๆ. @ViewData["MenuName"]");
-            });
-
-            $('#datatables').DataTable({
-                "pagingType": "full_numbers",
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                responsive: true,
-                language: {
-                    search: "ระบุคำค้นหา",
-                    searchPlaceholder: "......",
-                }
-            });
-
-            var table = $('#datatables').DataTable();
-
-            // Edit record
-
-            table.on('click', '.edit', function () {
-                $tr = $(this).closest('tr');
-
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-                var data = table.row($tr).data();
-                //alert('แก้ไขข้อมูล: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-            });
-
-            // Delete a record
-
-            table.on('click', '.remove', function (e) {
-                $tr = $(this).closest('tr');
-
-                if ($($tr).hasClass('child')) {
-                    $tr = $tr.prev('.parent');
-                }
-
-                table.row($tr).remove().draw();
-                e.preventDefault();
-            });
-
-            //Like record
-
-            table.on('click', '.like', function () {
-                alert('You clicked on Like button');
-            });
-        });
-    </script>
+    <script src="~/js/wnpp.js"></script>
 </body>
 
 </html>

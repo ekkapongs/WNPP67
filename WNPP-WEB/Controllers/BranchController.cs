@@ -57,7 +57,7 @@ namespace WNPP_WEB.Controllers
             {
                 MenuName = "B0 คัดค้นทะเบียนสาขา",
                 MenuListB = "show",
-                MenuB1 = "active",
+                MenuB0 = "active",
             };
             return View();
         }
@@ -136,6 +136,29 @@ namespace WNPP_WEB.Controllers
 
 
             return View(lst);
+        }
+        public IActionResult Edit2Branch(int Id)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "แก้ไขข้อมูลทะเบียนสาขา",
+                MenuListB = "show",
+                MenuB5 = "active",
+            };
+            TBranch branch;
+            try
+            {
+
+
+                branch = _service.findByID(Id);
+
+            }
+            catch (Exception ex)
+            {
+                branch = new TBranch();
+            }
+
+            return View(branch);
         }
         public IActionResult EditBranch(int Id)
         {

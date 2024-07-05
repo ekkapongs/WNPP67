@@ -6,9 +6,24 @@ namespace WNPP_WEB.Services.Mappers
     {
         public List<BranchViewModel> ToViews(List<TBranch> branches);
         public BranchViewModel ToView(TBranch branch);
+
+        public TBranchViewModel ToBranchView(TBranch branch);
     }
     public class BranchMapper: IBranchMapper
     {
+        public TBranchViewModel ToBranchView(TBranch branch)
+        {
+            TBranchViewModel result = new TBranchViewModel();
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                result = new TBranchViewModel();
+            }
+            return result;
+        }
         public List<BranchViewModel> ToViews(List<TBranch> branches)
         {
             List<BranchViewModel> result = new List<BranchViewModel>();
