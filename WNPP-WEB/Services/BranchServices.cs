@@ -6,7 +6,7 @@ namespace WNPP_WEB.Services
 {
     public interface IBranchServices : IWNPPServive
     {
-        public void editBranch(TBranch data);
+        public void edit2Branch(TBranch data);
 
         public List<BranchViewModel> searchBranch(string message);
 
@@ -21,7 +21,7 @@ namespace WNPP_WEB.Services
         public BranchServices() {
             _mapper = new BranchMapper();
         }
-        public void editBranch(TBranch data)
+        public void edit2Branch(TBranch data)
         {
             try
             {
@@ -31,24 +31,53 @@ namespace WNPP_WEB.Services
 
                 if (row != null)
                 {
+                    row.BranchType = data.BranchType;
                     row.BranchName = data.BranchName;
                     row.MonasteryName = data.MonasteryName;
+                    
                     row.AddressTextMonatery = data.AddressTextMonatery;
+                    row.HouseNoMonatery = data.HouseNoMonatery;
+                    row.MooMonatery = data.MooMonatery;
+                    row.VillageMonatery = data.VillageMonatery;
+                    row.RoadMonatery = data.RoadMonatery;
+
                     row.SubDistrictMonatery = data.SubDistrictMonatery;
                     row.DistrictMonatery = data.DistrictMonatery;
                     row.ProvinceMonatery = data.ProvinceMonatery;
                     row.CountryMonatery = data.CountryMonatery;
                     row.PostCodeMonatery = data.PostCodeMonatery;
+
+                    row.DepositaryName = data.DepositaryName;
+                    row.DepositaryPhoneNo = data.DepositaryPhoneNo;
+                    
+                    row.LandRightsDocuments = data.LandRightsDocuments;
+                    row.MonasteryAreaRai = data.MonasteryAreaRai;
+                    row.MonasteryAreaNgan = data.MonasteryAreaNgan;
+                    row.MonasteryAreaWa = data.MonasteryAreaWa;
                     row.MonasteryPhoneNo = data.MonasteryPhoneNo;
+
                     row.AbbotName = data.AbbotName;
+ 
                     row.AbbotImageUrl = data.AbbotImageUrl;
+                    row.AbbotTemple = data.AbbotTemple;
+                    row.EcclesiasticalTitle = data.EcclesiasticalTitle;
+                    row.AbbotTitle = data.AbbotTitle;
+
+                    row.AbbotPhoneNo = data.AbbotPhoneNo;
+                    row.AbbotEmail = data.AbbotEmail;
+                    row.AbbotLineId = data.AbbotLineId;
+
+                    row.DateOfAcceptPosition = data.DateOfAcceptPosition;
+                    row.DateOfBirth = data.DateOfBirth;
+                    row.DateOfOrdination = data.DateOfOrdination;
+                    row.DateOfRegister = data.DateOfRegister;
+
+                    row.Preceptor = data.Preceptor;
+                    row.PreceptorTemple = data.PreceptorTemple;
 
                     row.CertifierName = data.CertifierName;
                     row.CertifierTemple = data.CertifierTemple;
 
-                    row.DateOfBirth = data.DateOfBirth;
-                    row.DateOfOrdination = data.DateOfOrdination;
-                    
                     ctx.TBranches.Update(row);
                     ctx.SaveChanges();
                 }

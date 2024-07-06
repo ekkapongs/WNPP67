@@ -148,43 +148,18 @@ namespace WNPP_WEB.Controllers
             TBranch branch;
             try
             {
-
-
                 branch = _service.findByID(Id);
 
             }
             catch (Exception ex)
             {
-                branch = new TBranch();
-            }
-
-            return View(branch);
-        }
-        public IActionResult EditBranch(int Id)
-        {
-            ViewBag.MenuViewModel = new MenuViewModel()
-            {
-                MenuName = "ทะเบียนสาขานานาชาติ",
-                MenuListB = "show",
-                MenuB4 = "active",
-            };
-            TBranch branch = new TBranch();
-            try
-            {
-
-
-                branch = _service.findByID(Id);
-
-            }
-            catch (Exception ex)
-            {
-                return View("Error");
+                throw;
             }
 
             return View(branch);
         }
         [HttpPost]
-        public IActionResult EditBranch(TBranch data)
+        public IActionResult Edit2Branch(TBranch data)
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
@@ -195,7 +170,7 @@ namespace WNPP_WEB.Controllers
             TBranch branch = new TBranch();
             try
             {
-                _service.editBranch(data);
+                _service.edit2Branch(data);
                 return View("SearchBranch00");
             }
             catch (Exception ex)
