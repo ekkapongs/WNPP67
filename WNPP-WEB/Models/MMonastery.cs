@@ -27,6 +27,8 @@ public partial class MMonastery
 
     public DateTime? ModifiedDate { get; set; }
 
+    public string? MonasteryNo { get; set; }
+
     public string? MonasteryName { get; set; }
 
     public string? MonasteryType { get; set; }

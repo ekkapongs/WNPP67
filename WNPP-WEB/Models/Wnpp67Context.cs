@@ -19,7 +19,9 @@ public partial class Wnpp67Context : DbContext
 
     public virtual DbSet<TBranch> TBranches { get; set; }
 
-    public virtual DbSet<TempleDb> TempleDbs { get; set; }
+    public virtual DbSet<TMonk> TMonks { get; set; }
+
+    public virtual DbSet<ThaiTemple2567> ThaiTemple2567s { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -49,6 +51,7 @@ public partial class Wnpp67Context : DbContext
             entity.Property(e => e.ModifiedByName).HasMaxLength(100);
             entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             entity.Property(e => e.MonasteryName).HasMaxLength(250);
+            entity.Property(e => e.MonasteryNo).HasMaxLength(50);
             entity.Property(e => e.MonasteryType).HasMaxLength(50);
             entity.Property(e => e.Notation).HasMaxLength(500);
             entity.Property(e => e.PostCodeMonatery)
@@ -148,48 +151,199 @@ public partial class Wnpp67Context : DbContext
                 .HasColumnName("Village_Monatery");
         });
 
-        modelBuilder.Entity<TempleDb>(entity =>
+        modelBuilder.Entity<TMonk>(entity =>
         {
-            entity.HasKey(e => e.Column1);
+            entity.ToTable("T_Monk");
 
-            entity.ToTable("TempleDB");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CertificateForMonksNo).HasMaxLength(100);
+            entity.Property(e => e.CreatedByName).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.DateOfOrdination).HasColumnType("datetime");
+            entity.Property(e => e.FDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("F_District");
+            entity.Property(e => e.FProvince)
+                .HasMaxLength(100)
+                .HasColumnName("F_Province");
+            entity.Property(e => e.FSubDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("F_SubDistrict");
+            entity.Property(e => e.FTemple)
+                .HasMaxLength(250)
+                .HasColumnName("F_Temple");
+            entity.Property(e => e.FirstOrdinationTeacher).HasMaxLength(250);
+            entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+            entity.Property(e => e.MCountry)
+                .HasMaxLength(100)
+                .HasColumnName("M_Country");
+            entity.Property(e => e.MDateOfBirth)
+                .HasColumnType("datetime")
+                .HasColumnName("M_DateOfBirth");
+            entity.Property(e => e.MDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("M_District");
+            entity.Property(e => e.MEmail)
+                .HasMaxLength(50)
+                .HasColumnName("M_EMail");
+            entity.Property(e => e.MEthnicity)
+                .HasMaxLength(100)
+                .HasColumnName("M_Ethnicity");
+            entity.Property(e => e.MFirstName)
+                .HasMaxLength(250)
+                .HasColumnName("M_FirstName");
+            entity.Property(e => e.MHouseNo)
+                .HasMaxLength(50)
+                .HasColumnName("M_HouseNo");
+            entity.Property(e => e.MImage).HasColumnName("M_Image");
+            entity.Property(e => e.MLineId)
+                .HasMaxLength(50)
+                .HasColumnName("M_LineID");
+            entity.Property(e => e.MMoo)
+                .HasMaxLength(2)
+                .HasColumnName("M_Moo");
+            entity.Property(e => e.MNationality)
+                .HasMaxLength(100)
+                .HasColumnName("M_Nationality");
+            entity.Property(e => e.MPhoneNo)
+                .HasMaxLength(50)
+                .HasColumnName("M_PhoneNO");
+            entity.Property(e => e.MPid)
+                .HasMaxLength(15)
+                .HasColumnName("M_PID");
+            entity.Property(e => e.MPostCode)
+                .HasMaxLength(5)
+                .HasColumnName("M_PostCode");
+            entity.Property(e => e.MProvince)
+                .HasMaxLength(100)
+                .HasColumnName("M_Province");
+            entity.Property(e => e.MRoad)
+                .HasMaxLength(50)
+                .HasColumnName("M_Road");
+            entity.Property(e => e.MSubDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("M_SubDistrict");
+            entity.Property(e => e.MSurName)
+                .HasMaxLength(250)
+                .HasColumnName("M_SurName");
+            entity.Property(e => e.MVillage)
+                .HasMaxLength(50)
+                .HasColumnName("M_Village");
+            entity.Property(e => e.ModifiedByName).HasMaxLength(100);
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.MonkName).HasMaxLength(250);
+            entity.Property(e => e.Notation).HasMaxLength(500);
+            entity.Property(e => e.PDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("P_District");
+            entity.Property(e => e.PProvince)
+                .HasMaxLength(100)
+                .HasColumnName("P_Province");
+            entity.Property(e => e.PSubDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("P_SubDistrict");
+            entity.Property(e => e.PTemple)
+                .HasMaxLength(250)
+                .HasColumnName("P_Temple");
+            entity.Property(e => e.Preceptor).HasMaxLength(250);
+            entity.Property(e => e.RecordStatus).HasMaxLength(10);
+            entity.Property(e => e.SDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("S_District");
+            entity.Property(e => e.SProvince)
+                .HasMaxLength(100)
+                .HasColumnName("S_Province");
+            entity.Property(e => e.SSubDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("S_SubDistrict");
+            entity.Property(e => e.STemple)
+                .HasMaxLength(250)
+                .HasColumnName("S_Temple");
+            entity.Property(e => e.SecondOrdinationTeacher).HasMaxLength(250);
+            entity.Property(e => e.TDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("T_District");
+            entity.Property(e => e.TProvince)
+                .HasMaxLength(100)
+                .HasColumnName("T_Province");
+            entity.Property(e => e.TSubDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("T_SubDistrict");
+            entity.Property(e => e.TempleName).HasMaxLength(250);
+        });
 
-            entity.Property(e => e.Column1)
+        modelBuilder.Entity<ThaiTemple2567>(entity =>
+        {
+            entity.HasKey(e => e.ลำดบ);
+
+            entity.ToTable("ThaiTemple2567");
+
+            entity.Property(e => e.ลำดบ)
                 .ValueGeneratedNever()
-                .HasColumnName("column1");
-            entity.Property(e => e.Column10)
-                .HasMaxLength(100)
-                .HasColumnName("column10");
-            entity.Property(e => e.Column11)
-                .HasMaxLength(100)
-                .HasColumnName("column11");
-            entity.Property(e => e.Column12)
-                .HasMaxLength(10)
-                .HasColumnName("column12");
-            entity.Property(e => e.Column2)
-                .HasMaxLength(200)
-                .HasColumnName("column2");
-            entity.Property(e => e.Column3)
+                .HasColumnName("ลำดับ");
+            entity.Property(e => e.จงหวด)
+                .HasMaxLength(150)
+                .HasColumnName("จังหวัด");
+            entity.Property(e => e.ชอวด)
+                .HasMaxLength(250)
+                .HasColumnName("ชื่อวัด");
+            entity.Property(e => e.ชอหมบาน)
                 .HasMaxLength(50)
-                .HasColumnName("column3");
-            entity.Property(e => e.Column4)
+                .HasColumnName("ชื่อหมู่บ้าน");
+            entity.Property(e => e.ซอย).HasMaxLength(50);
+            entity.Property(e => e.ถนน).HasMaxLength(50);
+            entity.Property(e => e.นกาย)
                 .HasMaxLength(50)
-                .HasColumnName("column4");
-            entity.Property(e => e.Column5)
+                .HasColumnName("นิกาย");
+            entity.Property(e => e.บานเลขท)
                 .HasMaxLength(50)
-                .HasColumnName("column5");
-            entity.Property(e => e.Column6)
+                .HasColumnName("บ้านเลขที่");
+            entity.Property(e => e.ประเภทการขนทะเบยน)
                 .HasMaxLength(50)
-                .HasColumnName("column6");
-            entity.Property(e => e.Column7)
+                .HasColumnName("ประเภทการขึ้นทะเบียน");
+            entity.Property(e => e.ประเภทวด)
                 .HasMaxLength(50)
-                .HasColumnName("column7");
-            entity.Property(e => e.Column8)
+                .HasColumnName("ประเภทวัด");
+            entity.Property(e => e.รหสวด)
                 .HasMaxLength(50)
-                .HasColumnName("column8");
-            entity.Property(e => e.Column9)
-                .HasMaxLength(100)
-                .HasColumnName("column9");
+                .HasColumnName("รหัสวัด");
+            entity.Property(e => e.รหสไปรษณย)
+                .HasMaxLength(50)
+                .HasColumnName("รหัสไปรษณีย์");
+            entity.Property(e => e.วนทตงวด)
+                .HasMaxLength(50)
+                .HasColumnName("วันที่ตั้งวัด");
+            entity.Property(e => e.วนทสถานะวด)
+                .HasMaxLength(50)
+                .HasColumnName("วันที่สถานะวัด");
+            entity.Property(e => e.วนทไดรบวสงคามสมา)
+                .HasMaxLength(50)
+                .HasColumnName("วันที่ได้รับวิสุงคามสีมา");
+            entity.Property(e => e.หม)
+                .HasMaxLength(50)
+                .HasColumnName("หมู่");
+            entity.Property(e => e.หมายเหต)
+                .HasMaxLength(250)
+                .HasColumnName("หมายเหตุ");
+            entity.Property(e => e.อเมล)
+                .HasMaxLength(50)
+                .HasColumnName("อีเมล์");
+            entity.Property(e => e.เขตอำเภอ)
+                .HasMaxLength(150)
+                .HasColumnName("เขต_อำเภอ");
+            entity.Property(e => e.เบอรโทรศพท)
+                .HasMaxLength(50)
+                .HasColumnName("เบอร์โทรศัพท์");
+            entity.Property(e => e.เวบไซต)
+                .HasMaxLength(50)
+                .HasColumnName("เว็บไซต์");
+            entity.Property(e => e.แขวงตำบล)
+                .HasMaxLength(150)
+                .HasColumnName("แขวง_ตำบล");
+            entity.Property(e => e.โทรสาร).HasMaxLength(50);
+            entity.Property(e => e.ไดรบวสงคามสมา)
+                .HasMaxLength(50)
+                .HasColumnName("ได้รับวิสุงคามสีมา");
         });
 
         OnModelCreatingPartial(modelBuilder);

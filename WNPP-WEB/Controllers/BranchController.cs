@@ -165,13 +165,23 @@ namespace WNPP_WEB.Controllers
             {
                 MenuName = "ทะเบียนสาขานานาชาติ",
                 MenuListB = "show",
-                MenuB4 = "active",
+                MenuB5 = "active",
             };
             TBranch branch = new TBranch();
             try
             {
                 _service.edit2Branch(data);
-                return View("SearchBranch00");
+                if (data.BranchType == 1)
+                    return View("SearchBranch01", _service.getAllBranch());
+                else if (data.BranchType == 2)
+                    return View("SearchBranch02", _service.getAllReserve());
+                else if (data.BranchType == 3)
+                    return View("SearchBranch03", _service.getAllSurvey());
+                else if (data.BranchType == 4)
+                    return View("SearchBranch04", _service.getAllSurvey());
+                else
+                    return View("SearchBranch00");
+
             }
             catch (Exception ex)
             {

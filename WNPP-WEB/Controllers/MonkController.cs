@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WNPP_WEB.Models;
 using WNPP_WEB.Services;
 
 namespace WNPP_WEB.Controllers
@@ -15,6 +16,16 @@ namespace WNPP_WEB.Controllers
         {
             IFileServices services = new FileServices();
             return View(services.getAllAbbotImage());
+        }
+        public IActionResult Add2Monk()
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "งาน ทะเบียนภิกษุ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+            return View(new TMonk());
         }
     }
 }
