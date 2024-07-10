@@ -19,6 +19,10 @@ public partial class Wnpp67Context : DbContext
 
     public virtual DbSet<TBranch> TBranches { get; set; }
 
+    public virtual DbSet<TBuddhistLent> TBuddhistLents { get; set; }
+
+    public virtual DbSet<TBuddhistLentDetail> TBuddhistLentDetails { get; set; }
+
     public virtual DbSet<TMonk> TMonks { get; set; }
 
     public virtual DbSet<ThaiTemple2567> ThaiTemple2567s { get; set; }
@@ -151,6 +155,44 @@ public partial class Wnpp67Context : DbContext
                 .HasColumnName("Village_Monatery");
         });
 
+        modelBuilder.Entity<TBuddhistLent>(entity =>
+        {
+            entity.ToTable("T_BuddhistLent");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.BuddhistLentEndDate).HasColumnType("datetime");
+            entity.Property(e => e.BuddhistLentInFo).HasMaxLength(250);
+            entity.Property(e => e.BuddhistLentStartDate).HasColumnType("datetime");
+            entity.Property(e => e.CreatedByName).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+            entity.Property(e => e.ModifiedByName).HasMaxLength(100);
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.MonkNote).HasMaxLength(250);
+            entity.Property(e => e.Notation).HasMaxLength(500);
+            entity.Property(e => e.NunsNote).HasMaxLength(250);
+            entity.Property(e => e.RecordStatus).HasMaxLength(10);
+        });
+
+        modelBuilder.Entity<TBuddhistLentDetail>(entity =>
+        {
+            entity.ToTable("T_BuddhistLentDetail");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Blid).HasColumnName("BLID");
+            entity.Property(e => e.CreatedByName).HasMaxLength(100);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+            entity.Property(e => e.ModifiedByName).HasMaxLength(100);
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.MonkId).HasColumnName("MonkID");
+            entity.Property(e => e.MonkName).HasMaxLength(250);
+            entity.Property(e => e.MonkNicName).HasMaxLength(50);
+            entity.Property(e => e.MonkSeq).HasColumnName("MonkSEQ");
+            entity.Property(e => e.Notation).HasMaxLength(500);
+            entity.Property(e => e.RecordStatus).HasMaxLength(10);
+        });
+
         modelBuilder.Entity<TMonk>(entity =>
         {
             entity.ToTable("T_Monk");
@@ -205,6 +247,9 @@ public partial class Wnpp67Context : DbContext
             entity.Property(e => e.MNationality)
                 .HasMaxLength(100)
                 .HasColumnName("M_Nationality");
+            entity.Property(e => e.MNickName)
+                .HasMaxLength(50)
+                .HasColumnName("M_NickName");
             entity.Property(e => e.MPhoneNo)
                 .HasMaxLength(50)
                 .HasColumnName("M_PhoneNO");
@@ -232,6 +277,7 @@ public partial class Wnpp67Context : DbContext
             entity.Property(e => e.ModifiedByName).HasMaxLength(100);
             entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
             entity.Property(e => e.MonkName).HasMaxLength(250);
+            entity.Property(e => e.MonkTypeName).HasMaxLength(250);
             entity.Property(e => e.Notation).HasMaxLength(500);
             entity.Property(e => e.PDistrict)
                 .HasMaxLength(100)

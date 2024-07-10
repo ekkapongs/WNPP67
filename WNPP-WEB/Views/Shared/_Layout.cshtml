@@ -146,13 +146,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item @ViewBag.MenuViewModel.MenuM1">
-                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="Add2Monk">
+                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="BuddhistLent">
                                         <span class="sidebar-mini"> M1 </span>
                                         <span class="sidebar-normal"> จำพรรษา ณ วัดป่าพง </span>
                                     </a>
                                 </li>
                                 <li class="nav-item @ViewBag.MenuViewModel.MenuM2">
-                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="Add2Monk">
+                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="Add2BuddhistLent">
                                         <span class="sidebar-mini"> M2 </span>
                                         <span class="sidebar-normal"> งาน ทะเบียน ภิกษุ </span>
                                     </a>
@@ -414,5 +414,13 @@
 
     <script src="~/js/wnpp.js"></script>
 </body>
+<script>
+    $(document).ready(function () {
 
+        $("#btAdd2BuddhistLentSave").click(function () {
+            alert("The BT Add2BuddhistLentSave SAVE was clicked.");
+            $("#Add2BuddhistLent").submit()
+        });
+    });
+</script>
 </html>

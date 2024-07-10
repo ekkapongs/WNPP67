@@ -1,4 +1,5 @@
 ﻿using WNPP_WEB.Models;
+using WNPP_WEB.Models.ViewModels;
 
 namespace WNPP_WEB.Services.Mappers
 {

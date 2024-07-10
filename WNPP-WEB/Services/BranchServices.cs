@@ -1,5 +1,6 @@
 ﻿
 using WNPP_WEB.Models;
+using WNPP_WEB.Models.ViewModels;
 using WNPP_WEB.Services.Mappers;
 
 namespace WNPP_WEB.Services
@@ -89,28 +90,28 @@ namespace WNPP_WEB.Services
         }
         public List<BranchViewModel> searchBranch(string message)
         {
-            List<BranchViewModel> result = new List<BranchViewModel>();
-            result = _mapper.ToViews(calPhranSa(searchByName(message)));
+            List<BranchViewModel> result = [];
+            result = _mapper.ToViews( calPhranSa(searchByName(message)));
             return result;
             
         }
 
         public List<BranchViewModel> getAllBranch()
         {
-            List<BranchViewModel> result = new List<BranchViewModel>();
-            result = _mapper.ToViews(calPhranSa(getBranchByTypeID(1)));
+            List<BranchViewModel> result = [];
+            result = _mapper.ToViews(calPhranSa( getBranchByTypeID(1)));
             return result;
         }
         public List<BranchViewModel> getAllReserve()
         {
-            List<BranchViewModel> result = new List<BranchViewModel>();
-            result = _mapper.ToViews(calPhranSa(getBranchByTypeID(2)));
+            List<BranchViewModel> result = [];
+            result = _mapper.ToViews( calPhranSa( getBranchByTypeID(2)));
             return result;
         }
         public List<BranchViewModel> getAllSurvey()
         {
-            List<BranchViewModel> result = new List<BranchViewModel>();
-            result = _mapper.ToViews(calPhranSa(getBranchByTypeID(3)));
+            List<BranchViewModel> result = [];
+            result = _mapper.ToViews( calPhranSa( getBranchByTypeID(3)));
             return result;
         }
         

@@ -31,42 +31,7 @@ getImageFromExcel("D:\\DEV\\Branch\\", "สำรวจ", false);
 ///
 //migrateTempleToDB();
 
-void migrateTempleToDB()
-{
-    Wnpp67Context ctx = new Wnpp67Context();
-    MMonastery mo;
 
-    var rows = ctx.TempleDbs.ToList();
-    foreach (var row in rows)
-    {
-        mo = new MMonastery
-        {
-            ActiveStatus = CommonService._Record_Active,
-            LanguageId = CommonService._Lang_TH,
-
-            CreatedBy = CommonService._Admin_ID,
-            CreatedByName = CommonService._Admin_Name,
-            CreatedDate = DateTime.Now,
-
-            //Id = row.Column1,
-            MonasteryName = row.Column2,
-            MonasteryType = row.Column3,
-            Denomination = row.Column4,
-            RegisterType = row.Column5,
-            DateOfFoundingTxt = row.Column6,
-            WisungkhamType = row.Column7,
-            DateOfWisungkhamTxt = row.Column8,
-            SubDistrictMonatery = row.Column9,
-            DistrictMonatery = row.Column10,
-            ProvinceMonatery = row.Column11,
-            PostCodeMonatery = row.Column12,
-
-        };
-        ctx.MMonasteries.Add(mo);
-        Console.WriteLine(row.Column1);
-    }
-    ctx.SaveChanges();
-}
 void getDataFromNewExcelFormat()
 {
 

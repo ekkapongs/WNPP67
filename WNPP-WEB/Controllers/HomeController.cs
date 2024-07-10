@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using WNPP_WEB.Models;
+using WNPP_WEB.Models.ViewModels;
 
 namespace WNPP_WEB.Controllers
 {

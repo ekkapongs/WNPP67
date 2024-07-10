@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using WNPP_WEB.Models;
+using WNPP_WEB.Models.ViewModels;
 using WNPP_WEB.Services;
 
 namespace WNPP_WEB.Controllers
@@ -76,7 +77,7 @@ namespace WNPP_WEB.Controllers
                 lst = _service.searchBranch(txtSearch);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View("Error");
             }
@@ -145,13 +146,13 @@ namespace WNPP_WEB.Controllers
                 MenuListB = "show",
                 MenuB5 = "active",
             };
-            TBranch branch;
+            TBranch? branch;
             try
             {
                 branch = _service.findByID(Id);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -183,7 +184,7 @@ namespace WNPP_WEB.Controllers
                     return View("SearchBranch00");
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View("Error");
             }

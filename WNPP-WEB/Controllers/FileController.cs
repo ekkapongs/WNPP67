@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WNPP_WEB.Models;
+using WNPP_WEB.Models.ViewModels;
 using WNPP_WEB.Services;
 
 namespace WNPP_WEB.Controllers
@@ -35,9 +36,8 @@ namespace WNPP_WEB.Controllers
         [ActionName("PostAbbotImage")]
         public async Task<IActionResult> PostAbbotImage([FromForm] AbbotImageViewModel view)
         {
-            //await _service.PostAbbotImage(view);
-            //return View(view.CallBackPath);
-            return RedirectToAction("EditBranch", "Branch", new { id = view.DataId });
+
+            return  RedirectToAction("EditBranch", "Branch", new { id = view.DataId });
         }
         [HttpGet]
         [ActionName("LoadImage")]

@@ -1,4 +1,4 @@
-﻿namespace WNPP_WEB.Models
+﻿namespace WNPP_WEB.Models.ViewModels
 {
     public class AbbotImageViewModel
     {

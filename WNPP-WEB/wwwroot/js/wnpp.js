@@ -245,6 +245,7 @@
         alert("The BT branchForm SAVE was clicked.");
         $("#branchForm").submit()
     });
+    
     $("branchForm").submit(function () {
         alert("Submitted");
     });

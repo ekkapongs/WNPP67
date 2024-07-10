@@ -27,11 +27,17 @@ public partial class TMonk
 
     public DateTime? ModifiedDate { get; set; }
 
+    public int? MonkType { get; set; }
+
+    public string? MonkTypeName { get; set; }
+
     public string? MonkName { get; set; }
 
     public string? MFirstName { get; set; }
 
     public string? MSurName { get; set; }
+
+    public string? MNickName { get; set; }
 
     public DateTime? MDateOfBirth { get; set; }
 

@@ -5,7 +5,7 @@ namespace WNPP_WEB.Services
 {
     public interface IMonkServices : IBranchServices
     {
-        public List<TAbbotImg> getAllAbbotImage();
+  
     }
     public class MonkServices : BranchServices, IMonkServices
     {
@@ -13,17 +13,7 @@ namespace WNPP_WEB.Services
         private readonly Imdb67Context ctxImG = new Imdb67Context();
         public MonkServices() { 
         }
-        public List<TAbbotImg> getAllAbbotImage()
-        {
-            try
-            {
-                return ctxImG.TAbbotImgs.AsNoTracking().ToList();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+  
 
     }
 }
