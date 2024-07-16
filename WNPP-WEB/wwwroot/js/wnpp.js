@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    md.initFormExtendedDatetimepickers();
+    
 
     $('#datatables').DataTable({
         "pagingType": "full_numbers",

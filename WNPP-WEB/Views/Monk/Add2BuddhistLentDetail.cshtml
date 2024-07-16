@@ -1,0 +1,215 @@
+﻿@using WNPP_WEB.Models.ViewModels;
+@using System.Globalization;
+@model PhanSaViewModel;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Thread.CurrentThread.CurrentCulture = new CultureInfo("th-TH");
+    int rowCount = 0;
+}
+<div class="card">
+    <div class="card-header card-header-rose card-header-text">
+        <div class="card-text">
+            <h4 class="card-title">@Model.BuddhistLentYear</h4>
+        </div>
+    </div>
+    <div class="card-body ">
+        <form asp-controller="Monk" asp-action="Add2BuddhistLentDetail"
+              method="post" class="form-horizontal"
+              id="Add2BuddhistLentDetail" name="Add2BuddhistLentDetail">
+            <input type="hidden" class="form-control"
+                   id="BuddhistLentYear"
+                   name="BuddhistLentYear"
+                   value="@Model.BuddhistLentYear">
+
+            <div class="row">
+                <label class="col-sm-2 col-form-label label-checkbox">ประเภทพุทธบริษัท</label>
+                <div class="col-sm-10 checkbox-radios">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="1" checked> ภิกษุ
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="2"> สามเณร
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="3"> แม่ชี
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="4"> อุบาสก
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="5"> อุบาสิกา
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label">ชื่อ ฉายา</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control"
+                                       id="MonkName"
+                                       name="MonkName" placeholder="ชื่อ ฉายา" value="">
+                                <span class="bmd-help">พระ (ชื่อ ฉายา) / โยม (ชื่อ นามสกุล)</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control"
+                                       id="NickName"
+                                       name="NickName" placeholder="ชื่อ เล่น" value="">
+                                <span class="bmd-help">ชื่อเล่น ชื่อเรียก</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th"
+                                       id="DateOfBirth"
+                                       name="DateOfBirth">
+                                <span class="bmd-help">เกิดวันที่</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th"
+                                       id="DateOfOrdination"
+                                       name="DateOfOrdination">
+                                <span class="bmd-help">บวชวันที่</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control"
+                                       id="TempleName"
+                                       name="TempleName" placeholder="สถานที่อุปสมบท" value="">
+                                <span class="bmd-help">สถานที่อุปสมบท</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control"
+                                       id="Preceptor"
+                                       name="Preceptor" placeholder="พระอุปัชฌาย์" value="">
+                                <span class="bmd-help">พระอุปัชฌาย์</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <a id="btAdd2BuddhistLentDetailSave" name="btAdd2BuddhistLentDetailSave"
+                               class="btn btn-success" href="#">
+                                <i class="material-icons">save_as</i>
+                                <span class="sidebar-normal"> เพิ่มข้อมูล </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header card-header-rose card-header-text">
+        <div class="card-text">
+            <h4 class="card-title">@Model.BuddhistLentYear</h4>
+        </div>
+    </div>
+    <div class="card-body ">
+        @if (Model != null && Model.Details.Any())
+        {
+            <div class="material-datatables">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ลำดับที่</th>
+                            <th>ชื่อ ฉายา</th>
+                            <th>ชื่อ เล่น</th>
+                            <th>เกิดวันที่</th>
+                            <th>บวชวันที่</th>
+                            <th>สถานที่อุปสมบท</th>
+                            <th>พระอุปัชฌาย์</th>
+                            <th>อายุ</th>
+                            <th>พรรษา</th>
+                            <th class="disabled-sorting text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ลำดับที่</th>
+                            <th>ชื่อ ฉายา</th>
+                            <th>ชื่อ เล่น</th>
+                            <th>เกิดวันที่</th>
+                            <th>บวชวันที่</th>
+                            <th>สถานที่อุปสมบท</th>
+                            <th>พระอุปัชฌาย์</th>
+                            <th>อายุ</th>
+                            <th>พรรษา</th>
+                            <th class="text-right">Actions</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model.Details)
+                        {
+                            rowCount++;
+                            var DOB = (DateTime)item.DateOfBirth;
+                            var DOO = (DateTime)item.DateOfOrdination;
+                            <tr>
+                                <td>@rowCount</td>
+                                <td>@item.MonkName</td>
+                                <td>@item.MonkNicName</td>
+                                <td>@DOB.ToString("dddd dd MMMM yyyy")</td>
+                                <td>@DOO.ToString("dddd dd MMMM yyyy")</td>
+                                <td>@item.TempleName</td>
+                                <td>@item.Preceptor</td>
+                                <td>@item.MonkAge</td>
+                                <td>@item.MonkPhanSa</td>
+                                <td class="text-right">
+                                    <a asp-controller="Monk" asp-action="EditBL2Monk"
+                                       asp-route-id="@item.MonkId"
+                                       class="btn btn-link btn-danger btn-just-icon edit"
+                                       data-toggle="tooltip" data-placement="top"
+                                       title="แก้ไขข้อมูล"><i class="material-icons">handyman</i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

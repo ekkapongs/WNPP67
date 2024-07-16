@@ -11,7 +11,7 @@
             <i class="material-icons">calendar_month</i>
             <span class="sidebar-normal">ตารางข้อมูลพรรษา </span>
         </a>
-        <a class="btn btn-primary" asp-area="" asp-controller="Monk" asp-action="BuddhistLent">
+        <a class="btn btn-primary" asp-area="" asp-controller="Monk" asp-action="Add2BuddhistLent">
             <i class="material-icons">post_add</i>
             <span class="sidebar-normal">เพิ่มข้อมูลพรรษา </span>
         </a>
@@ -29,24 +29,34 @@
               method="post" class="form-horizontal"
               id="Add2BuddhistLent" name="Add2BuddhistLent">
             <div class="row">
+                <input type="hidden" class="form-control" 
+                       id="BuddhistLentYear"
+                       name="BuddhistLentYear"
+                       value="">
                 <label class="col-sm-2 col-form-label">วันเข้าพรรษา / วันออกพรรษา</label>
                 <div class="col-sm-10">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control datepicker" name="BuddhistLentStartDate" value="">
+                                <input type="text" class="form-control datepicker" 
+                                    id="BuddhistLentStartDate" 
+                                    name="BuddhistLentStartDate" value="">
                                 <span class="bmd-help">วัน เข้า พรรษา</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control datepicker" name="BuddhistLentEndDate" value="">
+                                <input type="text" class="form-control datepicker"
+                                       id="BuddhistLentEndDate" 
+                                       name="BuddhistLentEndDate" value="">
                                 <span class="bmd-help">วัน ออก พรรษา</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control" placeholder="รายละเอียดวัดเข้าพรรษา" name="BuddhistLentInFo"
+                                <input type="text" class="form-control" placeholder="รายละเอียดวัดเข้าพรรษา"
+                                       id="BuddhistLentInFo"
+                                       name="BuddhistLentInFo"
                                        value="">
                                 <span class="bmd-help">ตย. วันจันทร์ที่ 6 กรกฎาคม พ.ศ.2563 แรม ๑ ค่ำ เดือนแปด(๘) ปีชวด </span>
                             </div>
@@ -60,7 +70,8 @@
                 <div class="col-sm-10">
                     <div class="row">
                         <div class="col-sm-12 text-right">
-                            <a id="btAdd2BuddhistLentSave" name="btAdd2BuddhistLentSave" class="btn btn-success" href="#">
+                            <a id="btAdd2BuddhistLentSave" name="btAdd2BuddhistLentSave" 
+                                class="btn btn-success" href="#">
                                 <i class="material-icons">save_as</i>
                                 <span class="sidebar-normal"> บันทึก </span>
                             </a>

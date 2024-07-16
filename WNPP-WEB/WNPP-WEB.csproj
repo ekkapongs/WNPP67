@@ -8,14 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Monk\EditBL2Monk.cshtml" />
     <Content Remove="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Monk\EditBL2Monk.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Monk\EditBL2Monk.cshtml" />
     <None Include="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
@@ -36,4 +39,7 @@
 	<PropertyGroup>
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	</PropertyGroup>
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\Monk\EditBL2Monk.cshtml" />
+	</ItemGroup>
 </Project>

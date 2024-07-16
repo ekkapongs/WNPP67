@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <!--     Fonts and icons     -->
     <link rel="icon" type="image/png" href="~/assets/imgs/WNPP-Logo.png">
-    <link rel="stylesheet" href="~/assets/css//mali.css">
+    <link rel="stylesheet" href="~/assets/css/mali.css">
+    <link rel="stylesheet" href="~/css/datepicker.css">
     <!-- Material Kit CSS -->
     <link href="~/assets/css/material-dashboard.css?v=2.2.2" rel="stylesheet" />
 
@@ -404,7 +405,7 @@
     <!-- Library for adding dinamically elements -->
     <script src="~/assets/js/plugins/arrive.min.js"></script>
     <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>-->
     <!-- Chartist JS -->
     <script src="~/assets/js/plugins/chartist.min.js"></script>
     <!--  Notifications Plugin    -->
@@ -412,14 +413,61 @@
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/assets/js/material-dashboard.js?v=2.2.2" type="text/javascript"></script>
 
+    <!--   WNPP" JS Files   -->
+    <script src="~/js/bootstrap-datepicker.js"></script>
+    <script src="~/js/bootstrap-datepicker-thai.js"></script>
+    <script src="~/js/locales/bootstrap-datepicker.th.js"></script>
     <script src="~/js/wnpp.js"></script>
 </body>
 <script>
     $(document).ready(function () {
 
+        demo.showSwal();
+        $('.datepicker').datepicker();
+        //md.initFormExtendedDatetimepickers();
+
+        ///--------------------------
+        /// หน้าจอ ทะเบียนภิกษุ // เข้าพรรษา
+        ///--------------------------
+        function toDate(dateStr) {
+            var parts = dateStr.split("/")
+            return new Date(parts[2], parts[0] - 1, parts[1])
+        }
+
         $("#btAdd2BuddhistLentSave").click(function () {
-            alert("The BT Add2BuddhistLentSave SAVE was clicked.");
-            $("#Add2BuddhistLent").submit()
+            var txtStartDate = $("#BuddhistLentStartDate");
+            var txtEndDate = $("#BuddhistLentEndDate");
+
+            if (txtStartDate.val().length > 0 && txtEndDate.val().length > 0) {
+                var startDate = toDate(txtStartDate.val());
+                var endDate = toDate(txtEndDate.val());
+                if (startDate < endDate) {
+                    $("#BuddhistLentYear").val((startDate.getFullYear() + 543));
+                    $("#Add2BuddhistLent").submit()
+
+                }else{
+                    alert("ผิดอีกหละ กรอก วันเริ่มเข้าพรรษา ต้องน้อยกว่า วันออกพรรษา นะ");
+                }
+            } else {
+                alert("มึงลืมใส่วันที่หละ กรอก วันเริ่มเข้าพรรษา และ วันออกพรรษา นะ");
+            }
+        });
+
+        $("#btAdd2BuddhistLentDetailSave").click(function () {
+
+
+            console.log("DateOfBirth:" + $("#DateOfBirth").val());
+            console.log("DateOfOrdination:" + $("#DateOfOrdination").val());
+
+            if ($("#DateOfBirth").val().length > 0 && $("#DateOfOrdination").val().length > 0) {
+
+                
+                
+                $("#Add2BuddhistLentDetail").submit();
+
+            } else {
+                alert("ต้องกรอก วันเกิด และ วันที่บวช เพื่อคำวนอายุ นะ");
+            }
         });
     });
 </script>

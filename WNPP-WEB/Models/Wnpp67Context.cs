@@ -182,6 +182,8 @@ public partial class Wnpp67Context : DbContext
             entity.Property(e => e.Blid).HasColumnName("BLID");
             entity.Property(e => e.CreatedByName).HasMaxLength(100);
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
+            entity.Property(e => e.DateOfOrdination).HasColumnType("datetime");
             entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
             entity.Property(e => e.ModifiedByName).HasMaxLength(100);
             entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
@@ -190,7 +192,9 @@ public partial class Wnpp67Context : DbContext
             entity.Property(e => e.MonkNicName).HasMaxLength(50);
             entity.Property(e => e.MonkSeq).HasColumnName("MonkSEQ");
             entity.Property(e => e.Notation).HasMaxLength(500);
+            entity.Property(e => e.Preceptor).HasMaxLength(250);
             entity.Property(e => e.RecordStatus).HasMaxLength(10);
+            entity.Property(e => e.TempleName).HasMaxLength(250);
         });
 
         modelBuilder.Entity<TMonk>(entity =>

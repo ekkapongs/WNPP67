@@ -37,6 +37,14 @@ public partial class TBuddhistLentDetail
 
     public string? MonkNicName { get; set; }
 
+    public DateTime? DateOfBirth { get; set; }
+
+    public DateTime? DateOfOrdination { get; set; }
+
+    public string? TempleName { get; set; }
+
+    public string? Preceptor { get; set; }
+
     public int? MonkAge { get; set; }
 
     public int? MonkPhanSa { get; set; }

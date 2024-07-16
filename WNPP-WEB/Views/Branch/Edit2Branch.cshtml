@@ -9,6 +9,16 @@
     var check3 = (Model.BranchType == 3) ? "checked" : "";
     var check4 = (Model.BranchType == 4) ? "checked" : "";
 }
+@functions {
+    public string convert2ThaiDate(DateTime? data)
+    {
+        if (data == null)
+            return "";
+        else
+            data = ((DateTime)data).AddYears(543);
+        return ((DateTime)data).ToString("dd/MM/yyyy");
+    }
+}
 <div class="card">
     <div class="card-header card-header-rose card-header-text">
         <div class="card-text">
@@ -16,7 +26,7 @@
         </div>
     </div>
     <div class="card-body ">
-        <form asp-area="" asp-controller="Branch" asp-action="Edit2Branch" method="post" class="form-horizontal" id="branchForm" name="branchForm">
+        <form asp-controller="Branch" asp-action="Edit2Branch" method="post" class="form-horizontal" id="branchForm" name="branchForm">
             <div class="row">
                 <label class="col-sm-2 col-form-label label-checkbox">ประเภทสาขา</label>
                 <div class="col-sm-10 checkbox-radios">
@@ -300,7 +310,9 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control datepicker" name="DateOfAcceptPosition" value="@((DateTime)Model.DateOfAcceptPosition).ToString("MM/dd/yyyy")">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th" 
+                                       name="DateOfAcceptPosition" value="@convert2ThaiDate(Model.DateOfAcceptPosition)">
                                 <span class="bmd-help">รับตำแหน่งเจ้าอาวาส / ประธานสงฆ์ วันที่ ?</span>
                             </div>
                         </div>
@@ -313,7 +325,9 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control datepicker" name="DateOfBirth" value="@((DateTime)Model.DateOfBirth).ToString("MM/dd/yyyy")">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th" 
+                                       name="DateOfBirth" value="@convert2ThaiDate(Model.DateOfBirth)">
                                 <span class="bmd-help">ข้อมูล เจ้าอาวาส / ประธานสงฆ์</span>
                             </div>
                         </div>
@@ -326,7 +340,9 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control datepicker" name="DateOfOrdination" value="@((DateTime)Model.DateOfOrdination).ToString("MM/dd/yyyy")">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th" 
+                                       name="DateOfOrdination" value="@convert2ThaiDate(Model.DateOfOrdination)">
                                 <span class="bmd-help">ข้อมูล เจ้าอาวาส / ประธานสงฆ์</span>
                             </div>
                         </div>
@@ -377,7 +393,9 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control datepicker" name="DateOfRegister" value="@((DateTime)Model.DateOfRegister).ToString(" MM /dd/yyyy")">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th"
+                                       name="DateOfRegister" value="@convert2ThaiDate(Model.DateOfRegister)">
                                 <span class="bmd-help">ผู้รับรอง รับรองวันที่</span>
                             </div>
                         </div>

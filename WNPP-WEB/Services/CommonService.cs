@@ -2,12 +2,14 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Globalization;
 
 namespace WNPP_WEB.Services
 {
     public interface ICommonService
     {
         public Bitmap ResizeImage(System.Drawing.Image image, int width, int height);
+        public DateTime strTHDateToDateTIme(string thaiBudistDate);
     }
     public class CommonService
     {
@@ -31,6 +33,13 @@ namespace WNPP_WEB.Services
         public const string _DropDown_SageType = "SageType";
         public const string _DropDown_TheologianType = "TheologianType";
 
+        public DateTime strTHDateToDateTIme(string thaiBudistDate)
+        {
+            DateTime result = DateTime.Now;
+            CultureInfo provider = CultureInfo.GetCultureInfo("th-TH");
+            result = DateTime.Parse(thaiBudistDate, provider);
+            return result;
+        }
         public Bitmap ResizeImage(System.Drawing.Image image, int width, int height)
         {
             var destRect = new Rectangle(0, 0, width, height);

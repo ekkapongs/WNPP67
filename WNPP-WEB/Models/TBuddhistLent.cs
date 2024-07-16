@@ -41,6 +41,8 @@ public partial class TBuddhistLent
 
     public int? NunsCount { get; set; }
 
+    public int? UpasakaCount { get; set; }
+
     public int? UpasikaCount { get; set; }
 
     public string? MonkNote { get; set; }

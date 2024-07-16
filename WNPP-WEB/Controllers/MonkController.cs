@@ -19,7 +19,7 @@ namespace WNPP_WEB.Controllers
             IFileServices services = new FileServices();
             return View(services.getAllAbbotImage());
         }
-        public IActionResult Add2Monk()
+        public IActionResult Add2Monk(int id)
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
@@ -37,9 +37,9 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
-            List<PhanSaViewModel> datas = new List<PhanSaViewModel>();
 
-            return View(datas);
+
+            return View(_service.getAllBuddhistLent());
         }
         [HttpPost]
         public IActionResult BuddhistLent(PhanSaViewModel data)
@@ -58,7 +58,7 @@ namespace WNPP_WEB.Controllers
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
-                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง",
+                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง / เพิ่มข้อมูล เข้า พรรษา",
                 MenuListM = "show",
                 MenuM1 = "active",
             };
@@ -71,19 +71,69 @@ namespace WNPP_WEB.Controllers
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
-                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง",
+                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง / เพิ่มข้อมูล เข้า พรรษา",
                 MenuListM = "show",
                 MenuM1 = "active",
             };
 
+            _service.add2BuddhistLent(data);
 
-            return View("BuddhistLent");
+            return View("BuddhistLent", _service.getAllBuddhistLent());
+        }
+        public IActionResult Add2BuddhistLentDetail(int year)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง / แก้ไขข้อมูลรายปี",
+                MenuListM = "show",
+                MenuM1 = "active",
+            };
+
+            return View(_service.getPhanSaViewModel(year));
+        }
+        [HttpPost]
+        public IActionResult Add2BuddhistLentDetail(PhanSaViewModel data)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง / แก้ไขข้อมูลรายปี",
+                MenuListM = "show",
+                MenuM1 = "active",
+            };
+            _service.addMonkBuddhistLentDetail(data);
+
+            return View(_service.getPhanSaViewModel(data.BuddhistLentYear));
+        }
+        public IActionResult EditBL2Monk(int id)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง / แก้ไขข้อมูลรายปี / แก้ไขข้อมูลพระ",
+                MenuListM = "show",
+                MenuM1 = "active",
+            };
+            //_service.addMonkBuddhistLentDetail(data);
+
+            return View(new TMonk());
+        }
+        [HttpPost]
+        public IActionResult EditBL2Monk(TMonk data)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง / แก้ไขข้อมูลรายปี / แก้ไขข้อมูลพระ",
+                MenuListM = "show",
+                MenuM1 = "active",
+            };
+            //_service.addMonkBuddhistLentDetail(data);
+
+            return View(new TMonk());
         }
         public IActionResult TimeLine()
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
-                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง",
+                MenuName = "จำพรรษาวัดหนองป่าพง",
                 MenuListM = "show",
                 MenuM1 = "active",
             };

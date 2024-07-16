@@ -1,17 +1,21 @@
 ﻿@using WNPP_WEB.Models.ViewModels;
+@using System.Globalization;
+
+
 @model List<PhanSaViewModel>;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Thread.CurrentThread.CurrentCulture = new CultureInfo("th-TH");
 }
 <div class="card">
     <div class="card-body ">
-        <a class="btn btn-primary" asp-area="" asp-controller="Monk" asp-action="BuddhistLent">
+        <a class="btn btn-primary" asp-controller="Monk" asp-action="BuddhistLent">
             <i class="material-icons">calendar_month</i>
             <span class="sidebar-normal">ตารางข้อมูลพรรษา </span>
         </a>
-        <a class="btn btn-primary" asp-area="" asp-controller="Monk" asp-action="BuddhistLent">
+        <a class="btn btn-primary" asp-controller="Monk" asp-action="Add2BuddhistLent">
             <i class="material-icons">post_add</i>
             <span class="sidebar-normal">เพิ่มข้อมูลพรรษา </span>
         </a>
@@ -30,7 +34,7 @@
                         <tr>
                             <th>ปี พ.ศ.</th>
                             <th>เข้าพรรษาวันที่</th>
-                            <th>ตรงกับวันที่</th>
+                            <th>ออกพรรษาวันที่</th>
                             <th>จำนวนภิกษุ</th>
                             <th>จำนวนสามเณร</th>
                             <th>จำนวนแม่ชี</th>
@@ -43,7 +47,7 @@
                         <tr>
                             <th>ปี พ.ศ.</th>
                             <th>เข้าพรรษาวันที่</th>
-                            <th>ตรงกับวันที่</th>
+                            <th>ออกพรรษาวันที่</th>
                             <th>จำนวนภิกษุ</th>
                             <th>จำนวนสามเณร</th>
                             <th>จำนวนแม่ชี</th>
@@ -55,16 +59,25 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            var startDate = (DateTime)item.BuddhistLentStartDate;
+                            var endDate = (DateTime)item.BuddhistLentEndDate;
+                            var MonkCount = item.MonkCount == null ? 0 : item.MonkCount;
+                            var NoviceCount = item.NoviceCount == null ? 0 : item.NoviceCount;
+                            var NunsCount = item.NunsCount == null ? 0 : 1;
+                            var UpasikaCount = item.UpasikaCount == null ? 0 : 1;
+                            var summary = (MonkCount + NoviceCount + NunsCount + UpasikaCount);
                             <tr>
                                 <td>@item.BuddhistLentYear</td>
-                                <td>@item.BuddhistLentInFo.Split(',')[0]</td>
-                                <td>@item.BuddhistLentInFo.Split(',')[1]</td>
-                                <td>@item.MonkCount</td>
-                                <td>@item.NoviceCount</td>
-                                <td>@item.NunsCount</td>
-                                <td>@item.UpasikaCount</td>
+                                <td>@startDate.ToString("dddd dd MMMM yyyy")</td>
+                                <td>@endDate.ToString("dddd dd MMMM yyyy")</td>
+                                <td class="text-center">@MonkCount</td>
+                                <td class ="text-center">@NoviceCount</td>
+                                <td class="text-center">@NunsCount</td>
+                                <td class="text-center">@UpasikaCount</td>
+                                <td class="text-center">@summary</td>
                                 <td class="text-right">
-                                    <a href="/Branch/Edit2Branch/@item.Id"
+                                    <a asp-controller="Monk" asp-action="Add2BuddhistLentDetail"
+                                       asp-route-year="@item.BuddhistLentYear"
                                        class="btn btn-link btn-danger btn-just-icon edit"
                                        data-toggle="tooltip" data-placement="top"
                                        title="แก้ไขข้อมูล"><i class="material-icons">handyman</i></a>
