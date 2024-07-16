@@ -104,6 +104,18 @@ namespace WNPP_WEB.Controllers
 
             return View(_service.getPhanSaViewModel(data.BuddhistLentYear));
         }
+        public IActionResult Edit2Monk()
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง / แก้ไขข้อมูลรายปี / แก้ไขข้อมูลพระ",
+                MenuListM = "show",
+                MenuM1 = "active",
+            };
+            //_service.addMonkBuddhistLentDetail(data);
+
+            return View();
+        }
         public IActionResult EditBL2Monk(int id)
         {
             ViewBag.MenuViewModel = new MenuViewModel()
@@ -114,7 +126,7 @@ namespace WNPP_WEB.Controllers
             };
             //_service.addMonkBuddhistLentDetail(data);
 
-            return View(new TMonk());
+            return View(_service.getMonk(id));
         }
         [HttpPost]
         public IActionResult EditBL2Monk(TMonk data)

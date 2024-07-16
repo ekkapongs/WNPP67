@@ -1,9 +1,15 @@
-﻿@using WNPP_WEB.Models
-@model TMonk
+﻿@using WNPP_WEB.Models;
+@using WNPP_WEB.Models.ViewModels;
+@using System.Globalization;
+@using System.Threading;
+@model TMonk;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Thread.CurrentThread.CurrentCulture = new CultureInfo("th-TH");
+    var DateOfBirth = (DateTime)Model.MDateOfBirth;
+    var DateOfOrdination = (DateTime)Model.DateOfOrdination;
 }
 <div class="card">
     <div class="card-header card-header-rose card-header-text">
@@ -56,8 +62,10 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control" name="DateOfBirth"
-                                       value="">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th" 
+                                       name="DateOfBirth"
+                                       value="@DateOfBirth.ToString("dd/MM/yyyy")">
                                 <span class="bmd-help">ข้อมูลวันที่ เดือน / วัน / ปี ค.ศ. </span>
                             </div>
                         </div>
@@ -197,8 +205,10 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control" name="DateOfOrdination"
-                                       value="">
+                                <input type="text" class="form-control"
+                                        data-provide="datepicker" data-date-language="th-th" 
+                                        name="DateOfOrdination"
+                                        value="@DateOfOrdination.ToString("dd/MM/yyyy")">
                                 <span class="bmd-help">ข้อมูลวันที่ เดือน / วัน / ปี ค.ศ. </span>
                             </div>
                         </div>

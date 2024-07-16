@@ -8,38 +8,46 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Monk\Edit2Monk.cshtml" />
     <Content Remove="Views\Monk\EditBL2Monk.cshtml" />
     <Content Remove="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Monk\Edit2Monk.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Monk\EditBL2Monk.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Monk\Edit2Monk.cshtml" />
     <None Include="Views\Monk\EditBL2Monk.cshtml" />
     <None Include="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
   <ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+	  <PackageReference Include="Azure.Identity" Version="1.12.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.7" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-	  <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+	  <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
+	  <PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
   </ItemGroup>
 	<PropertyGroup>
 		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	</PropertyGroup>
 	<ItemGroup>
 	  <UpToDateCheckInput Remove="Views\Monk\EditBL2Monk.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\Monk\Edit2Monk.cshtml" />
 	</ItemGroup>
 </Project>
