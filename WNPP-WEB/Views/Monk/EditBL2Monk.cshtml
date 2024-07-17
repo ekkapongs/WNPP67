@@ -2,25 +2,85 @@
 @using WNPP_WEB.Models.ViewModels;
 @using System.Globalization;
 @using System.Threading;
-@model TMonk;
+@using System.Web;
+
+@model TMonkViewModel;
+
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     Thread.CurrentThread.CurrentCulture = new CultureInfo("th-TH");
+
     var DateOfBirth = (DateTime)Model.MDateOfBirth;
     var DateOfOrdination = (DateTime)Model.DateOfOrdination;
 }
+@{
+    String type1 = (Model.MonkType == 1) ? "checked" : "";
+    String type2 = (Model.MonkType == 2) ? "checked" : "";
+    String type3 = (Model.MonkType == 3) ? "checked" : "";
+    String type4 = (Model.MonkType == 4) ? "checked" : "";
+    String type5 = (Model.MonkType == 5) ? "checked" : "";
+}
+
 <div class="card">
     <div class="card-header card-header-rose card-header-text">
         <div class="card-text">
             <h4 class="card-title">เพิ่ม ข้อมูลภิกษุ</h4>
         </div>
     </div>
-    <div class="card-body ">
-        <form asp-controller="Monk" asp-action="EditBL2Monk" 
-            method="post" class="form-horizontal" 
-            id="EditBL2MonkForm" name="EditBL2MonkForm">
+    <div class="card-body">
+        <form asp-controller="Monk" asp-action="EditBL2Monk"
+              method="post" class="form-horizontal"
+              id="EditBL2MonkForm" name="EditBL2MonkForm">
+            <input type="text" class="form-control" placeholder="" name="MonkName"
+                   value="@DateOfBirth">
+
+            <div class="row">
+                <label class="col-sm-2 col-form-label label-checkbox">ประเภทพุทธบริษัท</label>
+                <div class="col-sm-10 checkbox-radios">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="1" @type1> ภิกษุ
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="2" @type2> สามเณร
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="3" @type3> แม่ชี
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="4" @type4> อุบาสก
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="5" @type5> อุบาสิกา
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <label class="col-sm-2 col-form-label">ชื่อ ฉายา</label>
                 <div class="col-sm-10">
@@ -63,8 +123,8 @@
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control"
-                                       data-provide="datepicker" data-date-language="th-th" 
-                                       name="DateOfBirth"
+                                       data-provide="datepicker" data-date-language="th-th"
+                                       id="txtDateOfBirth" name="txtDateOfBirth"
                                        value="@DateOfBirth.ToString("dd/MM/yyyy")">
                                 <span class="bmd-help">ข้อมูลวันที่ เดือน / วัน / ปี ค.ศ. </span>
                             </div>
@@ -206,9 +266,9 @@
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control"
-                                        data-provide="datepicker" data-date-language="th-th" 
-                                        name="DateOfOrdination"
-                                        value="@DateOfOrdination.ToString("dd/MM/yyyy")">
+                                       data-provide="datepicker" data-date-language="th-th"
+                                       name="DateOfOrdination"
+                                       value="@DateOfOrdination.ToString("dd/MM/yyyy")">
                                 <span class="bmd-help">ข้อมูลวันที่ เดือน / วัน / ปี ค.ศ. </span>
                             </div>
                         </div>

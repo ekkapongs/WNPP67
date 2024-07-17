@@ -10,10 +10,13 @@ namespace WNPP_WEB.Services
     public interface IMonkServices : IBranchServices
     {
         public TMonk getMonk(int id);
+        public TMonkViewModel getMonkView(int id);
         public List<PhanSaViewModel> getAllBuddhistLent();
         public void add2BuddhistLent(PhanSaViewModel data);
         public PhanSaViewModel getPhanSaViewModel(int year);
         public void addMonkBuddhistLentDetail(PhanSaViewModel data);
+
+        public void updateMonkBuddhistLentDetail(TMonk monk);
     }
     public class MonkServices : BranchServices, IMonkServices
     {
@@ -23,6 +26,44 @@ namespace WNPP_WEB.Services
         public MonkServices()
         {
             _mapper = new MonkMapper();
+        }
+        public void updateMonkBuddhistLentDetail(TMonk monk)
+        {
+            TMonk row = null;
+            try
+            {
+                row = getMonk(monk.Id);
+
+                row.ModifiedByName = _Admin_Name;
+                row.ModifiedDate = DateTime.Now;
+
+                row.MonkType = monk.MonkType;
+                row.MonkName = monk.MonkName;
+                row.MFirstName = monk.MFirstName;
+                row.MSurName = monk.MSurName;
+                row.MNickName = monk.MNickName;
+                
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public TMonkViewModel getMonkView(int id)
+        {
+            TMonkViewModel result = null;
+            try
+            {
+                result = _mapper.ToMonkView( getMonk(id));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            } 
+            return result;
         }
         public TMonk getMonk(int id)
         {

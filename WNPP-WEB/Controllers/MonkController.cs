@@ -125,8 +125,8 @@ namespace WNPP_WEB.Controllers
                 MenuM1 = "active",
             };
             //_service.addMonkBuddhistLentDetail(data);
-
-            return View(_service.getMonk(id));
+            var URLString = HttpContext.Current.Request;
+            return View(_service.getMonkView(id));
         }
         [HttpPost]
         public IActionResult EditBL2Monk(TMonk data)
