@@ -16,7 +16,7 @@ namespace WNPP_WEB.Services
         public PhanSaViewModel getPhanSaViewModel(int year);
         public void addMonkBuddhistLentDetail(PhanSaViewModel data);
 
-        public void updateMonkBuddhistLentDetail(TMonk monk);
+        public void editBL2Monk(TMonkViewModel monk);
     }
     public class MonkServices : BranchServices, IMonkServices
     {
@@ -27,23 +27,64 @@ namespace WNPP_WEB.Services
         {
             _mapper = new MonkMapper();
         }
-        public void updateMonkBuddhistLentDetail(TMonk monk)
+        public void editBL2Monk(TMonkViewModel mv)
         {
             TMonk row = null;
             try
             {
-                row = getMonk(monk.Id);
+                row = getMonk(mv.Id);
 
                 row.ModifiedByName = _Admin_Name;
                 row.ModifiedDate = DateTime.Now;
 
-                row.MonkType = monk.MonkType;
-                row.MonkName = monk.MonkName;
-                row.MFirstName = monk.MFirstName;
-                row.MSurName = monk.MSurName;
-                row.MNickName = monk.MNickName;
-                
+                row.MonkType = mv.MonkType;
+                row.MonkName = mv.MonkName;
+                row.MFirstName = mv.MFirstName;
+                row.MSurName = mv.MSurName;
+                row.MNickName = mv.MNickName;
 
+                row.MDateOfBirth = strTHDateToDateTIme(mv.txtDateOfBirth);
+                row.MPid = mv.MPid;
+                row.MEthnicity = mv.MEthnicity;
+                row.MNationality = mv.MNationality;
+
+                row.MHouseNo = mv.MHouseNo;
+                row.MMoo = mv.MMoo;
+                row.MVillage = mv.MVillage;
+                row.MRoad = mv.MRoad;
+                row.MSubDistrict = mv.MSubDistrict;
+                row.MDistrict = mv.MDistrict;
+                row.MProvince = mv.MProvince;
+                row.MPostCode = mv.MPostCode;
+                row.MCountry = mv.MCountry;
+                row.MPhoneNo = mv.MPhoneNo;
+                row.MLineId = mv.MLineId;
+                row.MEmail = mv.MEmail;
+
+                row.DateOfOrdination = strTHDateToDateTIme(mv.txtDateOfOrdination);
+                row.CertificateForMonksNo = mv.CertificateForMonksNo;
+                row.TempleName = mv.TempleName;
+                
+                row.Preceptor = mv.Preceptor;
+                row.PTemple = mv.PTemple;
+                row.PSubDistrict = mv.PSubDistrict;
+                row.PDistrict = mv.PDistrict;
+                row.PProvince = mv.PProvince;
+
+                row.FirstOrdinationTeacher = mv.FirstOrdinationTeacher;
+                row.FTemple = mv.FTemple;
+                row.FSubDistrict = mv.FSubDistrict;
+                row.FDistrict = mv.FDistrict;
+                row.FProvince = mv.FProvince;
+
+                row.SecondOrdinationTeacher = mv.SecondOrdinationTeacher;
+                row.STemple = mv.STemple;
+                row.SSubDistrict = mv.SSubDistrict;
+                row.SDistrict = mv.SDistrict;
+                row.SProvince = mv.SProvince;
+
+                ctx.TMonks.Update(row);
+                ctx.SaveChanges();
             }
             catch (Exception)
             {

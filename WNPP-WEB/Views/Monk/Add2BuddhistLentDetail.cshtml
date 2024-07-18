@@ -1,14 +1,15 @@
-﻿@using WNPP_WEB.Models.ViewModels;
-@using System.Globalization;
-@using System.Threading;
+﻿@using WNPP_WEB.Models.ViewModels
+@using System.Globalization
+@using System.Threading
 
-@model PhanSaViewModel;
+@model PhanSaViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     Thread.CurrentThread.CurrentCulture = new CultureInfo("th-TH");
     int rowCount = 0;
+
 }
 <div class="card">
     <div class="card-header card-header-rose card-header-text">
@@ -202,7 +203,7 @@
                                 <td>@item.MonkPhanSa</td>
                                 <td class="text-right">
                                     <a asp-controller="Monk" asp-action="EditBL2Monk"
-                                       asp-route-id="@item.MonkId"
+                                       asp-route-id="@item.MonkId" asp-route-callBack="@ViewData["CallBack"]"
                                        class="btn btn-link btn-danger btn-just-icon edit"
                                        data-toggle="tooltip" data-placement="top"
                                        title="แก้ไขข้อมูล"><i class="material-icons">handyman</i></a>

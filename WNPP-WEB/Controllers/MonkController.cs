@@ -2,6 +2,7 @@
 using WNPP_WEB.Models;
 using WNPP_WEB.Models.ViewModels;
 using WNPP_WEB.Services;
+using System.Web;
 
 namespace WNPP_WEB.Controllers
 {
@@ -89,6 +90,8 @@ namespace WNPP_WEB.Controllers
                 MenuM1 = "active",
             };
 
+            ViewData["CallBack"] = Request.Path + Request.QueryString;
+
             return View(_service.getPhanSaViewModel(year));
         }
         [HttpPost]
@@ -116,7 +119,7 @@ namespace WNPP_WEB.Controllers
 
             return View();
         }
-        public IActionResult EditBL2Monk(int id)
+        public IActionResult EditBL2Monk(int id, string callBack)
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
@@ -124,12 +127,12 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
-            //_service.addMonkBuddhistLentDetail(data);
-            var URLString = HttpContext.Current.Request;
+
+            ViewData["CallBack"] = callBack;
             return View(_service.getMonkView(id));
         }
         [HttpPost]
-        public IActionResult EditBL2Monk(TMonk data)
+        public IActionResult EditBL2Monk(TMonkViewModel data)
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
@@ -137,9 +140,9 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
-            //_service.addMonkBuddhistLentDetail(data);
+            _service.editBL2Monk(data);
 
-            return View(new TMonk());
+            return Redirect(data.CallBackPage);
         }
         public IActionResult TimeLine()
         {
