@@ -10,18 +10,21 @@
   <ItemGroup>
     <Content Remove="Views\Monk\Edit2Monk.cshtml" />
     <Content Remove="Views\Monk\EditBL2Monk.cshtml" />
+    <Content Remove="Views\Monk\SearchMonk00.cshtml" />
     <Content Remove="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Monk\Edit2Monk.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Monk\EditBL2Monk.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Monk\SearchMonk00.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Views\Monk\Edit2Monk.cshtml" />
     <None Include="Views\Monk\EditBL2Monk.cshtml" />
+    <None Include="Views\Monk\SearchMonk00.cshtml" />
     <None Include="wwwroot\js\wnpp.js" />
   </ItemGroup>
 
@@ -49,5 +52,8 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <UpToDateCheckInput Remove="Views\Monk\Edit2Monk.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\Monk\SearchMonk00.cshtml" />
 	</ItemGroup>
 </Project>

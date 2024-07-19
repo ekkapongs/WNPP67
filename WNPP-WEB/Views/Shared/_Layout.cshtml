@@ -141,9 +141,9 @@
                         <div class="collapse @ViewBag.MenuViewModel.MenuListM" id="monkRegister">
                             <ul class="nav">
                                 <li class="nav-item @ViewBag.MenuViewModel.MenuM0">
-                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="Add2Monk">
+                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="SearchMonk00">
                                         <span class="sidebar-mini"> M0 </span>
-                                        <span class="sidebar-normal"> ทะเบียนภิกษุ </span>
+                                        <span class="sidebar-normal"> คัดค้นทะเบียนภิกษุ </span>
                                     </a>
                                 </li>
                                 <li class="nav-item @ViewBag.MenuViewModel.MenuM1">
@@ -153,9 +153,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item @ViewBag.MenuViewModel.MenuM2">
-                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="Add2BuddhistLent">
+                                    <a class="nav-link" asp-area="" asp-controller="Monk" asp-action="Tmp">
                                         <span class="sidebar-mini"> M2 </span>
-                                        <span class="sidebar-normal"> งาน ทะเบียน ภิกษุ </span>
+                                        <span class="sidebar-normal"> Develop Page </span>
                                     </a>
                                 </li>
                             </ul>
@@ -483,6 +483,20 @@
 
             }
         });
+
+        $("#btEdit2MonkSave").click(function () {
+            console.log("DateOfBirth:" + $("#txtDateOfBirth").val());
+            console.log("DateOfOrdination:" + $("#txtDateOfOrdination").val());
+
+            if ($("#txtDateOfBirth").val().length > 0 && $("#txtDateOfOrdination").val().length > 0) {
+                $("#Edit2MonkForm").submit();
+
+            } else {
+                alert("ต้องกรอก วันเกิด และ วันที่บวช เพื่อคำวนอายุ นะ");
+
+            }
+        });
+        
         
     });
 </script>

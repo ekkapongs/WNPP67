@@ -295,7 +295,17 @@ public partial class Wnpp67Context : DbContext
             entity.Property(e => e.PTemple)
                 .HasMaxLength(250)
                 .HasColumnName("P_Temple");
+            entity.Property(e => e.ParticipateTemple).HasMaxLength(250);
             entity.Property(e => e.Preceptor).HasMaxLength(250);
+            entity.Property(e => e.PtDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("PT_District");
+            entity.Property(e => e.PtProvince)
+                .HasMaxLength(100)
+                .HasColumnName("PT_Province");
+            entity.Property(e => e.PtSubDistrict)
+                .HasMaxLength(100)
+                .HasColumnName("PT_SubDistrict");
             entity.Property(e => e.RecordStatus).HasMaxLength(10);
             entity.Property(e => e.SDistrict)
                 .HasMaxLength(100)

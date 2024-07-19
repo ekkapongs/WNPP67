@@ -9,13 +9,13 @@ namespace WNPP_WEB.Services
 {
     public interface IMonkServices : IBranchServices
     {
+        public List<TMonkViewModel> searchMonk(string txtSearch);
         public TMonk getMonk(int id);
         public TMonkViewModel getMonkView(int id);
         public List<PhanSaViewModel> getAllBuddhistLent();
         public void add2BuddhistLent(PhanSaViewModel data);
         public PhanSaViewModel getPhanSaViewModel(int year);
         public void addMonkBuddhistLentDetail(PhanSaViewModel data);
-
         public void editBL2Monk(TMonkViewModel monk);
     }
     public class MonkServices : BranchServices, IMonkServices
@@ -26,6 +26,38 @@ namespace WNPP_WEB.Services
         public MonkServices()
         {
             _mapper = new MonkMapper();
+        }
+        public List<TMonkViewModel> searchMonk(string txtSearch)
+        {
+            List<TMonkViewModel> result = new List<TMonkViewModel>();
+            try
+            {
+                var rows = ctx.TMonks.Where(x =>
+                            x.ActiveStatus == true &&
+                            (
+                                x.MonkName.Contains(txtSearch) ||
+                                x.MFirstName.Contains(txtSearch) ||
+                                x.MSurName.Contains(txtSearch) ||
+                                x.MNickName.Contains(txtSearch) ||
+                                x.MSubDistrict.Contains(txtSearch) ||
+                                x.MDistrict.Contains(txtSearch) ||
+                                x.MProvince.Contains(txtSearch)
+                            )
+                            ).AsNoTracking().ToList();
+                if (!rows.Any())
+                {
+                    throw new Exception($"Search data is not found by [ {txtSearch} ].");
+
+                }
+                result = _mapper.ToMonkViews(rows);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return result;
         }
         public void editBL2Monk(TMonkViewModel mv)
         {
@@ -64,7 +96,7 @@ namespace WNPP_WEB.Services
                 row.DateOfOrdination = strTHDateToDateTIme(mv.txtDateOfOrdination);
                 row.CertificateForMonksNo = mv.CertificateForMonksNo;
                 row.TempleName = mv.TempleName;
-                
+
                 row.Preceptor = mv.Preceptor;
                 row.PTemple = mv.PTemple;
                 row.PSubDistrict = mv.PSubDistrict;
@@ -97,13 +129,13 @@ namespace WNPP_WEB.Services
             TMonkViewModel result = null;
             try
             {
-                result = _mapper.ToMonkView( getMonk(id));
+                result = _mapper.ToMonkView(getMonk(id));
             }
             catch (Exception)
             {
 
                 throw;
-            } 
+            }
             return result;
         }
         public TMonk getMonk(int id)
@@ -111,7 +143,7 @@ namespace WNPP_WEB.Services
             TMonk result = null;
             try
             {
-                var rows = ctx.TMonks.Where(x=>
+                var rows = ctx.TMonks.Where(x =>
                             x.ActiveStatus == true &&
                             x.Id == id).ToList();
 
@@ -219,13 +251,13 @@ namespace WNPP_WEB.Services
                 switch (monk.MonkType)
                 {
                     case 1:
-                        bl.MonkCount = bl.MonkCount == null ? 1 : bl.MonkCount + 1; 
+                        bl.MonkCount = bl.MonkCount == null ? 1 : bl.MonkCount + 1;
                         break;
                     case 2:
-                        bl.NoviceCount = bl.NoviceCount == null ? 1 : bl.NoviceCount + 1; 
+                        bl.NoviceCount = bl.NoviceCount == null ? 1 : bl.NoviceCount + 1;
                         break;
                     case 3:
-                        bl.NunsCount = bl.NunsCount == null ? 1 : bl.NunsCount + 1; 
+                        bl.NunsCount = bl.NunsCount == null ? 1 : bl.NunsCount + 1;
                         break;
                     case 4:
                         bl.UpasakaCount = bl.UpasakaCount == null ? 1 : bl.UpasakaCount + 1;

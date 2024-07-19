@@ -17,8 +17,55 @@ namespace WNPP_WEB.Controllers
         }
         public IActionResult Tmp()
         {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "M2 คัดค้นทะเบียนภิกษุ ",
+                MenuListM = "show",
+                MenuM2 = "active",
+            };
             IFileServices services = new FileServices();
             return View(services.getAllAbbotImage());
+        }
+
+        public IActionResult SearchMonk00(string txtSearch)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "M0 คัดค้นทะเบียนภิกษุ ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+            if (string.IsNullOrEmpty(txtSearch))
+            {
+                return View();
+            }
+            else
+            {
+                return View(_service.searchMonk(txtSearch));
+            }
+        }
+        public IActionResult Edit2Monk(int id)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "คัดค้นทะเบียนภิกษุ / แก้ไขข้อมูลพระ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+
+            return View(_service.getMonkView(id));
+        }
+        [HttpPost]
+        public IActionResult Edit2Monk(TMonkViewModel data)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "คัดค้นทะเบียนภิกษุ / แก้ไขข้อมูลพระ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+            _service.editBL2Monk(data);
+            return View("SearchMonk00");
         }
         public IActionResult Add2Monk(int id)
         {
@@ -107,18 +154,7 @@ namespace WNPP_WEB.Controllers
 
             return View(_service.getPhanSaViewModel(data.BuddhistLentYear));
         }
-        public IActionResult Edit2Monk()
-        {
-            ViewBag.MenuViewModel = new MenuViewModel()
-            {
-                MenuName = "ภิกษุจำพรรษาวัดหนองป่าพง / แก้ไขข้อมูลรายปี / แก้ไขข้อมูลพระ",
-                MenuListM = "show",
-                MenuM1 = "active",
-            };
-            //_service.addMonkBuddhistLentDetail(data);
 
-            return View();
-        }
         public IActionResult EditBL2Monk(int id, string callBack)
         {
             ViewBag.MenuViewModel = new MenuViewModel()
@@ -144,6 +180,7 @@ namespace WNPP_WEB.Controllers
 
             return Redirect(data.CallBackPage);
         }
+
         public IActionResult TimeLine()
         {
             ViewBag.MenuViewModel = new MenuViewModel()

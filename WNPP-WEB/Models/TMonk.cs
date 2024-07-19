@@ -67,8 +67,6 @@ public partial class TMonk
 
     public DateTime? DateOfOrdination { get; set; }
 
-    public string? CertificateForMonksNo { get; set; }
-
     public string? TempleName { get; set; }
 
     public string? TSubDistrict { get; set; }
@@ -76,6 +74,16 @@ public partial class TMonk
     public string? TDistrict { get; set; }
 
     public string? TProvince { get; set; }
+
+    public string? CertificateForMonksNo { get; set; }
+
+    public string? ParticipateTemple { get; set; }
+
+    public string? PtSubDistrict { get; set; }
+
+    public string? PtDistrict { get; set; }
+
+    public string? PtProvince { get; set; }
 
     public string? Preceptor { get; set; }
 

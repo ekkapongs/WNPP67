@@ -67,21 +67,20 @@ namespace WNPP_WEB.Controllers
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
-                MenuName = "คัดค้นข้อมูล สาขา สำรอง สำรวจ",
+                MenuName = "B0 คัดค้นทะเบียนสาขา",
                 MenuListB = "show",
                 MenuB0 = "active",
             };
-            List<BranchViewModel> lst = new List<BranchViewModel>();
-            try
-            {
-                lst = _service.searchBranch(txtSearch);
 
-            }
-            catch (Exception)
+            if (string.IsNullOrEmpty(txtSearch))
             {
-                return View("Error");
+                return View();
             }
-            return View(lst);
+            else
+            {
+                return View(_service.searchBranch(txtSearch));
+            }
+            
         }
         public IActionResult SearchBranch01()
         {
