@@ -1,20 +1,92 @@
-﻿@using WNPP_WEB.Models;
-@model TMonk;
+﻿@using WNPP_WEB.Models.ViewModels
+@using System.Globalization
+@using System.Threading
+
+@model TMonkViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Thread.CurrentThread.CurrentCulture = new CultureInfo("th-TH");
+    // var DateOfBirth = (DateTime)Model.MDateOfBirth;
+    // var DateOfOrdination = (DateTime)Model.DateOfOrdination;
+    // String type1 = "", type2 = "", type3 = "", type4 = "", type5 = "";
 }
+@* @switch (Model.MonkType)
+{
+    case 1:
+        type1 = "checked";
+        break;
+    case 2:
+        type2 = "checked";
+        break;
+    case 3:
+        type3 = "checked";
+        break;
+    case 4:
+        type4 = "checked";
+        break;
+    case 5:
+        type5 = "checked";
+        break;
+} *@
+
 <div class="card">
     <div class="card-header card-header-rose card-header-text">
         <div class="card-text">
-            <h4 class="card-title">เพิ่ม ข้อมูลภิกษุ</h4>
+            <h4 class="card-title">เพิ่ม ภิกษุ-สามเณร-แม่ขี-อุบาสก-อุบาสิกา</h4>
         </div>
     </div>
-    <div class="card-body ">
-        <form asp-area="" asp-controller="Monk" asp-action="Add2Branch" 
+    <div class="card-body">
+        <form asp-controller="Monk" asp-action="Add2Monk"
               method="post" class="form-horizontal"
-              id="monkForm" name="monkForm">
+              id="Add2MonkForm" name="Add2MonkForm">
+
+            <div class="row">
+                <label class="col-sm-2 col-form-label label-checkbox">ประเภทพุทธบริษัท</label>
+                <div class="col-sm-10 checkbox-radios">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="1" checked> ภิกษุ
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="2" > สามเณร
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="3" > แม่ชี
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="4" > อุบาสก
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="MonkType" value="5" > อุบาสิกา
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <label class="col-sm-2 col-form-label">ชื่อ ฉายา</label>
                 <div class="col-sm-10">
@@ -22,28 +94,28 @@
                         <div class="col-sm-5">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="" name="MonkName"
-                                       value="@Model.MonkName">
+                                       value="">
                                 <span class="bmd-help">ชื่อ และ ฉายา</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="ชื่อเดิม" name="MFirstName"
-                                       value="@Model.MFirstName">
+                                       value="">
                                 <span class="bmd-help">ชื่อ ก่อนบวช </span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="นามสกุลเดิม" name="MSurName"
-                                       value="@Model.MSurName">
+                                       value="">
                                 <span class="bmd-help">นามสกุล ก่อนบวช </span>
                             </div>
                         </div>
                         <div class="col-sm-1">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="ชื่อเล่น" name="MNickName"
-                                       value="@Model.MNickName">
+                                       value="">
                                 <span class="bmd-help">ชื่อเล่น ชื่อเรียก</span>
                             </div>
                         </div>
@@ -56,29 +128,31 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control datepicker" name="DateOfBirth"
-                                       value="@(Model.MDateOfBirth == null) ? "":((DateTime)Model.MDateOfBirth).ToString(" MM /dd/yyyy")">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th"
+                                       id="txtDateOfBirth" name="txtDateOfBirth"
+                                       value="">
                                 <span class="bmd-help">ข้อมูลวันที่ เดือน / วัน / ปี ค.ศ. </span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" name="MPid"
-                                       value="@Model.MPid">
+                                       value="">
                                 <span class="bmd-help">เลขประจำตัวประชาชน ... </span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เชื้อชาติ" name="MEthnicity"
-                                       value="@Model.MEthnicity">
+                                       value="">
                                 <span class="bmd-help">เชื้อชาติ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="สัญชาติ" name="MNationality"
-                                       value="@Model.MNationality">
+                                       value="">
                                 <span class="bmd-help">สัญชาติ ...</span>
                             </div>
                         </div>
@@ -92,28 +166,28 @@
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="บ้านเลขที่" name="MHouseNo"
-                                       value="@Model.MHouseNo">
+                                       value="">
                                 <span class="bmd-help">บ้านเลขที่ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="หมู่ที่" name="MMoo"
-                                       value="@Model.MMoo">
+                                       value="">
                                 <span class="bmd-help">หมู่ที่ ... </span>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="หมู่บ้าน(บ้าน)" name="MVillage"
-                                       value="@Model.MVillage">
+                                       value="">
                                 <span class="bmd-help">หมู่บ้าน (บ้าน) ...</span>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="ถนน" name="MRoad"
-                                       value="@Model.MRoad">
+                                       value="">
                                 <span class="bmd-help">ถนน ...</span>
                             </div>
                         </div>
@@ -127,28 +201,28 @@
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="แขวง / ตำบล" name="MSubDistrict"
-                                       value="@Model.MSubDistrict">
+                                       value="">
                                 <span class="bmd-help">แขวง / ตำบล ...</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เขต / อำเภอ" name="MDistrict"
-                                       value="@Model.MDistrict">
+                                       value="">
                                 <span class="bmd-help">เขต / อำเภอ ... </span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="จังหวัด" name="MProvince"
-                                       value="@Model.MProvince">
+                                       value="">
                                 <span class="bmd-help">จังหวัด ...</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="รหัสไปรษณีย์" name="MPostCode"
-                                       value="@Model.MPostCode">
+                                       value="">
                                 <span class="bmd-help">รหัสไปรษณีย์ ...</span>
                             </div>
                         </div>
@@ -162,47 +236,32 @@
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="ประเทศ" name="MCountry"
-                                       value="@Model.MCountry">
+                                       value="">
                                 <span class="bmd-help">ประเทศ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" name="MPhoneNo"
-                                       value="@Model.MPhoneNo">
+                                       value="">
                                 <span class="bmd-help">เบอร์โทรศัพท์ </span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เบอร์ไลน์ไอดี" name="MLineId"
-                                       value="@Model.MLineId">
+                                       value="">
                                 <span class="bmd-help">เบอร์ไลน์ไอดี </span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="อีเมล์" name="MEmail"
-                                       value="@Model.MEmail">
+                                       value="">
                                 <span class="bmd-help">อีเมล์ </span>
                             </div>
                         </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <label class="col-sm-2 col-form-label">บวช วันที่</label>
-                <div class="col-sm-10">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control datepicker" name="DateOfOrdination"
-                                       value="@(Model.DateOfOrdination == null) ? " ":((DateTime)Model.DateOfOrdination).ToString(" MM /dd/yyyy")">
-                                <span class="bmd-help">ข้อมูลวันที่ เดือน / วัน / ปี ค.ศ. </span>
-                            </div>
-                        </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -213,35 +272,35 @@
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เลขใบสุทธิ" name="CertificateForMonksNo"
-                                       value="@Model.CertificateForMonksNo">
+                                       value="">
                                 <span class="bmd-help">เลขใบสุทธิ ... </span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control" placeholder="สังกัดวัด" name="TempleName"
-                                       value="@Model.TempleName">
+                                <input type="text" class="form-control" placeholder="สังกัดวัด" name="ParticipateTemple"
+                                       value="">
                                 <span class="bmd-help">สังกัดวัด ... </span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control" placeholder="แขวง / ตำบล" name="TSubDistrict"
-                                       value="@Model.TSubDistrict">
+                                <input type="text" class="form-control" placeholder="แขวง / ตำบล" name="PtSubDistrict"
+                                       value="">
                                 <span class="bmd-help">แขวง / ตำบล ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control" placeholder="เขต / อำเภอ" name="TDistrict"
-                                       value="@Model.TDistrict">
+                                <input type="text" class="form-control" placeholder="เขต / อำเภอ" name="PtDistrict"
+                                       value="">
                                 <span class="bmd-help">เขต / อำเภอ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control" placeholder="จังหวัด" name="TProvince"
-                                       value="@Model.TProvince">
+                                <input type="text" class="form-control" placeholder="จังหวัด" name="PtProvince"
+                                       value="">
                                 <span class="bmd-help">จังหวัด ...</span>
                             </div>
                         </div>
@@ -249,41 +308,86 @@
                 </div>
             </div>
             <div class="row">
+                <label class="col-sm-2 col-form-label">บวช วันที่</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control"
+                                       data-provide="datepicker" data-date-language="th-th"
+                                       id="txtDateOfOrdination" name="txtDateOfOrdination"
+                                       value="">
+                                <span class="bmd-help">ข้อมูลวันที่ เดือน / วัน / ปี ค.ศ. </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="บวชที่วัด" name="TempleName"
+                                       value="">
+                                <span class="bmd-help">บวชที่วัด ... </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="แขวง / ตำบล" name="TSubDistrict"
+                                       value="">
+                                <span class="bmd-help">แขวง / ตำบล ...</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="เขต / อำเภอ" name="TDistrict"
+                                       value="">
+                                <span class="bmd-help">เขต / อำเภอ ...</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group bmd-form-group">
+                                <input type="text" class="form-control" placeholder="จังหวัด" name="TProvince"
+                                       value="">
+                                <span class="bmd-help">จังหวัด ...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
                 <label class="col-sm-2 col-form-label">พระอุปัชฌาย์</label>
                 <div class="col-sm-10">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="พระอุปัชฌาย์" name="Preceptor"
-                                       value="@Model.Preceptor">
+                                       value="">
                                 <span class="bmd-help">พระอุปัชฌาย์ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="สังกัดวัด" name="PTemple"
-                                       value="@Model.PTemple">
+                                       value="">
                                 <span class="bmd-help">สังกัดวัด ... </span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="แขวง / ตำบล" name="PSubDistrict"
-                                       value="@Model.PSubDistrict">
+                                       value="">
                                 <span class="bmd-help">แขวง / ตำบล ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เขต / อำเภอ" name="PDistrict"
-                                       value="@Model.PDistrict">
+                                       value="">
                                 <span class="bmd-help">เขต / อำเภอ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="จังหวัด" name="PProvince"
-                                       value="@Model.PProvince">
+                                       value="">
                                 <span class="bmd-help">จังหวัด ...</span>
                             </div>
                         </div>
@@ -297,35 +401,35 @@
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="พระกรรมวาจาจารย์" name="FirstOrdinationTeacher"
-                                       value="@Model.FirstOrdinationTeacher">
+                                       value="">
                                 <span class="bmd-help">พระกรรมวาจาจารย์ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="สังกัดวัด" name="FTemple"
-                                       value="@Model.FTemple">
+                                       value="">
                                 <span class="bmd-help">สังกัดวัด ... </span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="แขวง / ตำบล" name="FSubDistrict"
-                                       value="@Model.FSubDistrict">
+                                       value="">
                                 <span class="bmd-help">แขวง / ตำบล ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เขต / อำเภอ" name="FDistrict"
-                                       value="@Model.FDistrict">
+                                       value="">
                                 <span class="bmd-help">เขต / อำเภอ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="จังหวัด" name="FProvince"
-                                       value="@Model.FProvince">
+                                       value="">
                                 <span class="bmd-help">จังหวัด ...</span>
                             </div>
                         </div>
@@ -339,35 +443,35 @@
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="พระอนุสาวนาจารย์" name="SecondOrdinationTeacher"
-                                       value="@Model.SecondOrdinationTeacher">
+                                       value="">
                                 <span class="bmd-help">พระอนุสาวนาจารย์ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="สังกัดวัด" name="STemple"
-                                       value="@Model.STemple">
+                                       value="">
                                 <span class="bmd-help">สังกัดวัด ... </span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="แขวง / ตำบล" name="SSubDistrict"
-                                       value="@Model.SSubDistrict">
+                                       value="">
                                 <span class="bmd-help">แขวง / ตำบล ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="เขต / อำเภอ" name="SDistrict"
-                                       value="@Model.SDistrict">
+                                       value="">
                                 <span class="bmd-help">เขต / อำเภอ ...</span>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group bmd-form-group">
                                 <input type="text" class="form-control" placeholder="จังหวัด" name="SProvince"
-                                       value="@Model.SProvince">
+                                       value="">
                                 <span class="bmd-help">จังหวัด ...</span>
                             </div>
                         </div>
@@ -379,11 +483,11 @@
                 <div class="col-sm-10">
                     <div class="row">
                         <div class="col-sm-12 text-right">
-                            <a id="backLink" name="backLink" class="btn btn-danger" href="#">
-                                <i class="material-icons">logout</i>
-                                <span class="sidebar-normal"> ย้อนกลับ </span>
+                            <a class="btn btn-primary" asp-area="" asp-controller="Monk" asp-action="SearchMonk00">
+                                <i class="material-icons">search</i>
+                                <span class="sidebar-normal"> ค้นหา </span>
                             </a>
-                            <a id="btSave" name="btSave" class="btn btn-success" href="#">
+                            <a id="btAdd2MonkSave" name="btAdd2MonkSave" class="btn btn-success" href="#">
                                 <i class="material-icons">save_as</i>
                                 <span class="sidebar-normal"> บันทึก </span>
                             </a>

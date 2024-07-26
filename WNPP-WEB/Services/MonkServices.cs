@@ -174,9 +174,17 @@ namespace WNPP_WEB.Services
                 row.MLineId = mv.MLineId;
                 row.MEmail = mv.MEmail;
 
-                row.DateOfOrdination = strTHDateToDateTIme(mv.txtDateOfOrdination);
                 row.CertificateForMonksNo = mv.CertificateForMonksNo;
+                row.ParticipateTemple = mv.ParticipateTemple;
+                row.PtSubDistrict = mv.PtSubDistrict;
+                row.PtDistrict = mv.PtDistrict;
+                row.PtProvince = mv.PtProvince;
+
+                row.DateOfOrdination = strTHDateToDateTIme(mv.txtDateOfOrdination);
                 row.TempleName = mv.TempleName;
+                row.TSubDistrict = mv.TSubDistrict;
+                row.TDistrict = mv.TDistrict;
+                row.TProvince = mv.TProvince;
 
                 row.Preceptor = mv.Preceptor;
                 row.PTemple = mv.PTemple;

@@ -15,6 +15,66 @@ namespace WNPP_WEB.Controllers
             _logger = logger;
             _service = new MonkServices();
         }
+        public IActionResult Index()
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "M0 งานทะเบียนภิกษุ ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+            return View();
+        }
+        public IActionResult SearchMonk00(string txtSearch)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "M0 งานทะเบียนภิกษุ / คัดค้นทะเบียนภิกษุ ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+            if (string.IsNullOrEmpty(txtSearch))
+            {
+                return View();
+            }
+            else
+            {
+                return View(_service.searchMonk(txtSearch));
+            }
+        }
+        public IActionResult Add2Monk(int id)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "งาน ทะเบียนภิกษุ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+            return View();
+        }
+        public IActionResult Edit2Monk(int id)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "คัดค้นทะเบียนภิกษุ / แก้ไขข้อมูลพระ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+
+            return View(_service.getMonkView(id));
+        }
+        [HttpPost]
+        public IActionResult Edit2Monk(TMonkViewModel data)
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "คัดค้นทะเบียนภิกษุ / แก้ไขข้อมูลพระ",
+                MenuListM = "show",
+                MenuM0 = "active",
+            };
+            _service.edit2Monk(data);
+            return View("SearchMonk00");
+        }
         public IActionResult Tmp()
         {
             ViewBag.MenuViewModel = new MenuViewModel()
@@ -64,56 +124,9 @@ namespace WNPP_WEB.Controllers
                 throw;
             }
         }
-        public IActionResult SearchMonk00(string txtSearch)
-        {
-            ViewBag.MenuViewModel = new MenuViewModel()
-            {
-                MenuName = "M0 คัดค้นทะเบียนภิกษุ ",
-                MenuListM = "show",
-                MenuM0 = "active",
-            };
-            if (string.IsNullOrEmpty(txtSearch))
-            {
-                return View();
-            }
-            else
-            {
-                return View(_service.searchMonk(txtSearch));
-            }
-        }
-        public IActionResult Edit2Monk(int id)
-        {
-            ViewBag.MenuViewModel = new MenuViewModel()
-            {
-                MenuName = "คัดค้นทะเบียนภิกษุ / แก้ไขข้อมูลพระ",
-                MenuListM = "show",
-                MenuM0 = "active",
-            };
 
-            return View(_service.getMonkView(id));
-        }
-        [HttpPost]
-        public IActionResult Edit2Monk(TMonkViewModel data)
-        {
-            ViewBag.MenuViewModel = new MenuViewModel()
-            {
-                MenuName = "คัดค้นทะเบียนภิกษุ / แก้ไขข้อมูลพระ",
-                MenuListM = "show",
-                MenuM0 = "active",
-            };
-            _service.edit2Monk(data);
-            return View("SearchMonk00");
-        }
-        public IActionResult Add2Monk(int id)
-        {
-            ViewBag.MenuViewModel = new MenuViewModel()
-            {
-                MenuName = "งาน ทะเบียนภิกษุ",
-                MenuListM = "show",
-                MenuM0 = "active",
-            };
-            return View(new TMonk());
-        }
+
+
         public IActionResult BuddhistLent()
         {
             ViewBag.MenuViewModel = new MenuViewModel()
