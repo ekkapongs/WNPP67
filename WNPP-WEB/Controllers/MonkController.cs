@@ -26,7 +26,44 @@ namespace WNPP_WEB.Controllers
             IFileServices services = new FileServices();
             return View(services.getAllAbbotImage());
         }
-
+        [HttpPost]
+        public JsonResult searchMonkByName(string name)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    return new JsonResult(_service.searchMonkByName(name));
+                }
+                else
+                {
+                    return new JsonResult(new List<TMonk>());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpPost]
+        public JsonResult getMonk(string name)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    return new JsonResult(_service.getMonkByName(name));
+                }
+                else
+                {
+                    return new JsonResult(new TMonk());
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public IActionResult SearchMonk00(string txtSearch)
         {
             ViewBag.MenuViewModel = new MenuViewModel()
@@ -64,7 +101,7 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM0 = "active",
             };
-            _service.editBL2Monk(data);
+            _service.edit2Monk(data);
             return View("SearchMonk00");
         }
         public IActionResult Add2Monk(int id)
@@ -155,7 +192,7 @@ namespace WNPP_WEB.Controllers
             return View(_service.getPhanSaViewModel(data.BuddhistLentYear));
         }
 
-        public IActionResult EditBL2Monk(int id, string callBack)
+        public IActionResult EditBL2Monk(int id, string callBack, int year)
         {
             ViewBag.MenuViewModel = new MenuViewModel()
             {
@@ -165,7 +202,9 @@ namespace WNPP_WEB.Controllers
             };
 
             ViewData["CallBack"] = callBack;
-            return View(_service.getMonkView(id));
+            TMonkViewModel model = _service.getMonkView(id);
+            model.BuddhistLentYear = year;
+            return View(model);
         }
         [HttpPost]
         public IActionResult EditBL2Monk(TMonkViewModel data)

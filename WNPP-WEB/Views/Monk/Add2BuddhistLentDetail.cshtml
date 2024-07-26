@@ -96,7 +96,7 @@
                                 <input type="text" class="form-control"
                                        data-provide="datepicker" data-date-language="th-th"
                                        id="DateOfBirth"
-                                       name="DateOfBirth">
+                                       name="DateOfBirth" placeholder="วันเกิด">
                                 <span class="bmd-help">เกิดวันที่</span>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                 <input type="text" class="form-control"
                                        data-provide="datepicker" data-date-language="th-th"
                                        id="DateOfOrdination"
-                                       name="DateOfOrdination">
+                                       name="DateOfOrdination" placeholder="วันบวช">
                                 <span class="bmd-help">บวชวันที่</span>
                             </div>
                         </div>
@@ -208,6 +208,7 @@
                                 <td class="text-right">
                                     <a asp-controller="Monk" asp-action="EditBL2Monk"
                                        asp-route-id="@item.MonkId" asp-route-callBack="@ViewData["CallBack"]"
+                                       asp-route-year="@Model.BuddhistLentYear"
                                        class="btn btn-link btn-danger btn-just-icon edit"
                                        data-toggle="tooltip" data-placement="top"
                                        title="แก้ไขข้อมูล"><i class="material-icons">handyman</i></a>

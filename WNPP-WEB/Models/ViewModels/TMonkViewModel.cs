@@ -2,6 +2,7 @@
 {
     public class TMonkViewModel 
     {
+        public int BuddhistLentYear { get; set; }
         public string? CallBackPage { get; set; }
         public string? txtDateOfBirth { get; set; }
         public string? txtDateOfOrdination { get; set; }

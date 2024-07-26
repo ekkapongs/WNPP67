@@ -42,7 +42,14 @@
               method="post" class="form-horizontal"
               id="EditBL2MonkForm" name="EditBL2MonkForm">
 
-            <input type="hidden" class="form-control" name="CallBackPage" value="@ViewData["CallBack"]">
+            <input type="hidden" class="form-control" 
+                    name="CallBackPage" 
+                    value="@ViewData["CallBack"]">
+
+            <input type="hidden" class="form-control"
+                   id="BuddhistLentYear"
+                   name="BuddhistLentYear"
+                   value="@Model.BuddhistLentYear">
 
             <div class="row">
                 <label class="col-sm-2 col-form-label label-checkbox">ประเภทพุทธบริษัท</label>

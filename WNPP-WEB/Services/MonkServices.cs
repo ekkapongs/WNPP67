@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using System.Xml;
 using WNPP_WEB.Models;
 using WNPP_WEB.Models.ViewModels;
@@ -9,7 +10,9 @@ namespace WNPP_WEB.Services
 {
     public interface IMonkServices : IBranchServices
     {
+        public List<TMonk> searchMonkByName(string name);
         public List<TMonkViewModel> searchMonk(string txtSearch);
+        public TMonk getMonkByName(string name);
         public TMonk getMonk(int id);
         public TMonkViewModel getMonkView(int id);
         public List<PhanSaViewModel> getAllBuddhistLent();
@@ -17,6 +20,7 @@ namespace WNPP_WEB.Services
         public PhanSaViewModel getPhanSaViewModel(int year);
         public void addMonkBuddhistLentDetail(PhanSaViewModel data);
         public void editBL2Monk(TMonkViewModel monk);
+        public TMonk edit2Monk(TMonkViewModel monk);
     }
     public class MonkServices : BranchServices, IMonkServices
     {
@@ -26,6 +30,44 @@ namespace WNPP_WEB.Services
         public MonkServices()
         {
             _mapper = new MonkMapper();
+        }
+        public List<TMonk> searchMonkByName(string name)
+        {
+            List<TMonk> result = new List<TMonk>();
+            try
+            {
+                result = ctx.TMonks.Where(x =>
+                            x.ActiveStatus == true &&
+                            x.MonkName.Contains(name)).AsNoTracking().ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return result;
+        }
+        public TMonk getMonkByName(string name)
+        {
+            TMonk result = null;
+            try
+            {
+                var rows = ctx.TMonks.Where(x =>
+                           x.ActiveStatus == true &&
+                           x.MonkName.Equals(name)).AsNoTracking().ToList();
+                if (!rows.Any())
+                {
+                    throw new Exception($"getMonkByName is not found by [ {name} ].");
+
+                }
+                result = rows.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return result;
         }
         public List<TMonkViewModel> searchMonk(string txtSearch)
         {
@@ -62,10 +104,49 @@ namespace WNPP_WEB.Services
         public void editBL2Monk(TMonkViewModel mv)
         {
             TMonk row = null;
+            TBuddhistLent bl = null;
+            TBuddhistLentDetail blDetail = null;
+            try
+            {
+                row = edit2Monk(mv);
+                
+                bl = ctx.TBuddhistLents.Where(x =>
+                        x.ActiveStatus == true &&
+                        x.BuddhistLentYear == mv.BuddhistLentYear).FirstOrDefault();
+
+                blDetail = ctx.TBuddhistLentDetails.Where(x =>
+                            x.ActiveStatus == true &&
+                            x.Blid == bl.Id &&
+                            x.MonkId == mv.Id).FirstOrDefault();
+
+
+                blDetail.ModifiedBy = row.ModifiedBy;
+                blDetail.ModifiedByName = row.ModifiedByName;
+                blDetail.ModifiedDate = DateTime.Now;
+
+                blDetail.MonkNicName = row.MNickName;
+                blDetail.DateOfBirth = row.MDateOfBirth;
+                blDetail.DateOfOrdination = row.DateOfOrdination;
+                blDetail.TempleName = row.TempleName;
+                blDetail.Preceptor = row.Preceptor;
+
+                ctx.TBuddhistLentDetails.Update(blDetail);
+                ctx.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public TMonk edit2Monk(TMonkViewModel mv)
+        {
+            TMonk row = null;
             try
             {
                 row = getMonk(mv.Id);
 
+                row.ModifiedBy = _Admin_ID;
                 row.ModifiedByName = _Admin_Name;
                 row.ModifiedDate = DateTime.Now;
 
@@ -120,9 +201,9 @@ namespace WNPP_WEB.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
+            return row;
         }
         public TMonkViewModel getMonkView(int id)
         {
@@ -168,33 +249,32 @@ namespace WNPP_WEB.Services
 
             try
             {
+                bl = ctx.TBuddhistLents.Where(x => 
+                        x.ActiveStatus == true && 
+                        x.BuddhistLentYear == data.BuddhistLentYear).FirstOrDefault();
+
                 var datails = ctx.TBuddhistLentDetails.Where(x =>
                                 x.ActiveStatus == true &&
-                                x.MonkName.Contains(data.MonkName)).ToList();
+                                x.Blid == bl.Id &&
+                                x.MonkName.Contains(data.MonkName.Trim())).ToList();
 
                 if (datails.Any()) throw new Exception($"มีข้อมูล {data.MonkName} ในตารางแล้ว !! ");
 
-
-                bl = ctx.TBuddhistLents.Where(x =>
-                            x.ActiveStatus == true &&
-                            x.BuddhistLentYear == data.BuddhistLentYear).FirstOrDefault();
-
                 var monks = ctx.TMonks.Where(x =>
                             x.ActiveStatus == true &&
-                            x.MonkName.Equals(data.MonkName)).ToList();
+                            x.MonkName.Equals(data.MonkName.Trim())).ToList();
 
                 if (monks.Any())
                 {
                     monk = monks.FirstOrDefault();
 
+                    monk.ModifiedBy = _Admin_ID;
                     monk.ModifiedByName = _Admin_Name;
                     monk.ModifiedDate = DateTime.Now;
 
-                    monk.MonkType = data.MonkType;
-                    monk.MonkName = data.MonkName;
-                    monk.MNickName = data.NickName;
-                    monk.TempleName = data.TempleName;
-                    monk.Preceptor = data.Preceptor;
+                    monk.MNickName = data.NickName.Trim();
+                    monk.TempleName = data.TempleName.Trim();
+                    monk.Preceptor = data.Preceptor.Trim();
 
                     monk.MDateOfBirth = strTHDateToDateTIme(data.DateOfBirth);
                     monk.DateOfOrdination = strTHDateToDateTIme(data.DateOfOrdination);
@@ -212,10 +292,10 @@ namespace WNPP_WEB.Services
                         CreatedDate = DateTime.Now,
 
                         MonkType = data.MonkType,
-                        MonkName = data.MonkName,
-                        MNickName = data.NickName,
-                        TempleName = data.TempleName,
-                        Preceptor = data.Preceptor,
+                        MonkName = data.MonkName.Trim(),
+                        MNickName = data.NickName.Trim(),
+                        TempleName = data.TempleName.Trim(),
+                        Preceptor = data.Preceptor.Trim(),
 
                         MDateOfBirth = strTHDateToDateTIme(data.DateOfBirth),
                         DateOfOrdination = strTHDateToDateTIme(data.DateOfOrdination),
