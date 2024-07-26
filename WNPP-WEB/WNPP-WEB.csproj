@@ -44,16 +44,4 @@
 	  <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
 	  <PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
   </ItemGroup>
-	<PropertyGroup>
-		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
-	</PropertyGroup>
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\Monk\EditBL2Monk.cshtml" />
-	</ItemGroup>
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\Monk\Edit2Monk.cshtml" />
-	</ItemGroup>
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\Monk\SearchMonk00.cshtml" />
-	</ItemGroup>
 </Project>
