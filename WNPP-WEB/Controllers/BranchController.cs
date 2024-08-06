@@ -71,15 +71,22 @@ namespace WNPP_WEB.Controllers
                 MenuListB = "show",
                 MenuB0 = "active",
             };
-
-            if (string.IsNullOrEmpty(txtSearch))
+            try
             {
-                return View();
+                if (string.IsNullOrEmpty(txtSearch))
+                {
+                    return View();
+                }
+                else
+                {
+                    return View(_service.searchBranch(txtSearch));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return View(_service.searchBranch(txtSearch));
+                return View("NotFound", ex); 
             }
+            
             
         }
         public IActionResult SearchBranch01()
@@ -190,7 +197,10 @@ namespace WNPP_WEB.Controllers
 
 
         }
-
+        public IActionResult NotFound(Exception obj)
+        {
+            return View(obj);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

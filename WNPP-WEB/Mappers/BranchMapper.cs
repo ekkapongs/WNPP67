@@ -1,7 +1,7 @@
 ﻿using WNPP_WEB.Models;
 using WNPP_WEB.Models.ViewModels;
 
-namespace WNPP_WEB.Services.Mappers
+namespace WNPP_WEB.Mappers
 {
     public interface IBranchMapper
     {
@@ -10,16 +10,16 @@ namespace WNPP_WEB.Services.Mappers
 
         public TBranchViewModel ToBranchView(TBranch branch);
     }
-    public class BranchMapper: IBranchMapper
+    public class BranchMapper : IBranchMapper
     {
         public TBranchViewModel ToBranchView(TBranch branch)
         {
             TBranchViewModel result = new TBranchViewModel();
             try
             {
-                
+
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 result = new TBranchViewModel();
             }
@@ -37,7 +37,7 @@ namespace WNPP_WEB.Services.Mappers
                     result.Add(data);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -68,7 +68,7 @@ namespace WNPP_WEB.Services.Mappers
                     PostCodeMonatery = branch.PostCodeMonatery,
                 };
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

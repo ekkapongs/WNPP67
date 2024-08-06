@@ -1,9 +1,9 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Xml;
+using WNPP_WEB.Mappers;
 using WNPP_WEB.Models;
 using WNPP_WEB.Models.ViewModels;
-using WNPP_WEB.Services.Mappers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WNPP_WEB.Services
@@ -399,7 +399,16 @@ namespace WNPP_WEB.Services
         public List<PhanSaViewModel> getAllBuddhistLent()
         {
             List<PhanSaViewModel> result = new List<PhanSaViewModel>();
-            result = _mapper.ToPhanSaViews(ctx.TBuddhistLents.ToList());
+            try
+            {
+                result = _mapper.ToPhanSaViews(ctx.TBuddhistLents.ToList());
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
             return result;
         }
 

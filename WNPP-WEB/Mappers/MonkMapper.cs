@@ -2,7 +2,7 @@
 using WNPP_WEB.Models;
 using WNPP_WEB.Models.ViewModels;
 
-namespace WNPP_WEB.Services.Mappers
+namespace WNPP_WEB.Mappers
 {
     public interface IMonkMapper
     {

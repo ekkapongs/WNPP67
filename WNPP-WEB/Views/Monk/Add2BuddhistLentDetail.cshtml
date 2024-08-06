@@ -77,10 +77,17 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
-                                <input type="text" class="form-control"
-                                       id="MonkName"
-                                       name="MonkName" placeholder="ชื่อ ฉายา" value="">
-                                <span class="bmd-help">พระ (ชื่อ ฉายา) / โยม (ชื่อ นามสกุล)</span>
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-fab btn-round btn-info" tabindex="-1"
+                                                data-toggle="modal" data-target="#searhMonkModal01">
+                                            <i class="material-icons">search</i>
+                                        </button>
+                                    </span>
+                                    <input type="text" class="form-control"
+                                           id="MonkName"
+                                           name="MonkName" placeholder="ชื่อ ฉายา" value="">
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-1">
@@ -219,5 +226,47 @@
                 </table>
             </div>
         }
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="searhMonkModal01" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ค้นชื่อภิกษุ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead class="text-warning">
+                    <th>ลำดับ</th>
+                    <th>ชื่อ/ฉายา</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>พระเทพวชิรญาณ (เลี่ยม ฐิตธัมโม)</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>พระสุริยนต์ จนฺทปญฺโญ</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>พระวิฑูรย์ โพธิปญฺโญ</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>พระฟื้น กนฺตธมฺโม</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
     </div>
 </div>

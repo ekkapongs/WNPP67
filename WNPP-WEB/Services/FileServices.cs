@@ -89,7 +89,7 @@ namespace WNPP_WEB.Services
                 ctxDB.TBranches.Update(row);
                 ctxDB.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

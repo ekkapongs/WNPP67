@@ -1,7 +1,7 @@
 ﻿
+using WNPP_WEB.Mappers;
 using WNPP_WEB.Models;
 using WNPP_WEB.Models.ViewModels;
-using WNPP_WEB.Services.Mappers;
 
 namespace WNPP_WEB.Services
 {
@@ -83,7 +83,7 @@ namespace WNPP_WEB.Services
                     ctx.SaveChanges();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -91,7 +91,16 @@ namespace WNPP_WEB.Services
         public List<BranchViewModel> searchBranch(string message)
         {
             List<BranchViewModel> result = [];
-            result = _mapper.ToViews( calPhranSa(searchByName(message)));
+            try
+            {
+                result = _mapper.ToViews(calPhranSa(searchByName(message)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             return result;
             
         }
@@ -99,19 +108,46 @@ namespace WNPP_WEB.Services
         public List<BranchViewModel> getAllBranch()
         {
             List<BranchViewModel> result = [];
-            result = _mapper.ToViews(calPhranSa( getBranchByTypeID(1)));
+            try
+            {
+                result = _mapper.ToViews(calPhranSa(getBranchByTypeID(1)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
             return result;
         }
         public List<BranchViewModel> getAllReserve()
         {
             List<BranchViewModel> result = [];
-            result = _mapper.ToViews( calPhranSa( getBranchByTypeID(2)));
+            try
+            {
+                result = _mapper.ToViews(calPhranSa(getBranchByTypeID(2)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
             return result;
         }
         public List<BranchViewModel> getAllSurvey()
         {
             List<BranchViewModel> result = [];
-            result = _mapper.ToViews( calPhranSa( getBranchByTypeID(3)));
+            try
+            {
+                result = _mapper.ToViews(calPhranSa(getBranchByTypeID(3)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
             return result;
         }
         
