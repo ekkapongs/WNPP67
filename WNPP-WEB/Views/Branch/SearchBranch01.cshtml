@@ -1,5 +1,5 @@
 ﻿@using WNPP_WEB.Models.ViewModels;
-@model List<BranchViewModel>
+@model List<TBranch>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -29,12 +29,11 @@
                         <th>วัด/ที่พักสงฆ์</th>
                         <th>ชื่อ/ฉายา</th>
                         <th>เบอร์โทร</th>
-                        <th>ที่อยู่</th>
                         <th>ตำบล</th>
                         <th>อำเภอ</th>
                         <th>จังหวัด</th>
-                        <th>ประเทศ</th>
-                        <th>รหัส</th>
+                        <th>อายุ</th>
+                        <th>พรรษา</th>
                         <th>ข้อมูลอุปสมบท</th>
                         <th class="disabled-sorting text-right">Actions</th>
                     </tr>
@@ -46,12 +45,11 @@
                         <th>วัด/ที่พักสงฆ์</th>
                         <th>ชื่อ/ฉายา</th>
                         <th>เบอร์โทร</th>
-                        <th>ที่อยู่</th>
                         <th>ตำบล</th>
                         <th>อำเภอ</th>
                         <th>จังหวัด</th>
-                        <th>ประเทศ</th>
-                        <th>รหัส</th>
+                        <th>อายุ</th>
+                        <th>พรรษา</th>
                         <th>ข้อมูลอุปสมบท</th>
                         <th class="text-right">Actions</th>
                     </tr>
@@ -59,28 +57,37 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        var age = (DateTime.Now.Year - ((DateTime)item.DateOfBirth).Year);
+                        var pansa = (DateTime.Now.Year - ((DateTime)item.DateOfOrdination).Year);
                         <tr>
                             <td>
-                                @if (string.IsNullOrEmpty( item.AbbotImageUrl))
-                                {
-                                    <img class="img" src="~/assets/imgs/NoDataMonk.jpg" />
-                                }
-                                else
-                                {
-                                    <img class="img" src="@item.AbbotImageUrl" />
-                                }
-                                
+                                <img class="img" src="@item.AbbotImageUrl" />
                             </td>
                             <td>@item.BranchName</td>
                             <td>@item.MonasteryName</td>
                             <td>@item.AbbotName</td>
-                            <td>@item.MonasteryPhoneNO</td>
-                            <td>@item.AddressTextMonatery</td>
+                            @if (!string.IsNullOrEmpty(item.AbbotPhoneNo))
+                            {
+                                <td>
+                                    @foreach (string str in item.AbbotPhoneNo.Split(','))
+                                    {
+                                        <a class="btn btn-primary" href="tel:@str">
+                                            <i class="material-icons">call</i>
+                                            <span class="sidebar-normal"> @str</span>
+                                        </a>
+                                    }
+                                </td>
+                            }
+                            else
+                            {
+                                <td>@item.AbbotPhoneNo</td>
+                            }
+
                             <td>@item.SubDistrictMonatery</td>
                             <td>@item.DistrictMonatery</td>
                             <td>@item.ProvinceMonatery</td>
-                            <td>@item.CountryMonatery</td>
-                            <td>@item.PostCodeMonatery</td>
+                            <td>@age</td>
+                            <td>@pansa</td>
                             <td>@item.Notation</td>
                             <td class="text-right">
                                 <a href="/Branch/Edit2Branch/@item.Id"

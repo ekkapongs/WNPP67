@@ -37,7 +37,7 @@ namespace WNPP_WEB.Controllers
         public async Task<IActionResult> PostAbbotImage([FromForm] AbbotImageViewModel view)
         {
 
-            return  RedirectToAction("EditBranch", "Branch", new { id = view.DataId });
+            return RedirectToAction("EditBranch", "Branch", new { id = view.DataId });
         }
         [HttpGet]
         [ActionName("LoadImage")]

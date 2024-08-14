@@ -78,15 +78,16 @@
                         <div class="col-sm-3">
                             <div class="form-group bmd-form-group">
                                 <div class="input-group">
+                                    <input type="text" class="form-control"
+                                           id="MonkName"
+                                           name="MonkName" placeholder="ชื่อ ฉายา" value="" autofocus="autofocus">
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-fab btn-round btn-info" tabindex="-1"
-                                                data-toggle="modal" data-target="#searhMonkModal01">
+                                        <button type="button" class="btn btn-fab btn-round btn-info"
+                                                id="btSearchMonkByName" name="btSearchMonkByName">
                                             <i class="material-icons">search</i>
                                         </button>
                                     </span>
-                                    <input type="text" class="form-control"
-                                           id="MonkName"
-                                           name="MonkName" placeholder="ชื่อ ฉายา" value="">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -139,7 +140,16 @@
                 <label class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-10">
                     <div class="row">
+                        <div class="col-sm-12">
+                            <p>
+                                * เมื่อกดปุ่ม 
+                                <button type="button" class="btn btn-fab btn-round btn-info" disabled>
+                                    <i class="material-icons">search</i>
+                                </button> ค้นข้อมูล ให้กด Tap เพื่อเลื่อน ไปที่ปุ่มเพิ่มข้อมูล (แก้ปัญหาเรื่องวันที่ไม่เปลี่ยน)
+                            </p>
+                        </div>
                         <div class="col-sm-12 text-right">
+                            
                             <a id="backLink" name="backLink" class="btn btn-danger" href="#">
                                 <i class="material-icons">logout</i>
                                 <span class="sidebar-normal"> ย้อนกลับ </span>

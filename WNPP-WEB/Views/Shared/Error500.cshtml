@@ -1,0 +1,44 @@
+﻿@model Exception
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var Message = "!!! งงเหมือนกันนะนุช !!!";
+    var Where = "!!! ไม่รู้ตายตรงไหน !!!";
+    if (Model != null)
+    {
+        Message = Model.Message;
+        Where = Model.Source;
+    }
+}
+<div class="col-md-4">
+    <div class="card card-product">
+        <div class="card-header card-header-image" data-header-animation="true">
+            <a href="#pablo">
+                <img class="img"  src="~/assets/imgs/Error500.png" />
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="card-actions text-center">
+                <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                    <i class="material-icons">build</i> ซ่อมได้
+                </button>
+            </div>
+            <h4 class="card-title">
+                <a href="#pablo">!!! เกิดข้อผิดพลาดบางอย่าง !!! </a>
+            </h4>
+            <div class="card-description">
+                @Message
+            </div>
+        </div>
+        <div class="card-footer">
+            <a id="backLink" name="backLink" class="btn btn-danger" href="#">
+                <i class="material-icons">logout</i>
+                <span class="sidebar-normal"> ย้อนกลับ </span>
+            </a>
+            <div class="stats">
+                <p class="card-category"><i class="material-icons">place</i> @Where</p>
+            </div>
+        </div>
+    </div>
+</div>

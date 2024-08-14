@@ -9,11 +9,11 @@ namespace WNPP_WEB.Services
     {
         public void edit2Branch(TBranch data);
 
-        public List<BranchViewModel> searchBranch(string message);
+        public List<TBranch> searchBranch(string message);
 
-        public List<BranchViewModel> getAllBranch();
-        public List<BranchViewModel> getAllReserve();
-        public List<BranchViewModel> getAllSurvey();
+        public List<TBranch> getAllBranch();
+        public List<TBranch> getAllReserve();
+        public List<TBranch> getAllSurvey();
     }
     public class BranchServices : WNPPServive, IBranchServices
     {
@@ -88,12 +88,14 @@ namespace WNPP_WEB.Services
                 throw;
             }
         }
-        public List<BranchViewModel> searchBranch(string message)
+        public List<TBranch> searchBranch(string message)
         {
-            List<BranchViewModel> result = [];
+            List<TBranch> result = [];
             try
             {
-                result = _mapper.ToViews(calPhranSa(searchByName(message)));
+                //result = _mapper.ToViews(calPhranSa(searchByName(message)));
+                //result = calPhranSa(searchByName(message));
+                result = searchByName(message);
             }
             catch (Exception)
             {
@@ -105,12 +107,13 @@ namespace WNPP_WEB.Services
             
         }
 
-        public List<BranchViewModel> getAllBranch()
+        public List<TBranch> getAllBranch()
         {
-            List<BranchViewModel> result = [];
+            List<TBranch> result = [];
             try
             {
-                result = _mapper.ToViews(calPhranSa(getBranchByTypeID(1)));
+                //result = calPhranSa(getBranchByTypeID(1));
+                result = getBranchByTypeID(1);
             }
             catch (Exception)
             {
@@ -120,12 +123,13 @@ namespace WNPP_WEB.Services
             
             return result;
         }
-        public List<BranchViewModel> getAllReserve()
+        public List<TBranch> getAllReserve()
         {
-            List<BranchViewModel> result = [];
+            List<TBranch> result = [];
             try
             {
-                result = _mapper.ToViews(calPhranSa(getBranchByTypeID(2)));
+                //result = calPhranSa(getBranchByTypeID(2));
+                result = getBranchByTypeID(2);
             }
             catch (Exception)
             {
@@ -135,12 +139,13 @@ namespace WNPP_WEB.Services
             
             return result;
         }
-        public List<BranchViewModel> getAllSurvey()
+        public List<TBranch> getAllSurvey()
         {
-            List<BranchViewModel> result = [];
+            List<TBranch> result = [];
             try
             {
-                result = _mapper.ToViews(calPhranSa(getBranchByTypeID(3)));
+                //result = calPhranSa(getBranchByTypeID(3));
+                result = getBranchByTypeID(3);
             }
             catch (Exception)
             {

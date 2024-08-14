@@ -430,13 +430,59 @@
         /// หน้าจอ ทะเบียนภิกษุ // เข้าพรรษา
         ///--------------------------
         function toDate(dateStr) {
-            var parts = dateStr.split("/")
-            return new Date(parts[2], parts[0] - 1, parts[1])
+            var parts = dateStr.split("/");
+            return new Date(parts[2], parts[0] - 1, parts[1]);
+        }
+
+        function toStrDateTH(dateStr) {
+            var parts = new Date(dateStr);
+            var strDate = parts.getDate() + "/" + (parts.getMonth() + 1) + "/" + (parts.getFullYear() + 543);
+            return strDate;
         }
 
         $("#backLink").click(function (event) {
             event.preventDefault();
             history.back(1);
+        });
+
+        $("#btSearchMonkByName").click(function (event) {
+            var request = "http://localhost:5000/Monk/getMonk";
+            var name = $("#MonkName").val();
+            if (name.length > 0) {
+                $.post(request, { "name": name }, function (data) {
+                    //console.log(data);
+
+                    $("#NickName").val(data.mNickName);
+                    $("#DateOfBirth").val(toStrDateTH(data.mDateOfBirth));
+                    $("#DateOfOrdination").val(toStrDateTH(data.dateOfOrdination));
+                    $("#TempleName").val(data.templeName);
+                    $("#Preceptor").val(data.preceptor);
+
+                    $("#DateOfBirth").attr('value', $('#DateOfBirth').val());
+                    $("#DateOfOrdination").attr('value', $('#DateOfOrdination').val());
+                })
+                    .fail(function (error) {
+                        $("#NickName").val('');
+                        $("#DateOfBirth").val('');
+                        $("#DateOfOrdination").val('');
+                        $("#TempleName").val('');
+                        $("#Preceptor").val('');
+
+                        $("#DateOfBirth").attr('value', '');
+                        $("#DateOfOrdination").attr('value', '');
+                    });
+            }else{
+                $("#NickName").val('');
+                $("#DateOfBirth").val('');
+                $("#DateOfOrdination").val('');
+                $("#TempleName").val('');
+                $("#Preceptor").val('');
+
+                $("#DateOfBirth").attr('value', '');
+                $("#DateOfOrdination").attr('value', '');
+            }
+            
+
         });
 
         $("#btAdd2BuddhistLentSave").click(function () {
@@ -450,7 +496,7 @@
                     $("#BuddhistLentYear").val((startDate.getFullYear() + 543));
                     $("#Add2BuddhistLent").submit()
 
-                }else{
+                } else {
                     alert("ผิดอีกหละ กรอก วันเริ่มเข้าพรรษา ต้องน้อยกว่า วันออกพรรษา นะ");
                 }
             } else {
@@ -514,10 +560,7 @@
                 alert("ต้องกรอก วันเกิด และ วันที่บวช เพื่อคำวนอายุ นะ");
 
             }
-
         });
-        
-        
     });
 </script>
 </html>

@@ -84,10 +84,10 @@ namespace WNPP_WEB.Controllers
             }
             catch (Exception ex)
             {
-                return View("NotFound", ex); 
+                return View("Error500", ex);
             }
-            
-            
+
+
         }
         public IActionResult SearchBranch01()
         {
@@ -97,7 +97,7 @@ namespace WNPP_WEB.Controllers
                 MenuListB = "show",
                 MenuB1 = "active",
             };
-            List<BranchViewModel> lst = _service.getAllBranch();
+            List<TBranch> lst = _service.getAllBranch();
 
             return View(lst);
         }
@@ -109,9 +109,16 @@ namespace WNPP_WEB.Controllers
                 MenuListB = "show",
                 MenuB2 = "active",
             };
-            List<BranchViewModel> lst = _service.getAllReserve();
+            List<TBranch> lst;
 
-
+            try
+            {
+                lst = _service.getAllReserve();
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
 
             return View(lst);
 
@@ -124,8 +131,15 @@ namespace WNPP_WEB.Controllers
                 MenuListB = "show",
                 MenuB3 = "active",
             };
-            List<BranchViewModel> lst = _service.getAllSurvey();
-
+            List<TBranch> lst;
+            try
+            {
+                lst = _service.getAllSurvey();
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
 
 
             return View(lst);
@@ -138,9 +152,16 @@ namespace WNPP_WEB.Controllers
                 MenuListB = "show",
                 MenuB4 = "active",
             };
-            List<BranchViewModel> lst = _service.getAllSurvey();
+            List<TBranch> lst;
 
-
+            try
+            {
+                lst = _service.getAllSurvey();
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
 
             return View(lst);
         }
@@ -158,9 +179,9 @@ namespace WNPP_WEB.Controllers
                 branch = _service.findByID(Id);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return View("Error500", ex);
             }
 
             return View(branch);
@@ -190,12 +211,16 @@ namespace WNPP_WEB.Controllers
                     return View("SearchBranch00");
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return View("Error");
+                return View("Error500", ex);
             }
 
 
+        }
+        public IActionResult Error500(Exception obj)
+        {
+            return View(obj);
         }
         public IActionResult NotFound(Exception obj)
         {

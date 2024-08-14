@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
 
-    
-
     $('#datatables').DataTable({
         "pagingType": "full_numbers",
         "lengthMenu": [

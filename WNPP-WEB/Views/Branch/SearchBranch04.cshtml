@@ -1,5 +1,5 @@
 ﻿@using WNPP_WEB.Models.ViewModels;
-@model List<BranchViewModel>
+@model List<TBranch>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -28,12 +28,11 @@
                         <th>วัด/ที่พักสงฆ์</th>
                         <th>ชื่อ/ฉายา</th>
                         <th>เบอร์โทร</th>
-                        <th>ที่อยู่</th>
                         <th>ตำบล</th>
                         <th>อำเภอ</th>
                         <th>จังหวัด</th>
-                        <th>ประเทศ</th>
-                        <th>รหัส</th>
+                        <th>อายุ</th>
+                        <th>พรรษา</th>
                         <th>ข้อมูลอุปสมบท</th>
                         <th>ผู้รับรอง</th>
                         <th>วัดที่รับรอง</th>
@@ -46,12 +45,11 @@
                         <th>วัด/ที่พักสงฆ์</th>
                         <th>ชื่อ/ฉายา</th>
                         <th>เบอร์โทร</th>
-                        <th>ที่อยู่</th>
                         <th>ตำบล</th>
                         <th>อำเภอ</th>
                         <th>จังหวัด</th>
-                        <th>ประเทศ</th>
-                        <th>รหัส</th>
+                        <th>อายุ</th>
+                        <th>พรรษา</th>
                         <th>ข้อมูลอุปสมบท</th>
                         <th>ผู้รับรอง</th>
                         <th>วัดที่รับรอง</th>
@@ -65,7 +63,22 @@
                             <td>@item.BranchName</td>
                             <td>@item.MonasteryName</td>
                             <td>@item.AbbotName</td>
-                            <td>@item.MonasteryPhoneNO</td>
+                            @if (!string.IsNullOrEmpty(item.AbbotPhoneNo))
+                            {
+                                <td>
+                                    @foreach (string str in item.AbbotPhoneNo.Split(','))
+                                    {
+                                        <a class="btn btn-primary" href="tel:@str">
+                                            <i class="material-icons">call</i>
+                                            <span class="sidebar-normal"> @str</span>
+                                        </a>
+                                    }
+                                </td>
+                            }
+                            else
+                            {
+                                <td>@item.AbbotPhoneNo</td>
+                            }
                             <td>@item.AddressTextMonatery</td>
                             <td>@item.SubDistrictMonatery</td>
                             <td>@item.DistrictMonatery</td>

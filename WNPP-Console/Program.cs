@@ -2,6 +2,8 @@
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Globalization;
+using DocumentFormat.OpenXml.Drawing.Spreadsheet;
+using System.Reflection.Metadata;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -10,13 +12,13 @@ using WNPP_WEB.Services;
 
 ///=== RUN =======
 //string fileName = @"D:\DEV\NewContract2567v.2.04.16.xlsx"; // Data Type 4
-string fileName = @"D:\DEV\NewContract2567v.2.05.05.xlsx"; // Data Type 5
+string fileName = @"D:\DEV\NewContract2567v.2.05.15.xlsx"; // Data Type 5
 ///
 
 /////=== GET IMAGE ===///
 //Imdb67Context ctx = new Imdb67Context();
 //getImageFromExcel("D:\\DEV\\Branch\\", "สาขา", false);
-////getImageFromExcelToDB(ctx, "สาขา", true);
+//getImageFromExcelToDB(ctx, "สาขา", true);
 
 //getImageFromExcel("D:\\DEV\\Branch\\", "สำรอง", false);
 ////getImageFromExcelToDB(ctx, "สำรอง", true);
@@ -25,62 +27,18 @@ string fileName = @"D:\DEV\NewContract2567v.2.05.05.xlsx"; // Data Type 5
 ////getImageFromExcelToDB(ctx, "สำรวจ", true);
 
 ///=== Load Data To Database ===///
-///getDataFromNewExcelFormat();
+getDataFromNewExcelFormat();
 
 ///=== Migration Temple to database. ===//
 ///
 //migrateTempleToDB();
 
-testDate();
+///=== Test ================///
+//testDate();
+//testGetImageByCellName("สำรอง");
 
-void testDate()
-{
-    string thaiBudistDate = "16/7/2567";
-    CultureInfo provider;
-    DateTime date;
-
-    // US format
-    //provider = CultureInfo.GetCultureInfo("en-US");
-    //DateTime date = DateTime.Parse(thaiBudistDate, provider);
-    //Console.WriteLine("Original string: '" + provider + "' in 'en-US' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
-
-    // Thai Culture
-    provider = CultureInfo.GetCultureInfo("th-TH");
-    date = DateTime.Parse(thaiBudistDate, provider);
-    Console.WriteLine("Original string: '" + provider + "' in 'th-TH' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
-
-    //// Thai Culture format! M/d/yyyy
-    //provider = CultureInfo.GetCultureInfo("th-TH");
-    //var format = "M/d/yyyy";
-    //date = DateTime.ParseExact(thaiBudistDate, format, provider);
-    //Console.WriteLine("Original string: '" + provider + "' in 'th-TH' format specified 'M/d/yyyy' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
-
-    //// Thai Culture format d/M/yyyy 
-    //provider = CultureInfo.GetCultureInfo("th-TH");
-    //format = "d/M/yyyy";
-    //date = DateTime.ParseExact(thaiBudistDate, format, provider);
-    //Console.WriteLine("Original string: '" + provider + "' in 'th-TH' format specified 'd/M/yyyy' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
-
-    //// Using Gregorian time
-    //string usaDate = "12/7/2018";
-    //// US Culture
-    //provider = CultureInfo.GetCultureInfo("en-US");
-    //date = DateTime.Parse(usaDate, provider);
-    //Console.WriteLine("Original string: '" + usaDate + "' in 'en-Us' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
-
-
-    //// You got the point, dones't matter what provider you use! Hope this will help you undestand how wondows Culture works
-    //usaDate = "12/7/2018";
-    //// Thai Culture
-    //provider = CultureInfo.GetCultureInfo("th-TH");
-    //date = DateTime.Parse(usaDate, provider);
-    //Console.WriteLine("Original string: '" + usaDate + "' in 'th-TH' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
-
-}
 void getDataFromNewExcelFormat()
 {
-
-
     int set_1_Subject = 1;
     int set_2_Add1 = 3;
     int set_3_Add2 = 4;
@@ -312,7 +270,6 @@ WorksheetPart GetWorksheetPartByName(SpreadsheetDocument document, string sheetN
 
     return worksheetPart;
 }
-
 void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp67Context ctx)
 {
     WorksheetPart worksheetPart = GetWorksheetPartByName(doc, sheetName);
@@ -443,7 +400,7 @@ void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = data != null ? getArabicnumber(data.Trim()) : "";
         data = data.Replace("-", "");
         data = data.Replace(" ", "");
-        branch.MonasteryPhoneNo = data;
+        branch.AbbotPhoneNo = data;
 
         rowRecCount++; i++;
 
@@ -604,7 +561,7 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = data != null ? getArabicnumber(data.Trim()) : "";
         data = data.Replace("-", "");
         data = data.Replace(" ", "");
-        branch.MonasteryPhoneNo = data;
+        branch.AbbotPhoneNo = data;
 
         rowRecCount++; i++;
 
@@ -761,7 +718,7 @@ void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument d
         data = data != null ? getArabicnumber(data.Trim()) : "";
         data = data.Replace("-", "");
         data = data.Replace(" ", "");
-        branch.MonasteryPhoneNo = data;
+        branch.AbbotPhoneNo = data;
 
         rowRecCount++; i++;
 
@@ -832,8 +789,6 @@ void getImageFromExcelToDB(Imdb67Context ctx, string sheetName, bool needReSize)
     }
 }
 void getImageFromExcel(string filePath, string sheetName, bool needReSize)
-
-
 {
     string filesOut = filePath + sheetName + "\\";
 
@@ -867,7 +822,6 @@ void getImageFromExcel(string filePath, string sheetName, bool needReSize)
         }
     }
 }
-
 Bitmap ResizeImage(Image image, int width, int height)
 {
     var destRect = new Rectangle(0, 0, width, height);
@@ -891,4 +845,76 @@ Bitmap ResizeImage(Image image, int width, int height)
     }
 
     return destImage;
+}
+void testDate()
+{
+    string thaiBudistDate = "16/7/2567";
+    CultureInfo provider;
+    DateTime date;
+
+    // US format
+    //provider = CultureInfo.GetCultureInfo("en-US");
+    //DateTime date = DateTime.Parse(thaiBudistDate, provider);
+    //Console.WriteLine("Original string: '" + provider + "' in 'en-US' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
+
+    // Thai Culture
+    provider = CultureInfo.GetCultureInfo("th-TH");
+    date = DateTime.Parse(thaiBudistDate, provider);
+    Console.WriteLine("Original string: '" + provider + "' in 'th-TH' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
+
+    //// Thai Culture format! M/d/yyyy
+    //provider = CultureInfo.GetCultureInfo("th-TH");
+    //var format = "M/d/yyyy";
+    //date = DateTime.ParseExact(thaiBudistDate, format, provider);
+    //Console.WriteLine("Original string: '" + provider + "' in 'th-TH' format specified 'M/d/yyyy' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
+
+    //// Thai Culture format d/M/yyyy 
+    //provider = CultureInfo.GetCultureInfo("th-TH");
+    //format = "d/M/yyyy";
+    //date = DateTime.ParseExact(thaiBudistDate, format, provider);
+    //Console.WriteLine("Original string: '" + provider + "' in 'th-TH' format specified 'd/M/yyyy' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
+
+    //// Using Gregorian time
+    //string usaDate = "12/7/2018";
+    //// US Culture
+    //provider = CultureInfo.GetCultureInfo("en-US");
+    //date = DateTime.Parse(usaDate, provider);
+    //Console.WriteLine("Original string: '" + usaDate + "' in 'en-Us' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
+
+
+    //// You got the point, dones't matter what provider you use! Hope this will help you undestand how wondows Culture works
+    //usaDate = "12/7/2018";
+    //// Thai Culture
+    //provider = CultureInfo.GetCultureInfo("th-TH");
+    //date = DateTime.Parse(usaDate, provider);
+    //Console.WriteLine("Original string: '" + usaDate + "' in 'th-TH' => Day: " + date.Day + " Month: " + date.Month + " Year: " + date.Year);
+
+}
+void testGetImageByCellName(string sheetName)
+{
+    //WorkbookPart wbPart = document.WorkbookPart;
+    //var workSheet = wbPart.WorksheetParts.FirstOrDefault();
+    //TwoCellAnchor cellHoldingPicture = workSheet.DrawingsPart.WorksheetDrawing.OfType<TwoCellAnchor>()
+    //     .Where(c => c.FromMarker.RowId.Text == row && c.FromMarker.ColumnId.Text == col).FirstOrDefault();
+    //var picture = cellHoldingPicture.OfType<DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture>().FirstOrDefault();
+    //string rIdofPicture = picture.BlipFill.Blip.Embed;
+    //Console.WriteLine("The rID of this Anchor's [{0},{1}] Picture is '{2}'", row, col, rIdofPicture);
+    //ImagePart imageInThisCell = (ImagePart)workSheet.DrawingsPart.GetPartById(rIdofPicture);
+
+    string row = "1";
+    string col = "0";
+    using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+    {
+        using (SpreadsheetDocument doc = SpreadsheetDocument.Open(fs, false))
+        {
+            WorkbookPart workbookPart = doc.WorkbookPart;
+            WorksheetPart workSheet = GetWorksheetPartByName(doc, sheetName);
+            TwoCellAnchor cellHoldingPicture = workSheet.DrawingsPart.WorksheetDrawing.OfType<TwoCellAnchor>()
+                    .Where(c => c.FromMarker.RowId.Text == row && c.FromMarker.ColumnId.Text == col).FirstOrDefault();
+            var picture = cellHoldingPicture.OfType<DocumentFormat.OpenXml.Drawing.Spreadsheet.Picture>().FirstOrDefault();
+            string rIdofPicture = picture.BlipFill.Blip.Embed;
+            Console.WriteLine("The rID of this Anchor's [{0},{1}] Picture is '{2}'", row, col, rIdofPicture);
+            ImagePart imageInThisCell = (ImagePart)workSheet.DrawingsPart.GetPartById(rIdofPicture);
+        }
+    }
 }
