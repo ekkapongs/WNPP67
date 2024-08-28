@@ -33,13 +33,20 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM0 = "active",
             };
-            if (string.IsNullOrEmpty(txtSearch))
+            try
             {
-                return View();
+                if (string.IsNullOrEmpty(txtSearch))
+                {
+                    return View();
+                }
+                else
+                {
+                    return View(_service.searchMonk(txtSearch));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return View(_service.searchMonk(txtSearch));
+                return View("Error500", ex);
             }
         }
         public IActionResult Add2Monk(int id)
@@ -60,8 +67,14 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM0 = "active",
             };
-
-            return View(_service.getMonkView(id));
+            try
+            {
+                return View(_service.getMonkView(id));
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
         }
         [HttpPost]
         public IActionResult Edit2Monk(TMonkViewModel data)
@@ -72,60 +85,16 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM0 = "active",
             };
-            _service.edit2Monk(data);
-            return View("SearchMonk00");
-        }
-        public IActionResult Tmp()
-        {
-            ViewBag.MenuViewModel = new MenuViewModel()
-            {
-                MenuName = "M2 คัดค้นทะเบียนภิกษุ ",
-                MenuListM = "show",
-                MenuM2 = "active",
-            };
-            IFileServices services = new FileServices();
-            return View(services.getAllAbbotImage());
-        }
-        [HttpPost]
-        public JsonResult searchMonkByName(string name)
-        {
             try
             {
-                if (!string.IsNullOrEmpty(name))
-                {
-                    return new JsonResult(_service.searchMonkByName(name));
-                }
-                else
-                {
-                    return new JsonResult(new List<TMonk>());
-                }
+                _service.edit2Monk(data);
+                return View("SearchMonk00");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return View("Error500", ex);
             }
         }
-        [HttpPost]
-        public JsonResult getMonk(string name)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(name))
-                {
-                    return new JsonResult(_service.getMonkByName(name));
-                }
-                else
-                {
-                    return new JsonResult(new TMonk());
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
 
         public IActionResult BuddhistLent()
         {
@@ -135,9 +104,15 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
+            try
+            {
+                return View(_service.getAllBuddhistLent());
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
 
-
-            return View(_service.getAllBuddhistLent());
         }
         [HttpPost]
         public IActionResult BuddhistLent(PhanSaViewModel data)
@@ -173,10 +148,17 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
+            try
+            {
+                _service.add2BuddhistLent(data);
 
-            _service.add2BuddhistLent(data);
+                return View("BuddhistLent", _service.getAllBuddhistLent());
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
 
-            return View("BuddhistLent", _service.getAllBuddhistLent());
         }
         public IActionResult Add2BuddhistLentDetail(int year)
         {
@@ -186,10 +168,17 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
+            try
+            {
+                ViewData["CallBack"] = Request.Path + Request.QueryString;
 
-            ViewData["CallBack"] = Request.Path + Request.QueryString;
+                return View(_service.getPhanSaViewModel(year));
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
 
-            return View(_service.getPhanSaViewModel(year));
         }
         [HttpPost]
         public IActionResult Add2BuddhistLentDetail(PhanSaViewModel data)
@@ -200,9 +189,17 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
-            _service.addMonkBuddhistLentDetail(data);
+            try
+            {
+                _service.addMonkBuddhistLentDetail(data);
 
-            return View(_service.getPhanSaViewModel(data.BuddhistLentYear));
+                return View(_service.getPhanSaViewModel(data.BuddhistLentYear));
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
+
         }
 
         public IActionResult EditBL2Monk(int id, string callBack, int year)
@@ -213,11 +210,18 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
+            try
+            {
+                ViewData["CallBack"] = callBack;
+                TMonkViewModel model = _service.getMonkView(id);
+                model.BuddhistLentYear = year;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
 
-            ViewData["CallBack"] = callBack;
-            TMonkViewModel model = _service.getMonkView(id);
-            model.BuddhistLentYear = year;
-            return View(model);
         }
         [HttpPost]
         public IActionResult EditBL2Monk(TMonkViewModel data)
@@ -228,11 +232,56 @@ namespace WNPP_WEB.Controllers
                 MenuListM = "show",
                 MenuM1 = "active",
             };
-            _service.editBL2Monk(data);
+            try
+            {
+                _service.editBL2Monk(data);
 
-            return Redirect(data.CallBackPage);
+                return Redirect(data.CallBackPage);
+            }
+            catch (Exception ex)
+            {
+                return View("Error500", ex);
+            }
+            
         }
-
+        [HttpPost]
+        public JsonResult searchMonkByName(string name)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    return new JsonResult(_service.searchMonkByName(name));
+                }
+                else
+                {
+                    return new JsonResult(new List<TMonk>());
+                }
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(ex);
+            }
+        }
+        [HttpPost]
+        public JsonResult getMonk(string name)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    return new JsonResult(_service.getMonkByName(name));
+                }
+                else
+                {
+                    return new JsonResult(new TMonk());
+                }
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(ex);
+            }
+        }
         public IActionResult TimeLine()
         {
             ViewBag.MenuViewModel = new MenuViewModel()
@@ -242,6 +291,26 @@ namespace WNPP_WEB.Controllers
                 MenuM1 = "active",
             };
             return View();
+        }
+        public IActionResult Tmp()
+        {
+            ViewBag.MenuViewModel = new MenuViewModel()
+            {
+                MenuName = "M2 คัดค้นทะเบียนภิกษุ ",
+                MenuListM = "show",
+                MenuM2 = "active",
+            };
+            try
+            {
+                IFileServices services = new FileServices();
+                return View(services.getAllAbbotImage());
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error500", ex);
+            }
+
         }
     }
 }
