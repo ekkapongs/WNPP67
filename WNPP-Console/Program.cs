@@ -17,7 +17,7 @@ string fileName = @"D:\DEV\NewContract2567v.2.05.15.xlsx"; // Data Type 5
 
 /////=== GET IMAGE ===///
 //Imdb67Context ctx = new Imdb67Context();
-//getImageFromExcel("D:\\DEV\\Branch\\", "สาขา", false);
+getImageFromExcel("D:\\DEV\\Branch\\", "สาขา", false);
 //getImageFromExcelToDB(ctx, "สาขา", true);
 
 //getImageFromExcel("D:\\DEV\\Branch\\", "สำรอง", false);
@@ -27,7 +27,7 @@ string fileName = @"D:\DEV\NewContract2567v.2.05.15.xlsx"; // Data Type 5
 ////getImageFromExcelToDB(ctx, "สำรวจ", true);
 
 ///=== Load Data To Database ===///
-getDataFromNewExcelFormat();
+//getDataFromNewExcelFormat();
 
 ///=== Migration Temple to database. ===//
 ///
@@ -409,7 +409,6 @@ void migrateType1(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     ctx.TBranches.AddRange(lstTBranch);
     ctx.SaveChanges();
 }
-/// ===> สำรอง
 void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp67Context ctx)
 {
     WorksheetPart worksheetPart = GetWorksheetPartByName(doc, sheetName);
@@ -570,7 +569,6 @@ void migrateType2(string sheetName, SharedStringTable sst, SpreadsheetDocument d
     ctx.TBranches.AddRange(lstTBranch);
     ctx.SaveChanges();
 }
-/// ===> สำรวจ
 void migrateType3(string sheetName, SharedStringTable sst, SpreadsheetDocument doc, Wnpp67Context ctx)
 {
     WorksheetPart worksheetPart = GetWorksheetPartByName(doc, sheetName);
